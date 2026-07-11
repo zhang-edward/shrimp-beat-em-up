@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://cvy141mpsnbpc"]
+
+[ext_resource type="Script" uid="uid://bq5fj1twsn5vc" path="res://scripts/Game.gd" id="1_ibkli"]
+[ext_resource type="PackedScene" uid="uid://u157y7k8bimf" path="res://prefab/Ground.tscn" id="2_cpr0p"]
+[ext_resource type="PackedScene" uid="uid://cyj1qui0kg5gk" path="res://prefab/Player.tscn" id="2_qbsmt"]
+
+[node name="Game" type="Node2D" unique_id=67653856]
+script = ExtResource("1_ibkli")
+
+[node name="Ground" parent="." unique_id=1608475129 instance=ExtResource("2_cpr0p")]
+
+[node name="Player" parent="." unique_id=1699568361 node_paths=PackedStringArray("ground_ref") instance=ExtResource("2_qbsmt")]
+ground_ref = NodePath("../Ground")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=983189321]
