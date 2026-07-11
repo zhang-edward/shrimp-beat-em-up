@@ -38,6 +38,6 @@ func update(_delta: float) -> void:
 			timer = randf_range(PAUSE_TIME_SECONDS_MIN, PAUSE_TIME_SECONDS_MAX)
 
 	if wandering:
-		enemy.velocity = random_direction * enemy.move_speed
+		enemy.absolute_velocity = random_direction * enemy.move_speed
 	else:
-		enemy.velocity = Vector2.ZERO
+		enemy.absolute_velocity = Vector2.ZERO
