@@ -3,17 +3,38 @@
 [ext_resource type="Script" uid="uid://bq5fj1twsn5vc" path="res://scripts/Game.gd" id="1_ibkli"]
 [ext_resource type="PackedScene" uid="uid://u157y7k8bimf" path="res://prefab/Ground.tscn" id="2_cpr0p"]
 [ext_resource type="PackedScene" uid="uid://cyj1qui0kg5gk" path="res://prefab/Player.tscn" id="2_qbsmt"]
+[ext_resource type="PackedScene" uid="uid://s4vk1a005tvq" path="res://prefab/Enemy.tscn" id="4_78awf"]
+[ext_resource type="Script" uid="uid://d3ewt73qfqtdc" path="res://scenes/EnemyManager.gd" id="5_s0nni"]
 
 [node name="Game" type="Node2D" unique_id=67653856]
 script = ExtResource("1_ibkli")
+
+[node name="BG" type="Node2D" parent="." unique_id=1544554596]
+
+[node name="Sky" type="ColorRect" parent="BG" unique_id=1604384904]
+offset_left = -576.0
+offset_top = -325.0
+offset_right = 575.0
+offset_bottom = 113.0
+color = Color(0.24160114, 0.6478208, 0.7254051, 1)
+
+[node name="Ground2" type="ColorRect" parent="BG" unique_id=1821130166]
+offset_left = -576.0
+offset_top = 97.0
+offset_right = 575.0
+offset_bottom = 321.0
+color = Color(0.7, 0.5544, 0.42700002, 1)
 
 [node name="Ground" parent="." unique_id=1608475129 instance=ExtResource("2_cpr0p")]
 
 [node name="Player" parent="." unique_id=1699568361 node_paths=PackedStringArray("ground_ref") instance=ExtResource("2_qbsmt")]
 ground_ref = NodePath("../Ground")
 
-[node name="Enemy" parent="." unique_id=2117824229 node_paths=PackedStringArray("ground_ref") instance=ExtResource("2_qbsmt")]
-position = Vector2(222, 3)
-ground_ref = NodePath("../Ground")
+[node name="Enemy" parent="." unique_id=1600955621 node_paths=PackedStringArray("playerRef") instance=ExtResource("4_78awf")]
+position = Vector2(230, 3)
+playerRef = NodePath("../Player")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=983189321]
+
+[node name="EnemyManager" type="Node2D" parent="." unique_id=908296068]
+script = ExtResource("5_s0nni")

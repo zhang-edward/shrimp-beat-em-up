@@ -13,7 +13,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	var direction_x = Input.get_axis("move_left", "move_right")
-	velocity = Vector2(direction_x * speed, velocity.y)	
+	velocity = Vector2(direction_x * speed, velocity.y)
 	if is_jumping:
 		if get_slide_collision_count() > 0:
 			is_jumping = false
@@ -28,7 +28,7 @@ func _physics_process(delta: float) -> void:
 				ground_ref.collision_shape.set_deferred("disabled", false)
 				ground_ref.global_position.y = global_position.y
 				is_jumping = true
-				velocity.y = -JUMP_VELOCITY
+				velocity.y = - JUMP_VELOCITY
 		else:
 			ground_ref.collision_shape.set_deferred("disabled", true)
 			velocity = Vector2(velocity.x, direction_y * speed)
