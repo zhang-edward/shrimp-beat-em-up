@@ -5,8 +5,15 @@ extends State
 const ATTACK_RANGE_X := 100.0
 const ATTACK_RANGE_Y := 20.0
 const ATTACK_COOLDOWN_SECONDS := 1.0
+const STATE_DURATION_SECONDS := 10.0
 
+@export var nextState: State
+
+var state_timer := 0.0 # Timer to track how long the enemy has been in the current state
 var attack_timer := 0.0
+
+func enter(_msg := {}) -> void:
+	state_timer = STATE_DURATION_SECONDS
 
 func update(_delta: float) -> void:
 	var enemy = entity as Enemy
@@ -29,3 +36,7 @@ func update(_delta: float) -> void:
 			print(enemy, " attacking player!")
 		else:
 			attack_timer -= _delta
+
+	state_timer -= _delta
+	if state_timer <= 0.0:
+		state_machine.transition_to(nextState)

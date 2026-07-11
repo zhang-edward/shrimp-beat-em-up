@@ -4,6 +4,8 @@
 [ext_resource type="Script" uid="uid://bge0hmqmafyrt" path="res://scripts/fsm/StateMachine.gd" id="2_e3gy8"]
 [ext_resource type="Texture2D" uid="uid://dmlqvg0yr7q4o" path="res://icon.svg" id="2_mx2wg"]
 [ext_resource type="Script" uid="uid://bpe5ra7nyt4xn" path="res://scripts/states/AttackState.gd" id="3_mx2wg"]
+[ext_resource type="Script" uid="uid://duq3i13njmcii" path="res://scripts/states/WanderState.gd" id="4_7mgug"]
+[ext_resource type="Script" uid="uid://do8t1vj4ygsrh" path="res://scripts/fsm/DebugStateMachineLabel.gd" id="5_y7302"]
 
 [node name="Enemy" type="CharacterBody2D" unique_id=1600955621]
 script = ExtResource("1_f08wl")
@@ -16,5 +18,26 @@ texture = ExtResource("2_mx2wg")
 script = ExtResource("2_e3gy8")
 initial_state = NodePath("Attack")
 
-[node name="Attack" type="Node" parent="StateMachine" unique_id=614500442]
+[node name="Wander" type="Node" parent="StateMachine" unique_id=1280282429 node_paths=PackedStringArray("nextState")]
+script = ExtResource("4_7mgug")
+nextState = NodePath("../Attack")
+
+[node name="Attack" type="Node" parent="StateMachine" unique_id=614500442 node_paths=PackedStringArray("nextState")]
 script = ExtResource("3_mx2wg")
+nextState = NodePath("../Wander")
+
+[node name="DebugStateMachineLabel" type="Label" parent="." unique_id=155363593 node_paths=PackedStringArray("state_machine")]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -46.0
+offset_top = -99.0
+offset_right = 46.0
+offset_bottom = -76.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+text = "debug state"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("5_y7302")
+state_machine = NodePath("../StateMachine")
