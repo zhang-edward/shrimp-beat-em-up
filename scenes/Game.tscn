@@ -12,4 +12,8 @@ script = ExtResource("1_ibkli")
 [node name="Player" parent="." unique_id=1699568361 node_paths=PackedStringArray("ground_ref") instance=ExtResource("2_qbsmt")]
 ground_ref = NodePath("../Ground")
 
+[node name="Enemy" parent="." unique_id=2117824229 node_paths=PackedStringArray("ground_ref") instance=ExtResource("2_qbsmt")]
+position = Vector2(222, 3)
+ground_ref = NodePath("../Ground")
+
 [node name="Camera2D" type="Camera2D" parent="." unique_id=983189321]
