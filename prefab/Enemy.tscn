@@ -1,16 +1,20 @@
 [gd_scene format=3 uid="uid://s4vk1a005tvq"]
 
+[ext_resource type="Script" uid="uid://pyemjxradddg" path="res://scripts/Enemy.gd" id="1_f08wl"]
+[ext_resource type="Script" uid="uid://bge0hmqmafyrt" path="res://scripts/fsm/StateMachine.gd" id="2_e3gy8"]
 [ext_resource type="Texture2D" uid="uid://dmlqvg0yr7q4o" path="res://icon.svg" id="2_mx2wg"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_6pmnr"]
-size = Vector2(128, 130)
+[ext_resource type="Script" uid="uid://bpe5ra7nyt4xn" path="res://scripts/states/AttackState.gd" id="3_mx2wg"]
 
 [node name="Enemy" type="CharacterBody2D" unique_id=1600955621]
+script = ExtResource("1_f08wl")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=172443480]
 modulate = Color(1, 0, 0, 1)
 texture = ExtResource("2_mx2wg")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1218874210]
-position = Vector2(-1, -1)
-shape = SubResource("RectangleShape2D_6pmnr")
+[node name="StateMachine" type="Node" parent="." unique_id=2094818322]
+script = ExtResource("2_e3gy8")
+initial_state = NodePath("Attack")
+
+[node name="Attack" type="Node" parent="StateMachine" unique_id=614500442]
+script = ExtResource("3_mx2wg")
