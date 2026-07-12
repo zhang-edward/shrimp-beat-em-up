@@ -8,10 +8,12 @@ var is_jumping = false
 @onready var sprite = $Sprite2D
 
 @export var healthbar: ProgressBar
-@export var ground_ref: Ground
+# @export var ground_ref: Ground
 @export var hitbox_scene: PackedScene = preload("res://prefab/Hitbox.tscn")
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+var z_velocity = 0.0
+var z = 0.0 # altitude
 
 func _ready() -> void:
 	pass
@@ -25,27 +27,27 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	var direction_x = Input.get_axis("move_left", "move_right")
-	velocity = Vector2(direction_x * speed, velocity.y)
+	var direction_y = Input.get_axis("move_up", "move_down")
+	velocity = Vector2(direction_x * speed, direction_y * speed)
+
 	if direction_x != 0:
 		sprite.flip_h = direction_x < 0
+
 	if is_jumping:
-		if get_slide_collision_count() > 0:
+		if z < 0:
+			z_velocity += gravity * delta
+		else:
+			z = 0
+			z_velocity = 0
 			is_jumping = false
-			velocity.y = 0
-		else:
-			velocity.y += gravity * delta
-	else:
-		var direction_y = Input.get_axis("move_up", "move_down")
-		if direction_y == 0:
-			velocity.y = 0
-			if Input.is_action_just_pressed("jump"):
-				ground_ref.collision_shape.set_deferred("disabled", false)
-				ground_ref.global_position.y = global_position.y
-				is_jumping = true
-				velocity.y = - JUMP_VELOCITY
-		else:
-			ground_ref.collision_shape.set_deferred("disabled", true)
-			velocity = Vector2(velocity.x, direction_y * speed)
+	if z == 0 and Input.is_action_just_pressed("jump"):
+		is_jumping = true
+		z_velocity = - JUMP_VELOCITY
+
+	z += z_velocity * delta
+	velocity = MovementUtils.scale_velocity(velocity)
+	sprite.position.y = z
+	print(z)
 	move_and_slide()
 
 func damage(amount: int):
