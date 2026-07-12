@@ -1,17 +1,21 @@
 [gd_scene format=3 uid="uid://cvy141mpsnbpc"]
 
 [ext_resource type="Script" uid="uid://bq5fj1twsn5vc" path="res://scripts/Game.gd" id="1_ibkli"]
+[ext_resource type="PackedScene" uid="uid://cng8xwc74kx24" path="res://prefab/EnemySpawner.tscn" id="2_aug50"]
 [ext_resource type="StyleBox" uid="uid://tu5xpycc3rfh" path="res://prefab/styles/healthbar_bg.tres" id="2_kiw3p"]
 [ext_resource type="PackedScene" uid="uid://cyj1qui0kg5gk" path="res://prefab/Player.tscn" id="2_qbsmt"]
 [ext_resource type="StyleBox" uid="uid://bpb3vlcuriyr1" path="res://prefab/styles/healthbar_fill.tres" id="3_400sg"]
 [ext_resource type="PackedScene" uid="uid://s4vk1a005tvq" path="res://prefab/Enemy.tscn" id="4_78awf"]
-[ext_resource type="Script" uid="uid://d3ewt73qfqtdc" path="res://scenes/EnemyManager.gd" id="5_s0nni"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mod73"]
 size = Vector2(1150, 389)
 
 [node name="Game" type="Node2D" unique_id=67653856]
 script = ExtResource("1_ibkli")
+
+[node name="EnemySpawner" parent="." unique_id=1590747713 node_paths=PackedStringArray("player_ref") instance=ExtResource("2_aug50")]
+player_ref = NodePath("../Player")
+enemy_scene = ExtResource("4_78awf")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=432593465]
 collision_layer = 2
@@ -34,6 +38,15 @@ step = 1.0
 value = 100.0
 show_percentage = false
 
+[node name="WaveStats" type="Label" parent="CanvasLayer" unique_id=964023802]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 23.0
+grow_horizontal = 0
+text = "Wave 1: 0/15"
+
 [node name="BG" type="Node2D" parent="." unique_id=1544554596]
 
 [node name="Sky" type="ColorRect" parent="BG" unique_id=1604384904]
@@ -51,30 +64,7 @@ offset_bottom = 321.0
 color = Color(0.7, 0.5544, 0.42700002, 1)
 
 [node name="Player" parent="." unique_id=1699568361 node_paths=PackedStringArray("healthbar") instance=ExtResource("2_qbsmt")]
-position = Vector2(-428, 249)
+position = Vector2(0, 100)
 healthbar = NodePath("../CanvasLayer/Healthbar")
 
-[node name="Enemy" parent="." unique_id=1600955621 node_paths=PackedStringArray("playerRef") instance=ExtResource("4_78awf")]
-position = Vector2(441, 234)
-collision_layer = 1
-playerRef = NodePath("../Player")
-
-[node name="Enemy2" parent="." unique_id=442601830 node_paths=PackedStringArray("playerRef") instance=ExtResource("4_78awf")]
-position = Vector2(444, 153)
-collision_layer = 1
-playerRef = NodePath("../Player")
-
-[node name="Enemy3" parent="." unique_id=1576268664 node_paths=PackedStringArray("playerRef") instance=ExtResource("4_78awf")]
-position = Vector2(265, 263)
-collision_layer = 1
-playerRef = NodePath("../Player")
-
-[node name="Enemy4" parent="." unique_id=1140385219 node_paths=PackedStringArray("playerRef") instance=ExtResource("4_78awf")]
-position = Vector2(280, 167)
-collision_layer = 1
-playerRef = NodePath("../Player")
-
 [node name="Camera2D" type="Camera2D" parent="." unique_id=983189321]
-
-[node name="EnemyManager" type="Node2D" parent="." unique_id=908296068]
-script = ExtResource("5_s0nni")

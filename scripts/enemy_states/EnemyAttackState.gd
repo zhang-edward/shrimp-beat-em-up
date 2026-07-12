@@ -17,7 +17,7 @@ func enter(_msg := {}) -> void:
 	state_timer = STATE_DURATION_SECONDS
 
 func update(_delta: float) -> void:
-	var player = enemy.playerRef
+	var player = enemy.player_ref
 
 	enemy.absolute_velocity.x = sign(player.global_position.x - enemy.global_position.x) * enemy.move_speed \
 		if abs(player.global_position.x - enemy.global_position.x) > ATTACK_RANGE_X \

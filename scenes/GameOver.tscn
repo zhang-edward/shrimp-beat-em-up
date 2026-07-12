@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://bsmpj13anhsyd"]
+
+[node name="GameOver" type="Node2D" unique_id=712809338]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1282215310]
+
+[node name="Label" type="Label" parent="CanvasLayer" unique_id=1140075151]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "You win!"

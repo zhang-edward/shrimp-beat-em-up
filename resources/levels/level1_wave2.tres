@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="WaveSpawnConfig" format=3 uid="uid://bow2nh180i6ru"]
+
+[ext_resource type="Script" uid="uid://nudvt7fmanuk" path="res://scripts/levels/EnemyConfig.gd" id="1_eravj"]
+[ext_resource type="Resource" uid="uid://d181lclxi3agf" path="res://resources/enemies/Fish.tres" id="2_5u7gj"]
+[ext_resource type="Script" uid="uid://d3l5nsti7vk1p" path="res://scripts/levels/WaveSpawnConfig.gd" id="2_qtp8g"]
+
+[resource]
+script = ExtResource("2_qtp8g")
+enemy_configs = Array[ExtResource("1_eravj")]([ExtResource("2_5u7gj")])
+spawn_freq = 1.0
+num_enemies_to_defeat = 20
+max_enemies = 8
+metadata/_custom_type_script = "uid://d3l5nsti7vk1p"
