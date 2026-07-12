@@ -18,8 +18,9 @@ func enter(msg := {}) -> void:
 
 	var hitbox = hitbox_scene.instantiate()
 	player.add_child(hitbox)
-	var hitbox_offset = Vector2(-50, -16) if player.sprite.flip_h else Vector2(50, -16)
-	hitbox.init(hitbox_offset, Vector2(64, 64), 0.25, Hitbox.CollideableTypes.Enemy, 10, player)
+	var sprite_size = player.get_sprite_size()
+	var hitbox_offset = Vector2(-50, -sprite_size.y / 3) if player.sprite.flip_h else Vector2(50, -sprite_size.y / 3)
+	hitbox.init(hitbox_offset, Vector2(48, 48), 0.25, Hitbox.CollideableTypes.Enemy, 10, player)
 
 	var anim = "punch_" + str(combo_index)
 	player.sprite.play(anim)

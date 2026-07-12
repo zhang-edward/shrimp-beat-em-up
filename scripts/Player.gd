@@ -24,3 +24,6 @@ func _physics_process(_delta: float) -> void:
 
 func damage(amount: int):
 	healthbar.value -= amount
+
+func get_sprite_size():
+	return sprite.sprite_frames.get_frame_texture("default", 0).get_size() * sprite.scale

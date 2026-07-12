@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://pyemjxradddg" path="res://scripts/Enemy.gd" id="1_f08wl"]
 [ext_resource type="Script" uid="uid://bge0hmqmafyrt" path="res://scripts/fsm/StateMachine.gd" id="2_e3gy8"]
 [ext_resource type="Texture2D" uid="uid://mlbn5bvn88iy" path="res://sprites/fish_enemy_1.png" id="4_n3fxy"]
-[ext_resource type="Script" uid="uid://csf7xaemitdcb" path="res://prefab/Hurtbox.gd" id="5_2y5xi"]
+[ext_resource type="Script" uid="uid://csf7xaemitdcb" path="res://scripts/Hurtbox.gd" id="5_2y5xi"]
 [ext_resource type="Script" uid="uid://do8t1vj4ygsrh" path="res://scripts/fsm/DebugStateMachineLabel.gd" id="5_y7302"]
 [ext_resource type="StyleBox" uid="uid://tu5xpycc3rfh" path="res://prefab/styles/healthbar_bg.tres" id="7_jca2b"]
 [ext_resource type="Script" uid="uid://bukmh6a1bpgy" path="res://scripts/enemy_states/EnemyAttackState.gd" id="7_n3fxy"]
@@ -108,9 +108,9 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -86.0
-offset_top = -158.0
+offset_top = -134.0
 offset_right = 87.0
-offset_bottom = -143.0
+offset_bottom = -119.0
 grow_horizontal = 2
 theme_override_styles/background = ExtResource("7_jca2b")
 theme_override_styles/fill = ExtResource("8_2y5xi")
@@ -120,9 +120,8 @@ value = 50.0
 show_percentage = false
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=847188949]
-scale = Vector2(2, 2)
+scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_mod73")
-animation = &"move"
 offset = Vector2(0, -12)
 
 [node name="HurtBox" type="Area2D" parent="AnimatedSprite2D" unique_id=1798380912 node_paths=PackedStringArray("parent")]
@@ -160,9 +159,9 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -46.0
-offset_top = -99.0
+offset_top = -112.0
 offset_right = 46.0
-offset_bottom = -76.0
+offset_bottom = -89.0
 grow_horizontal = 2
 size_flags_horizontal = 4
 text = "debug state"

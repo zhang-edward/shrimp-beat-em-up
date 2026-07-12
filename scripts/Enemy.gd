@@ -40,6 +40,8 @@ func damage(amount: int, source: Node2D):
 	healthbar.value -= amount
 	if healthbar.value == 0:
 		queue_free()
-
 	var dir = Vector2(position.x - source.position.x, 0)
 	state_machine.transition_to(hurt_state, {"dir": dir})
+
+func get_sprite_size():
+	return sprite.sprite_frames.get_frame_texture("default", 0).get_size() * sprite.scale

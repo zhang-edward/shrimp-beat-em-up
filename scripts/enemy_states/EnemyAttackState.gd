@@ -38,7 +38,8 @@ func update(_delta: float) -> void:
 			attack_timer = ATTACK_COOLDOWN_SECONDS
 			var hitbox = hitbox_scene.instantiate()
 			enemy.add_child(hitbox)
-			var hitbox_offset = Vector2(-50, 0) if enemy.sprite.flip_h else Vector2(50, 0)
+			var sprite_size = enemy.get_sprite_size()
+			var hitbox_offset = Vector2(-50, -sprite_size.y / 3) if enemy.sprite.flip_h else Vector2(50, -sprite_size.y / 3)
 			hitbox.init(hitbox_offset, Vector2(64, 64), 0.25, Hitbox.CollideableTypes.Player, 10, enemy)
 		else:
 			attack_timer -= _delta
