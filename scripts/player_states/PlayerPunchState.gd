@@ -2,8 +2,8 @@ class_name PlayerPunchState
 extends PlayerState
 
 const NUDGE_MOVE_SPEED = 50.0
-const RECOVERY_TIME := 0.3
-const BUFFER_WINDOW := 0.2
+const RECOVERY_TIME := 0.2
+const BUFFER_WINDOW := 0.1
 
 @export var move_state: PlayerMoveState
 
@@ -24,6 +24,13 @@ func enter(msg := {}) -> void:
 
 	var anim = "punch_" + str(combo_index)
 	player.sprite.play(anim)
+
+	player.scale = Vector2(1.2, 1)
+	player.sprite.position.x = -10 if player.sprite.flip_h else 10
+	var tween = player.get_tree().create_tween()
+	tween.set_ease(Tween.EASE_OUT)
+	tween.tween_property(player, "scale", Vector2(1, 1), 0.05)
+	tween.tween_property(player.sprite, "position:x", 0, 0.05)
 
 func physics_update(_delta: float) -> void:
 	var direction_x = Input.get_axis("move_left", "move_right")
