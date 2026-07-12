@@ -38,6 +38,8 @@ func _handle_area_entered(body: Area2D):
 		if hurtbox.parent is Player and _collide_with == CollideableTypes.Player:
 			var player = hurtbox.parent as Player
 			player.damage(_damage)
+			Hitstop.freeze([_source, player])
 		elif hurtbox.parent is Enemy and _collide_with == CollideableTypes.Enemy:
 			var enemy = hurtbox.parent as Enemy
 			enemy.damage(_damage, _source)
+			Hitstop.freeze([_source, enemy])
