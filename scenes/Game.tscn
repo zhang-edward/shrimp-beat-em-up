@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://cvy141mpsnbpc"]
 
 [ext_resource type="Script" uid="uid://bq5fj1twsn5vc" path="res://scripts/Game.gd" id="1_ibkli"]
-[ext_resource type="PackedScene" uid="uid://u157y7k8bimf" path="res://prefab/Ground.tscn" id="2_cpr0p"]
 [ext_resource type="StyleBox" uid="uid://tu5xpycc3rfh" path="res://prefab/styles/healthbar_bg.tres" id="2_kiw3p"]
 [ext_resource type="PackedScene" uid="uid://cyj1qui0kg5gk" path="res://prefab/Player.tscn" id="2_qbsmt"]
 [ext_resource type="StyleBox" uid="uid://bpb3vlcuriyr1" path="res://prefab/styles/healthbar_fill.tres" id="3_400sg"]
@@ -13,6 +12,14 @@ size = Vector2(1150, 389)
 
 [node name="Game" type="Node2D" unique_id=67653856]
 script = ExtResource("1_ibkli")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=432593465]
+collision_layer = 2
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1428512183]
+position = Vector2(0, -129.5)
+shape = SubResource("RectangleShape2D_mod73")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1452419952]
 
@@ -38,17 +45,14 @@ color = Color(0.24160114, 0.6478208, 0.7254051, 1)
 
 [node name="Ground2" type="ColorRect" parent="BG" unique_id=1821130166]
 offset_left = -576.0
-offset_top = 97.0
+offset_top = 68.0
 offset_right = 575.0
 offset_bottom = 321.0
 color = Color(0.7, 0.5544, 0.42700002, 1)
 
-[node name="Ground" parent="." unique_id=1608475129 instance=ExtResource("2_cpr0p")]
-
-[node name="Player" parent="." unique_id=1699568361 node_paths=PackedStringArray("healthbar", "ground_ref") instance=ExtResource("2_qbsmt")]
+[node name="Player" parent="." unique_id=1699568361 node_paths=PackedStringArray("healthbar") instance=ExtResource("2_qbsmt")]
 position = Vector2(-428, 249)
 healthbar = NodePath("../CanvasLayer/Healthbar")
-ground_ref = NodePath("../Ground")
 
 [node name="Enemy" parent="." unique_id=1600955621 node_paths=PackedStringArray("playerRef") instance=ExtResource("4_78awf")]
 position = Vector2(441, 234)
@@ -60,11 +64,3 @@ playerRef = NodePath("../Player")
 
 [node name="EnemyManager" type="Node2D" parent="." unique_id=908296068]
 script = ExtResource("5_s0nni")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=432593465]
-collision_layer = 2
-collision_mask = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1428512183]
-position = Vector2(0, -129.5)
-shape = SubResource("RectangleShape2D_mod73")

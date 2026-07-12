@@ -2,10 +2,10 @@ class_name Player
 extends CharacterBody2D
 
 var speed = 200.0
-const JUMP_VELOCITY = 500
+const JUMP_VELOCITY = 400
 var is_jumping = false
 
-@onready var sprite = $Sprite2D
+@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 @export var healthbar: ProgressBar
 # @export var ground_ref: Ground
@@ -16,6 +16,7 @@ var z_velocity = 0.0
 var z = 0.0 # altitude
 
 func _ready() -> void:
+	sprite.play("default")
 	pass
 	
 func _process(delta: float) -> void:
@@ -24,6 +25,17 @@ func _process(delta: float) -> void:
 		add_child(hitbox)
 		var hitbox_offset = Vector2(-50, 0) if sprite.flip_h else Vector2(50, 0)
 		hitbox.init(hitbox_offset, Vector2(64, 64), 0.25, Hitbox.CollideableTypes.Enemy, 10)
+	
+	# animation
+	if z < 0:
+		if z_velocity < 0:
+			sprite.play("jump")
+		else:
+			sprite.play("fall")
+	elif velocity.length() > 0:
+		sprite.play("move")
+	else:
+		sprite.play("default")
 
 func _physics_process(delta: float) -> void:
 	var direction_x = Input.get_axis("move_left", "move_right")
@@ -47,7 +59,6 @@ func _physics_process(delta: float) -> void:
 	z += z_velocity * delta
 	velocity = MovementUtils.scale_velocity(velocity)
 	sprite.position.y = z
-	print(z)
 	move_and_slide()
 
 func damage(amount: int):
