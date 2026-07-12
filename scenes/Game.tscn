@@ -2,12 +2,27 @@
 
 [ext_resource type="Script" uid="uid://bq5fj1twsn5vc" path="res://scripts/Game.gd" id="1_ibkli"]
 [ext_resource type="PackedScene" uid="uid://u157y7k8bimf" path="res://prefab/Ground.tscn" id="2_cpr0p"]
+[ext_resource type="StyleBox" uid="uid://tu5xpycc3rfh" path="res://prefab/styles/healthbar_bg.tres" id="2_kiw3p"]
 [ext_resource type="PackedScene" uid="uid://cyj1qui0kg5gk" path="res://prefab/Player.tscn" id="2_qbsmt"]
+[ext_resource type="StyleBox" uid="uid://bpb3vlcuriyr1" path="res://prefab/styles/healthbar_fill.tres" id="3_400sg"]
 [ext_resource type="PackedScene" uid="uid://s4vk1a005tvq" path="res://prefab/Enemy.tscn" id="4_78awf"]
 [ext_resource type="Script" uid="uid://d3ewt73qfqtdc" path="res://scenes/EnemyManager.gd" id="5_s0nni"]
 
 [node name="Game" type="Node2D" unique_id=67653856]
 script = ExtResource("1_ibkli")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1452419952]
+
+[node name="Healthbar" type="ProgressBar" parent="CanvasLayer" unique_id=1146778923]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 304.0
+offset_bottom = 47.0
+theme_override_styles/background = ExtResource("2_kiw3p")
+theme_override_styles/fill = ExtResource("3_400sg")
+step = 1.0
+value = 100.0
+show_percentage = false
 
 [node name="BG" type="Node2D" parent="." unique_id=1544554596]
 
@@ -27,11 +42,28 @@ color = Color(0.7, 0.5544, 0.42700002, 1)
 
 [node name="Ground" parent="." unique_id=1608475129 instance=ExtResource("2_cpr0p")]
 
-[node name="Player" parent="." unique_id=1699568361 node_paths=PackedStringArray("ground_ref") instance=ExtResource("2_qbsmt")]
+[node name="Player" parent="." unique_id=1699568361 node_paths=PackedStringArray("healthbar", "ground_ref") instance=ExtResource("2_qbsmt")]
+healthbar = NodePath("../CanvasLayer/Healthbar")
 ground_ref = NodePath("../Ground")
 
 [node name="Enemy" parent="." unique_id=1600955621 node_paths=PackedStringArray("playerRef") instance=ExtResource("4_78awf")]
-position = Vector2(230, 3)
+position = Vector2(441, 234)
+playerRef = NodePath("../Player")
+
+[node name="Enemy2" parent="." unique_id=174174259 node_paths=PackedStringArray("playerRef") instance=ExtResource("4_78awf")]
+position = Vector2(193, -243)
+playerRef = NodePath("../Player")
+
+[node name="Enemy3" parent="." unique_id=385568390 node_paths=PackedStringArray("playerRef") instance=ExtResource("4_78awf")]
+position = Vector2(-463, 225)
+playerRef = NodePath("../Player")
+
+[node name="Enemy4" parent="." unique_id=1204473853 node_paths=PackedStringArray("playerRef") instance=ExtResource("4_78awf")]
+position = Vector2(501, -245)
+playerRef = NodePath("../Player")
+
+[node name="Enemy5" parent="." unique_id=1701584890 node_paths=PackedStringArray("playerRef") instance=ExtResource("4_78awf")]
+position = Vector2(-379, -104)
 playerRef = NodePath("../Player")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=983189321]

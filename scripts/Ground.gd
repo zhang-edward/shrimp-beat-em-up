@@ -1,5 +1,5 @@
 class_name Ground
-extends RigidBody2D
+extends StaticBody2D
 
 @onready var collision_shape = $CollisionShape2D as CollisionShape2D
 

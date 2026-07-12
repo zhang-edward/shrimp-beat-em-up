@@ -6,9 +6,32 @@
 [ext_resource type="Script" uid="uid://bpe5ra7nyt4xn" path="res://scripts/states/AttackState.gd" id="3_mx2wg"]
 [ext_resource type="Script" uid="uid://duq3i13njmcii" path="res://scripts/states/WanderState.gd" id="4_7mgug"]
 [ext_resource type="Script" uid="uid://do8t1vj4ygsrh" path="res://scripts/fsm/DebugStateMachineLabel.gd" id="5_y7302"]
+[ext_resource type="StyleBox" uid="uid://tu5xpycc3rfh" path="res://prefab/styles/healthbar_bg.tres" id="7_jca2b"]
+[ext_resource type="StyleBox" uid="uid://bpb3vlcuriyr1" path="res://prefab/styles/healthbar_fill.tres" id="8_2y5xi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6pmnr"]
+size = Vector2(128, 130)
 
 [node name="Enemy" type="CharacterBody2D" unique_id=1600955621]
+collision_layer = 2
+collision_mask = 0
 script = ExtResource("1_f08wl")
+
+[node name="Healthbar" type="ProgressBar" parent="." unique_id=347754481]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -86.0
+offset_top = -123.0
+offset_right = 87.0
+offset_bottom = -108.0
+grow_horizontal = 2
+theme_override_styles/background = ExtResource("7_jca2b")
+theme_override_styles/fill = ExtResource("8_2y5xi")
+max_value = 50.0
+step = 1.0
+value = 50.0
+show_percentage = false
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=172443480]
 modulate = Color(1, 0, 0, 1)
@@ -41,3 +64,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("5_y7302")
 state_machine = NodePath("../StateMachine")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=600665596]
+shape = SubResource("RectangleShape2D_6pmnr")

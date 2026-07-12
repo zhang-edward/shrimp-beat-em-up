@@ -7,6 +7,7 @@ const ATTACK_RANGE_Y := 20.0
 const ATTACK_COOLDOWN_SECONDS := 1.0
 const STATE_DURATION_SECONDS := 10.0
 
+@export var hitbox_scene: PackedScene = preload("res://prefab/Hitbox.tscn")
 @export var nextState: State
 
 var state_timer := 0.0 # Timer to track how long the enemy has been in the current state
@@ -22,6 +23,9 @@ func update(_delta: float) -> void:
 	enemy.absolute_velocity.x = sign(player.global_position.x - enemy.global_position.x) * enemy.move_speed \
 		if abs(player.global_position.x - enemy.global_position.x) > ATTACK_RANGE_X \
 		else 0.0
+	
+	if enemy.absolute_velocity.x != 0:
+		enemy.sprite.flip_h = enemy.absolute_velocity.x < 0
 
 	enemy.absolute_velocity.y = sign(player.global_position.y - enemy.global_position.y) * enemy.move_speed \
 		if abs(player.global_position.y - enemy.global_position.y) > ATTACK_RANGE_Y \
@@ -33,7 +37,10 @@ func update(_delta: float) -> void:
 		# Attack player
 		if attack_timer <= 0.0:
 			attack_timer = ATTACK_COOLDOWN_SECONDS
-			print(enemy, " attacking player!")
+			var hitbox = hitbox_scene.instantiate()
+			enemy.add_child(hitbox)
+			var hitbox_offset = Vector2(-50, 0) if enemy.sprite.flip_h else Vector2(50, 0)
+			hitbox.init(hitbox_offset, Vector2(64, 64), 0.25, Hitbox.CollideableTypes.Player, 10)
 		else:
 			attack_timer -= _delta
 
