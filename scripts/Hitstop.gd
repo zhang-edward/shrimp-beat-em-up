@@ -14,18 +14,18 @@ static func _freeze_one(node: Node, duration: float) -> void:
 	var resume_at := Time.get_ticks_msec() + duration * 1000.0
 	if _resume_at.get(id, 0.0) >= resume_at:
 		return
-
 	if not _resume_at.has(id):
-		node.process_mode = Node.PROCESS_MODE_DISABLED
+		node.set_deferred("process_mode", Node.PROCESS_MODE_DISABLED)
 	_resume_at[id] = resume_at
 	var tree := Engine.get_main_loop() as SceneTree
 
-	tree.create_timer(duration).timeout.connect(_try_resume.bind(node, id, resume_at))
+	var timer = tree.create_timer(duration)
+	timer.timeout.connect(_try_resume.bind(node, id, resume_at))
 
 static func _try_resume(node: Node, id: int, scheduled_resume_at: float) -> void:
-	if not is_instance_valid(node) or _resume_at.get(id, 0.0) != scheduled_resume_at:
-		_resume_at.erase(id)
+	if _resume_at.get(id, 0.0) != scheduled_resume_at:
 		return
 
-	node.process_mode = Node.PROCESS_MODE_INHERIT
 	_resume_at.erase(id)
+	if is_instance_valid(node):
+		node.set_deferred("process_mode", Node.PROCESS_MODE_INHERIT)

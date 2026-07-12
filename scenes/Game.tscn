@@ -59,6 +59,21 @@ position = Vector2(441, 234)
 collision_layer = 1
 playerRef = NodePath("../Player")
 
+[node name="Enemy2" parent="." unique_id=442601830 node_paths=PackedStringArray("playerRef") instance=ExtResource("4_78awf")]
+position = Vector2(444, 153)
+collision_layer = 1
+playerRef = NodePath("../Player")
+
+[node name="Enemy3" parent="." unique_id=1576268664 node_paths=PackedStringArray("playerRef") instance=ExtResource("4_78awf")]
+position = Vector2(265, 263)
+collision_layer = 1
+playerRef = NodePath("../Player")
+
+[node name="Enemy4" parent="." unique_id=1140385219 node_paths=PackedStringArray("playerRef") instance=ExtResource("4_78awf")]
+position = Vector2(280, 167)
+collision_layer = 1
+playerRef = NodePath("../Player")
+
 [node name="Camera2D" type="Camera2D" parent="." unique_id=983189321]
 
 [node name="EnemyManager" type="Node2D" parent="." unique_id=908296068]
