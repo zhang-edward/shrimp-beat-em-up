@@ -1,5 +1,5 @@
-class_name WanderState
-extends State
+class_name EnemyWanderState
+extends EnemyState
 
 const WANDER_TIME_SECONDS_MAX := 3.0
 const WANDER_TIME_SECONDS_MIN := 1.0
@@ -21,8 +21,6 @@ func enter(_msg := {}) -> void:
 	random_direction = Vector2.ZERO
 
 func update(_delta: float) -> void:
-	var enemy = entity as Enemy
-
 	state_timer -= _delta
 	if state_timer <= 0.0:
 		state_machine.transition_to(nextState)

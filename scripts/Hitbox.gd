@@ -8,16 +8,18 @@ var _life_timer := 0.5;
 var _collision_exceptions := {}
 var _collide_with: CollideableTypes = CollideableTypes.Enemy
 var _damage: int
+var _source: Node2D
 
 @onready var _collision_shape: CollisionShape2D = $CollisionShape2D
 
-func init(pos: Vector2, size: Vector2, lifetime: float, collide_with: CollideableTypes, damage: int):
+func init(pos: Vector2, size: Vector2, lifetime: float, collide_with: CollideableTypes, damage: int, source: Node2D):
 	position = pos
 	_collide_with = collide_with
 	_collision_shape.shape = RectangleShape2D.new()
 	_collision_shape.shape.size = size
 	_life_timer = lifetime
 	_damage = damage
+	_source = source
 	area_entered.connect(_handle_area_entered)
 
 func _process(delta):
@@ -38,4 +40,4 @@ func _handle_area_entered(body: Area2D):
 			player.damage(_damage)
 		elif hurtbox.parent is Enemy and _collide_with == CollideableTypes.Enemy:
 			var enemy = hurtbox.parent as Enemy
-			enemy.damage(_damage)
+			enemy.damage(_damage, _source)

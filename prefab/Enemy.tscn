@@ -2,13 +2,14 @@
 
 [ext_resource type="Script" uid="uid://pyemjxradddg" path="res://scripts/Enemy.gd" id="1_f08wl"]
 [ext_resource type="Script" uid="uid://bge0hmqmafyrt" path="res://scripts/fsm/StateMachine.gd" id="2_e3gy8"]
-[ext_resource type="Script" uid="uid://bpe5ra7nyt4xn" path="res://scripts/states/AttackState.gd" id="3_mx2wg"]
-[ext_resource type="Script" uid="uid://duq3i13njmcii" path="res://scripts/states/WanderState.gd" id="4_7mgug"]
 [ext_resource type="Texture2D" uid="uid://mlbn5bvn88iy" path="res://sprites/fish_enemy_1.png" id="4_n3fxy"]
 [ext_resource type="Script" uid="uid://csf7xaemitdcb" path="res://prefab/Hurtbox.gd" id="5_2y5xi"]
 [ext_resource type="Script" uid="uid://do8t1vj4ygsrh" path="res://scripts/fsm/DebugStateMachineLabel.gd" id="5_y7302"]
 [ext_resource type="StyleBox" uid="uid://tu5xpycc3rfh" path="res://prefab/styles/healthbar_bg.tres" id="7_jca2b"]
+[ext_resource type="Script" uid="uid://bukmh6a1bpgy" path="res://scripts/enemy_states/EnemyAttackState.gd" id="7_n3fxy"]
 [ext_resource type="StyleBox" uid="uid://bpb3vlcuriyr1" path="res://prefab/styles/healthbar_fill.tres" id="8_2y5xi"]
+[ext_resource type="Script" uid="uid://cv7crwf5qo2jy" path="res://scripts/enemy_states/EnemyHurtState.gd" id="8_y16dy"]
+[ext_resource type="Script" uid="uid://dbujchdjs5x8u" path="res://scripts/enemy_states/EnemyWanderState.gd" id="9_kkroo"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y16dy"]
 atlas = ExtResource("4_n3fxy")
@@ -23,6 +24,26 @@ atlas = ExtResource("4_n3fxy")
 region = Rect2(64, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jp6k6"]
+atlas = ExtResource("4_n3fxy")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n3fxy"]
+atlas = ExtResource("4_n3fxy")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bl8wq"]
+atlas = ExtResource("4_n3fxy")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mvow0"]
+atlas = ExtResource("4_n3fxy")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sxvu5"]
+atlas = ExtResource("4_n3fxy")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e055q"]
 atlas = ExtResource("4_n3fxy")
 region = Rect2(96, 0, 32, 32)
 
@@ -43,6 +64,31 @@ animations = [{
 }],
 "loop": 1,
 "name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n3fxy")
+}],
+"loop": 1,
+"name": &"hurt",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bl8wq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mvow0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sxvu5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e055q")
+}],
+"loop": 1,
+"name": &"move",
 "speed": 5.0
 }]
 
@@ -76,6 +122,7 @@ show_percentage = false
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=847188949]
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_mod73")
+animation = &"move"
 offset = Vector2(0, -12)
 
 [node name="HurtBox" type="Area2D" parent="AnimatedSprite2D" unique_id=1798380912 node_paths=PackedStringArray("parent")]
@@ -91,16 +138,22 @@ shape = SubResource("RectangleShape2D_jca2b")
 debug_color = Color(0.7967164, 0.42138872, 0.12490418, 0.41960785)
 
 [node name="StateMachine" type="Node" parent="." unique_id=2094818322]
+unique_name_in_owner = true
 script = ExtResource("2_e3gy8")
-initial_state = NodePath("Attack")
+initial_state = NodePath("EnemyAttackState")
 
-[node name="Wander" type="Node" parent="StateMachine" unique_id=1280282429 node_paths=PackedStringArray("nextState")]
-script = ExtResource("4_7mgug")
-nextState = NodePath("../Attack")
+[node name="EnemyAttackState" type="Node" parent="StateMachine" unique_id=1390354486 node_paths=PackedStringArray("nextState")]
+script = ExtResource("7_n3fxy")
+nextState = NodePath("../EnemyWanderState")
 
-[node name="Attack" type="Node" parent="StateMachine" unique_id=614500442 node_paths=PackedStringArray("nextState")]
-script = ExtResource("3_mx2wg")
-nextState = NodePath("../Wander")
+[node name="EnemyHurtState" type="Node" parent="StateMachine" unique_id=1114880896 node_paths=PackedStringArray("default_state")]
+unique_name_in_owner = true
+script = ExtResource("8_y16dy")
+default_state = NodePath("../EnemyWanderState")
+
+[node name="EnemyWanderState" type="Node" parent="StateMachine" unique_id=1147463591 node_paths=PackedStringArray("nextState")]
+script = ExtResource("9_kkroo")
+nextState = NodePath("../EnemyAttackState")
 
 [node name="DebugStateMachineLabel" type="Label" parent="." unique_id=155363593 node_paths=PackedStringArray("state_machine")]
 anchors_preset = 5

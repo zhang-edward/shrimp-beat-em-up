@@ -1,6 +1,6 @@
 # Represents the state where the enemy is chasing and attacking the player. 
-class_name AttackState
-extends State
+class_name EnemyAttackState
+extends EnemyState
 
 const ATTACK_RANGE_X := 100.0
 const ATTACK_RANGE_Y := 20.0
@@ -17,7 +17,6 @@ func enter(_msg := {}) -> void:
 	state_timer = STATE_DURATION_SECONDS
 
 func update(_delta: float) -> void:
-	var enemy = entity as Enemy
 	var player = enemy.playerRef
 
 	enemy.absolute_velocity.x = sign(player.global_position.x - enemy.global_position.x) * enemy.move_speed \
@@ -40,7 +39,7 @@ func update(_delta: float) -> void:
 			var hitbox = hitbox_scene.instantiate()
 			enemy.add_child(hitbox)
 			var hitbox_offset = Vector2(-50, 0) if enemy.sprite.flip_h else Vector2(50, 0)
-			hitbox.init(hitbox_offset, Vector2(64, 64), 0.25, Hitbox.CollideableTypes.Player, 10)
+			hitbox.init(hitbox_offset, Vector2(64, 64), 0.25, Hitbox.CollideableTypes.Player, 10, enemy)
 		else:
 			attack_timer -= _delta
 
