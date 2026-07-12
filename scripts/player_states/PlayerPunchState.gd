@@ -3,7 +3,7 @@ extends PlayerState
 
 const NUDGE_MOVE_SPEED = 50.0
 const RECOVERY_TIME := 0.2
-const BUFFER_WINDOW := 0.1
+const BUFFER_WINDOW := 0.2
 
 @export var move_state: PlayerMoveState
 

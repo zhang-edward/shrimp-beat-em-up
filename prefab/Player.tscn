@@ -37,21 +37,17 @@ region = Rect2(192, 0, 48, 48)
 atlas = ExtResource("2_poo86")
 region = Rect2(240, 0, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_poo86"]
-atlas = ExtResource("2_poo86")
-region = Rect2(336, 0, 48, 48)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_msqmi"]
 atlas = ExtResource("2_poo86")
-region = Rect2(384, 0, 48, 48)
+region = Rect2(912, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_238m6"]
 atlas = ExtResource("2_poo86")
-region = Rect2(432, 0, 48, 48)
+region = Rect2(960, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l5s2s"]
 atlas = ExtResource("2_poo86")
-region = Rect2(480, 0, 48, 48)
+region = Rect2(1008, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_61nax"]
 atlas = ExtResource("2_poo86")
@@ -129,9 +125,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_poo86")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_msqmi")
 }, {
 "duration": 1.0,
@@ -142,7 +135,7 @@ animations = [{
 }],
 "loop": 1,
 "name": &"move",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -206,8 +199,7 @@ script = ExtResource("1_00yv1")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1104767220]
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_mod73")
-animation = &"sprint"
-frame_progress = 0.4861553
+animation = &"move"
 offset = Vector2(0, -17.36)
 
 [node name="HurtBox" type="Area2D" parent="AnimatedSprite2D" unique_id=669237323 node_paths=PackedStringArray("parent")]

@@ -12,7 +12,6 @@ var _sprinting: bool
 func physics_update(_delta: float) -> void:
 	var direction_x = Input.get_axis("move_left", "move_right")
 	var direction_y = Input.get_axis("move_up", "move_down")
-	_sprinting = Input.is_action_pressed("sprint")
 	var move_multiplier = MOVE_SPEED * SPRINT_MULTIPLIER if _sprinting else MOVE_SPEED
 	player.velocity = Vector2(direction_x * move_multiplier, direction_y * move_multiplier)
 
@@ -26,9 +25,6 @@ func update(_delta: float) -> void:
 
 	# animation
 	if player.velocity.length() > 0:
-		if _sprinting:
-			player.sprite.play("sprint")
-		else:
-			player.sprite.play("move")
+		player.sprite.play("move")
 	else:
 		player.sprite.play("default")
