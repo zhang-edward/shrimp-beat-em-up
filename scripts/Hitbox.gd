@@ -32,7 +32,6 @@ func _handle_area_entered(body: Area2D):
 		_collision_exceptions[body] = true
 	
 	if body is Hurtbox:
-		print("Hitbox collided with hurtbox")
 		var hurtbox = body as Hurtbox
 		if hurtbox.parent is Player and _collide_with == CollideableTypes.Player:
 			var player = hurtbox.parent as Player

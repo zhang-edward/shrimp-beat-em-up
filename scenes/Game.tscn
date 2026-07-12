@@ -57,7 +57,6 @@ healthbar = NodePath("../CanvasLayer/Healthbar")
 [node name="Enemy" parent="." unique_id=1600955621 node_paths=PackedStringArray("playerRef") instance=ExtResource("4_78awf")]
 position = Vector2(441, 234)
 collision_layer = 1
-collision_mask = 1
 playerRef = NodePath("../Player")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=983189321]

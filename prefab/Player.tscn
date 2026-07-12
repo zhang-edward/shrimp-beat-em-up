@@ -3,6 +3,11 @@
 [ext_resource type="Script" uid="uid://yf1p7bejodo2" path="res://scripts/Player.gd" id="1_00yv1"]
 [ext_resource type="Texture2D" uid="uid://cgn8m5nc1o08m" path="res://sprites/shrimp.png" id="2_poo86"]
 [ext_resource type="Script" uid="uid://csf7xaemitdcb" path="res://prefab/Hurtbox.gd" id="3_poo86"]
+[ext_resource type="Script" uid="uid://bge0hmqmafyrt" path="res://scripts/fsm/StateMachine.gd" id="4_vga1c"]
+[ext_resource type="Script" uid="uid://deiw0ulusq62o" path="res://scripts/player_states/PlayerMoveState.gd" id="5_dbxf5"]
+[ext_resource type="Script" uid="uid://cnewnatiuejdl" path="res://scripts/player_states/PlayerJumpState.gd" id="6_msqmi"]
+[ext_resource type="Script" uid="uid://x410y8jwway8" path="res://scripts/player_states/PlayerPunchState.gd" id="7_dbxf5"]
+[ext_resource type="Script" uid="uid://do8t1vj4ygsrh" path="res://scripts/fsm/DebugStateMachineLabel.gd" id="8_msqmi"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fetod"]
 atlas = ExtResource("2_poo86")
@@ -48,6 +53,30 @@ region = Rect2(432, 0, 48, 48)
 atlas = ExtResource("2_poo86")
 region = Rect2(480, 0, 48, 48)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_61nax"]
+atlas = ExtResource("2_poo86")
+region = Rect2(528, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ykq77"]
+atlas = ExtResource("2_poo86")
+region = Rect2(576, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_72431"]
+atlas = ExtResource("2_poo86")
+region = Rect2(624, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1n0hs"]
+atlas = ExtResource("2_poo86")
+region = Rect2(672, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wq2nr"]
+atlas = ExtResource("2_poo86")
+region = Rect2(720, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fqdn1"]
+atlas = ExtResource("2_poo86")
+region = Rect2(672, 0, 48, 48)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_mod73"]
 animations = [{
 "frames": [{
@@ -82,7 +111,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_74yla")
 }],
-"loop": 2,
+"loop": 0,
 "name": &"jump",
 "speed": 5.0
 }, {
@@ -102,6 +131,39 @@ animations = [{
 "loop": 1,
 "name": &"move",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_61nax")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ykq77")
+}],
+"loop": 0,
+"name": &"punch_0",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_72431")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1n0hs")
+}],
+"loop": 0,
+"name": &"punch_1",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wq2nr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fqdn1")
+}],
+"loop": 0,
+"name": &"punch_2",
+"speed": 8.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_da51w"]
@@ -118,7 +180,7 @@ script = ExtResource("1_00yv1")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1104767220]
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_mod73")
-animation = &"fall"
+animation = &"punch_0"
 offset = Vector2(0, -17.36)
 
 [node name="HurtBox" type="Area2D" parent="AnimatedSprite2D" unique_id=669237323 node_paths=PackedStringArray("parent")]
@@ -135,3 +197,38 @@ debug_color = Color(0.7967164, 0.42138872, 0.12490418, 0.41960785)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1225749893]
 position = Vector2(0, -3)
 shape = SubResource("CircleShape2D_mod73")
+
+[node name="StateMachine" type="Node" parent="." unique_id=766052711]
+script = ExtResource("4_vga1c")
+initial_state = NodePath("PlayerMoveState")
+
+[node name="PlayerMoveState" type="Node" parent="StateMachine" unique_id=1599645225 node_paths=PackedStringArray("jump_state", "punch_state")]
+script = ExtResource("5_dbxf5")
+jump_state = NodePath("../PlayerJumpState")
+punch_state = NodePath("../PlayerPunchState")
+metadata/_custom_type_script = "uid://deiw0ulusq62o"
+
+[node name="PlayerJumpState" type="Node" parent="StateMachine" unique_id=1612350408 node_paths=PackedStringArray("move_state")]
+script = ExtResource("6_msqmi")
+move_state = NodePath("../PlayerMoveState")
+
+[node name="PlayerPunchState" type="Node" parent="StateMachine" unique_id=1541438198 node_paths=PackedStringArray("move_state")]
+script = ExtResource("7_dbxf5")
+move_state = NodePath("../PlayerMoveState")
+metadata/_custom_type_script = "uid://x410y8jwway8"
+
+[node name="DebugStateMachineLabel" type="Label" parent="." unique_id=11757401 node_paths=PackedStringArray("state_machine")]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -46.0
+offset_top = -97.0
+offset_right = 46.0
+offset_bottom = -74.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+text = "debug state"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("8_msqmi")
+state_machine = NodePath("../StateMachine")
