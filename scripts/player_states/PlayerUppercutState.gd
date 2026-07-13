@@ -2,8 +2,8 @@ class_name PlayerUppercutState
 extends PlayerState
 
 const AIR_MOVE_SPEED = 50.0
-const JUMP_VELOCITY = -500
-const RECOVERY_TIME := 0.5
+const JUMP_VELOCITY = -1500
+const RECOVERY_TIME := 0.2
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var recovery_timer = 0
@@ -30,7 +30,10 @@ func physics_update(delta: float) -> void:
 	player.z += player.z_velocity * delta
 
 	if player.z < 0:
-		player.z_velocity += gravity * delta
+		if player.z_velocity < -500:
+			player.z_velocity += gravity * delta * 8
+		else:
+			player.z_velocity += gravity * delta
 	else:
 		player.z_velocity = 0
 		player.z = 0
@@ -39,10 +42,6 @@ func update(delta: float) -> void:
 	recovery_timer -= delta
 	if recovery_timer <= 0:
 		if player.z < 0:
-			state_machine.transition_to(jump_state, {"falling": true})
+			state_machine.transition_to(jump_state, {"from_uppercut": true})
 		else:
 			state_machine.transition_to(move_state)
-
-# func exit() -> void:
-# 	player.z = 0
-# 	player.z_velocity = 0

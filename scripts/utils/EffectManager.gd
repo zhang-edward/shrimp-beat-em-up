@@ -17,4 +17,5 @@ static func spawn_effect(config: EffectConfig):
 	effect.position = config.pos + Vector2(randf_range(-20, 20), randf_range(-20, 20))
 	effect.sprite_frames = config.anim
 	effect.rotation = randf_range(0, TAU)
+	effect.scale *= randf_range(0.9, 1.1)
 	effect.play()

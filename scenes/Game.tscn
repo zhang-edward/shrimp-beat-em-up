@@ -18,35 +18,6 @@
 [ext_resource type="Script" uid="uid://ghmm1evp356x" path="res://scripts/PropWithRandomizedAnimation.gd" id="14_vjgi4"]
 [ext_resource type="Texture2D" uid="uid://bugjdi2mb3dmu" path="res://sprites/props/seaweed_2.png" id="14_y5y3l"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_kyk2p"]
-atlas = ExtResource("9_r7sob")
-region = Rect2(0, 0, 48, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_45i86"]
-atlas = ExtResource("9_r7sob")
-region = Rect2(48, 0, 48, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_sv1m6"]
-atlas = ExtResource("9_r7sob")
-region = Rect2(96, 0, 48, 64)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_7ua8r"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_kyk2p")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_45i86")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_sv1m6")
-}],
-"loop": 1,
-"name": &"default",
-"speed": 5.0
-}]
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_r7sob"]
 atlas = ExtResource("12_7ua8r")
 region = Rect2(0, 0, 28, 32)
@@ -70,6 +41,35 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_vjgi4")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kyk2p"]
+atlas = ExtResource("9_r7sob")
+region = Rect2(0, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_45i86"]
+atlas = ExtResource("9_r7sob")
+region = Rect2(48, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sv1m6"]
+atlas = ExtResource("9_r7sob")
+region = Rect2(96, 0, 48, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7ua8r"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kyk2p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_45i86")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sv1m6")
 }],
 "loop": 1,
 "name": &"default",
@@ -150,8 +150,43 @@ y_sort_enabled = true
 position = Vector2(-11, 192)
 healthbar = NodePath("../../CanvasLayer/Healthbar")
 
+[node name="Camera2D" type="Camera2D" parent="Entities/Player" unique_id=983189321]
+position = Vector2(34, -172)
+zoom = Vector2(0.9, 0.9)
+limit_left = -600
+limit_top = -343
+limit_right = 1144
+limit_bottom = 382
+limit_smoothed = true
+position_smoothing_enabled = true
+
 [node name="Props" type="Node2D" parent="Entities" unique_id=1314156249]
 y_sort_enabled = true
+
+[node name="Seaweed1" type="AnimatedSprite2D" parent="Entities/Props" unique_id=1320274558]
+y_sort_enabled = true
+position = Vector2(-258, 140)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_mod73")
+offset = Vector2(0, -15.08)
+script = ExtResource("14_vjgi4")
+
+[node name="Seaweed4" type="AnimatedSprite2D" parent="Entities/Props" unique_id=2033097957]
+y_sort_enabled = true
+position = Vector2(-353, 257)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_7ua8r")
+offset = Vector2(0, -24)
+script = ExtResource("14_vjgi4")
+
+[node name="Seaweed5" type="AnimatedSprite2D" parent="Entities/Props" unique_id=330900740]
+y_sort_enabled = true
+position = Vector2(-435, 224)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_mod73")
+offset = Vector2(0, -15.08)
+flip_h = true
+script = ExtResource("14_vjgi4")
 
 [node name="Rock1" type="Sprite2D" parent="Entities/Props" unique_id=1480612877]
 y_sort_enabled = true
@@ -167,21 +202,6 @@ scale = Vector2(4, 4)
 texture = ExtResource("8_2rd6h")
 offset = Vector2(0, -15)
 
-[node name="Rock2" type="Sprite2D" parent="Entities/Props" unique_id=337832543]
-y_sort_enabled = true
-position = Vector2(362, 188)
-scale = Vector2(4, 4)
-texture = ExtResource("10_mcffj")
-offset = Vector2(0, -16)
-
-[node name="Rock5" type="Sprite2D" parent="Entities/Props" unique_id=147509202]
-y_sort_enabled = true
-position = Vector2(402, 362)
-scale = Vector2(4, 4)
-texture = ExtResource("10_mcffj")
-offset = Vector2(0, -16)
-flip_h = true
-
 [node name="Rock3" type="Sprite2D" parent="Entities/Props" unique_id=767440676]
 y_sort_enabled = true
 position = Vector2(-455, 333)
@@ -189,41 +209,31 @@ scale = Vector2(4, 4)
 texture = ExtResource("11_2rd6h")
 offset = Vector2(0, -8)
 
+[node name="Rock2" type="Sprite2D" parent="Entities/Props" unique_id=337832543]
+y_sort_enabled = true
+position = Vector2(875, 188)
+scale = Vector2(4, 4)
+texture = ExtResource("10_mcffj")
+offset = Vector2(0, -16)
+
+[node name="Rock5" type="Sprite2D" parent="Entities/Props" unique_id=147509202]
+y_sort_enabled = true
+position = Vector2(915, 362)
+scale = Vector2(4, 4)
+texture = ExtResource("10_mcffj")
+offset = Vector2(0, -16)
+flip_h = true
+
 [node name="Rock4" type="Sprite2D" parent="Entities/Props" unique_id=107203615]
 y_sort_enabled = true
-position = Vector2(418, 209)
+position = Vector2(931, 209)
 scale = Vector2(4, 4)
 texture = ExtResource("11_2rd6h")
 offset = Vector2(0, -9)
 
-[node name="Seaweed4" type="AnimatedSprite2D" parent="Entities/Props" unique_id=2033097957]
-y_sort_enabled = true
-position = Vector2(-353, 257)
-scale = Vector2(4, 4)
-sprite_frames = SubResource("SpriteFrames_7ua8r")
-offset = Vector2(0, -24)
-script = ExtResource("14_vjgi4")
-
-[node name="Seaweed1" type="AnimatedSprite2D" parent="Entities/Props" unique_id=1320274558]
-y_sort_enabled = true
-position = Vector2(-258, 140)
-scale = Vector2(4, 4)
-sprite_frames = SubResource("SpriteFrames_mod73")
-offset = Vector2(0, -15.08)
-script = ExtResource("14_vjgi4")
-
-[node name="Seaweed5" type="AnimatedSprite2D" parent="Entities/Props" unique_id=330900740]
-y_sort_enabled = true
-position = Vector2(-435, 224)
-scale = Vector2(4, 4)
-sprite_frames = SubResource("SpriteFrames_mod73")
-offset = Vector2(0, -15.08)
-flip_h = true
-script = ExtResource("14_vjgi4")
-
 [node name="Seaweed6" type="AnimatedSprite2D" parent="Entities/Props" unique_id=1572573585]
 y_sort_enabled = true
-position = Vector2(441, 310)
+position = Vector2(954, 310)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_mod73")
 offset = Vector2(0, -15.08)
@@ -232,7 +242,7 @@ script = ExtResource("14_vjgi4")
 
 [node name="Seaweed2" type="AnimatedSprite2D" parent="Entities/Props" unique_id=229547631]
 y_sort_enabled = true
-position = Vector2(374, 102)
+position = Vector2(887, 102)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_2rd6h")
 offset = Vector2(0, -16)
@@ -240,7 +250,7 @@ script = ExtResource("14_vjgi4")
 
 [node name="Seaweed7" type="AnimatedSprite2D" parent="Entities/Props" unique_id=2006825326]
 y_sort_enabled = true
-position = Vector2(478, 330)
+position = Vector2(991, 330)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_2rd6h")
 offset = Vector2(0, -16)
@@ -248,7 +258,7 @@ script = ExtResource("14_vjgi4")
 
 [node name="Seaweed3" type="AnimatedSprite2D" parent="Entities/Props" unique_id=734721757]
 y_sort_enabled = true
-position = Vector2(543, 338)
+position = Vector2(1056, 338)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_7ua8r")
 offset = Vector2(0, -24)
@@ -259,19 +269,19 @@ y_sort_enabled = true
 
 [node name="BG" type="Node2D" parent="." unique_id=1544554596]
 z_index = -100
-metadata/_edit_lock_ = true
 
-[node name="BG2" type="Sprite2D" parent="BG" unique_id=1083088022]
-position = Vector2(18, 25)
-scale = Vector2(3.8, 3.8)
+[node name="Parallax2D" type="Parallax2D" parent="BG" unique_id=2063531772]
+scroll_scale = Vector2(0.1, 0.1)
+
+[node name="BG2" type="Sprite2D" parent="BG/Parallax2D" unique_id=1083088022]
+position = Vector2(558.00006, 305)
+scale = Vector2(4.3, 4.35)
 texture = ExtResource("4_g4kob")
-metadata/_edit_lock_ = true
 
 [node name="Boundaries" type="StaticBody2D" parent="BG" unique_id=432593465]
 position = Vector2(1, 41)
 collision_layer = 2
 collision_mask = 3
-metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BG/Boundaries" unique_id=1428512183]
 position = Vector2(1, 36.75)
@@ -282,10 +292,6 @@ position = Vector2(1, 374)
 shape = SubResource("RectangleShape2D_mod73")
 
 [node name="BG" type="Sprite2D" parent="BG" unique_id=427071469]
-position = Vector2(0, 22)
-scale = Vector2(3.8, 3.8)
+position = Vector2(272.44998, 22)
+scale = Vector2(5.5081506, 3.8)
 texture = ExtResource("4_400sg")
-metadata/_edit_lock_ = true
-
-[node name="Camera2D" type="Camera2D" parent="." unique_id=983189321]
-position = Vector2(0, 24)

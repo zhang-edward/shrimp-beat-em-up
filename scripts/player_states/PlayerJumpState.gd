@@ -9,10 +9,12 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @export var jump_slam_state: PlayerJumpSlamState
 @export var uppercut_state: PlayerUppercutState
 
+var from_uppercut: bool
+
 func enter(msg := {}) -> void:
 	player.sprite.play("jump")
-	var falling = msg.has("falling") and msg["falling"] == true
-	if !falling:
+	from_uppercut = msg.has("from_uppercut") and msg["from_uppercut"] == true
+	if !from_uppercut:
 		player.z_velocity = - JUMP_VELOCITY
 
 func physics_update(delta: float) -> void:
@@ -38,5 +40,5 @@ func update(_delta: float) -> void:
 		if player.z_velocity > -100:
 			state_machine.transition_to(jump_slam_state)
 			return
-		elif player.z_velocity < 0:
+		elif player.z_velocity < 0 and not from_uppercut:
 			state_machine.transition_to(uppercut_state)
