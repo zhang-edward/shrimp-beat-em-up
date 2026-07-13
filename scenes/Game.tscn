@@ -106,7 +106,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mod73"]
-size = Vector2(1216, 389)
+size = Vector2(1216, 57.5)
 
 [node name="Game" type="Node2D" unique_id=67653856]
 script = ExtResource("1_ibkli")
@@ -155,21 +155,21 @@ y_sort_enabled = true
 
 [node name="Rock1" type="Sprite2D" parent="Entities/Props" unique_id=1480612877]
 y_sort_enabled = true
-position = Vector2(-471, 104)
+position = Vector2(-355, 144)
 scale = Vector2(4, 4)
 texture = ExtResource("9_3xj3m")
 offset = Vector2(0, -16)
 
 [node name="Log1" type="Sprite2D" parent="Entities/Props" unique_id=1657274146]
 y_sort_enabled = true
-position = Vector2(-408, 321)
+position = Vector2(-367, 336)
 scale = Vector2(4, 4)
 texture = ExtResource("8_2rd6h")
 offset = Vector2(0, -15)
 
 [node name="Rock2" type="Sprite2D" parent="Entities/Props" unique_id=337832543]
 y_sort_enabled = true
-position = Vector2(475, 133)
+position = Vector2(362, 188)
 scale = Vector2(4, 4)
 texture = ExtResource("10_mcffj")
 offset = Vector2(0, -16)
@@ -184,21 +184,21 @@ flip_h = true
 
 [node name="Rock3" type="Sprite2D" parent="Entities/Props" unique_id=767440676]
 y_sort_enabled = true
-position = Vector2(-496, 318)
+position = Vector2(-455, 333)
 scale = Vector2(4, 4)
 texture = ExtResource("11_2rd6h")
 offset = Vector2(0, -8)
 
 [node name="Rock4" type="Sprite2D" parent="Entities/Props" unique_id=107203615]
 y_sort_enabled = true
-position = Vector2(489, 201)
+position = Vector2(418, 209)
 scale = Vector2(4, 4)
 texture = ExtResource("11_2rd6h")
 offset = Vector2(0, -9)
 
 [node name="Seaweed4" type="AnimatedSprite2D" parent="Entities/Props" unique_id=2033097957]
 y_sort_enabled = true
-position = Vector2(-445, 212)
+position = Vector2(-353, 257)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_7ua8r")
 offset = Vector2(0, -24)
@@ -206,7 +206,7 @@ script = ExtResource("14_vjgi4")
 
 [node name="Seaweed1" type="AnimatedSprite2D" parent="Entities/Props" unique_id=1320274558]
 y_sort_enabled = true
-position = Vector2(-354, 104)
+position = Vector2(-258, 140)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_mod73")
 offset = Vector2(0, -15.08)
@@ -214,7 +214,7 @@ script = ExtResource("14_vjgi4")
 
 [node name="Seaweed5" type="AnimatedSprite2D" parent="Entities/Props" unique_id=330900740]
 y_sort_enabled = true
-position = Vector2(-524, 177)
+position = Vector2(-435, 224)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_mod73")
 offset = Vector2(0, -15.08)
@@ -267,14 +267,18 @@ scale = Vector2(3.8, 3.8)
 texture = ExtResource("4_g4kob")
 metadata/_edit_lock_ = true
 
-[node name="StaticBody2D" type="StaticBody2D" parent="BG" unique_id=432593465]
+[node name="Boundaries" type="StaticBody2D" parent="BG" unique_id=432593465]
 position = Vector2(1, 41)
 collision_layer = 2
 collision_mask = 3
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BG/StaticBody2D" unique_id=1428512183]
-position = Vector2(1, -129)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BG/Boundaries" unique_id=1428512183]
+position = Vector2(1, 36.75)
+shape = SubResource("RectangleShape2D_mod73")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="BG/Boundaries" unique_id=206786321]
+position = Vector2(1, 374)
 shape = SubResource("RectangleShape2D_mod73")
 
 [node name="BG" type="Sprite2D" parent="BG" unique_id=427071469]
@@ -284,3 +288,4 @@ texture = ExtResource("4_400sg")
 metadata/_edit_lock_ = true
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=983189321]
+position = Vector2(0, 24)
