@@ -6,10 +6,14 @@ const JUMP_VELOCITY = 500
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 @export var move_state: PlayerMoveState
+@export var jump_slam_state: PlayerJumpSlamState
+@export var uppercut_state: PlayerUppercutState
 
-func enter(_msg := {}) -> void:
+func enter(msg := {}) -> void:
 	player.sprite.play("jump")
-	player.z_velocity = - JUMP_VELOCITY
+	var falling = msg.has("falling") and msg["falling"] == true
+	if !falling:
+		player.z_velocity = - JUMP_VELOCITY
 
 func physics_update(delta: float) -> void:
 	var direction_x = Input.get_axis("move_left", "move_right")
@@ -21,6 +25,8 @@ func physics_update(delta: float) -> void:
 	if player.z < 0:
 		player.z_velocity += gravity * delta
 	else:
+		player.z = 0
+		player.z_velocity = 0
 		state_machine.transition_to(move_state)
 
 
@@ -28,7 +34,9 @@ func update(_delta: float) -> void:
 	if player.z_velocity > 0:
 		player.sprite.play("fall")
 
-
-func exit() -> void:
-	player.z = 0
-	player.z_velocity = 0
+	if Input.is_action_just_pressed("attack"):
+		if player.z_velocity > -100:
+			state_machine.transition_to(jump_slam_state)
+			return
+		elif player.z_velocity < 0:
+			state_machine.transition_to(uppercut_state)

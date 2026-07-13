@@ -1,6 +1,6 @@
 class_name Hitstop
 
-const DEFAULT_DURATION := 0.1
+const DEFAULT_DURATION := 0.08
 
 # Node instance id -> resume timestamp (ms). Tracks in-flight freezes so an overlapping hit extends the freeze 
 static var _resume_at: Dictionary = {}

@@ -2,7 +2,7 @@ class_name Player
 extends CharacterBody2D
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
-
+@onready var state_machine: StateMachine = %StateMachine
 @export var healthbar: ProgressBar
 
 var z_velocity = 0.0
@@ -15,7 +15,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	# animation
 	sprite.position.y = z
-	if velocity.x != 0:
+	if velocity.x != 0 and state_machine.state is not PlayerJumpSlamState:
 		sprite.flip_h = velocity.x < 0
 
 func _physics_process(_delta: float) -> void:
