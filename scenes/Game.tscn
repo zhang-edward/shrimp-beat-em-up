@@ -8,9 +8,104 @@
 [ext_resource type="PackedScene" uid="uid://s4vk1a005tvq" path="res://prefab/Enemy.tscn" id="4_78awf"]
 [ext_resource type="Texture2D" uid="uid://b6a6t3gkcmgxs" path="res://sprites/bg_sm.png" id="4_400sg"]
 [ext_resource type="Texture2D" uid="uid://8kdlujo1djqy" path="res://sprites/bg_sm_living_room.png" id="4_g4kob"]
+[ext_resource type="Texture2D" uid="uid://bhwt635b0jwv1" path="res://sprites/props/log1.png" id="8_2rd6h"]
+[ext_resource type="Texture2D" uid="uid://br5cp6d53s4vv" path="res://sprites/props/rock1.png" id="9_3xj3m"]
+[ext_resource type="Texture2D" uid="uid://dk704xgij5d80" path="res://sprites/props/seaweed_3.png" id="9_r7sob"]
+[ext_resource type="Texture2D" uid="uid://blp8ap5yk36w3" path="res://sprites/props/rock2.png" id="10_mcffj"]
+[ext_resource type="Texture2D" uid="uid://duf8us6pj3mfr" path="res://sprites/props/rock3.png" id="11_2rd6h"]
+[ext_resource type="Texture2D" uid="uid://800mviy7djks" path="res://sprites/props/seaweed_1.png" id="12_7ua8r"]
+[ext_resource type="Script" uid="uid://ghmm1evp356x" path="res://scripts/PropWithRandomizedAnimation.gd" id="14_vjgi4"]
+[ext_resource type="Texture2D" uid="uid://bugjdi2mb3dmu" path="res://sprites/props/seaweed_2.png" id="14_y5y3l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mod73"]
 size = Vector2(1216, 389)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kyk2p"]
+atlas = ExtResource("9_r7sob")
+region = Rect2(0, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_45i86"]
+atlas = ExtResource("9_r7sob")
+region = Rect2(48, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sv1m6"]
+atlas = ExtResource("9_r7sob")
+region = Rect2(96, 0, 48, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7ua8r"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kyk2p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_45i86")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sv1m6")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r7sob"]
+atlas = ExtResource("12_7ua8r")
+region = Rect2(0, 0, 28, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y5y3l"]
+atlas = ExtResource("12_7ua8r")
+region = Rect2(28, 0, 28, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vjgi4"]
+atlas = ExtResource("12_7ua8r")
+region = Rect2(56, 0, 28, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mod73"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r7sob")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y5y3l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vjgi4")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a8wo8"]
+atlas = ExtResource("14_y5y3l")
+region = Rect2(0, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_attvq"]
+atlas = ExtResource("14_y5y3l")
+region = Rect2(32, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bneo8"]
+atlas = ExtResource("14_y5y3l")
+region = Rect2(64, 0, 32, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2rd6h"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a8wo8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_attvq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bneo8")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Game" type="Node2D" unique_id=67653856]
 script = ExtResource("1_ibkli")
@@ -42,12 +137,12 @@ grow_horizontal = 0
 text = "Wave 1: 0/15"
 
 [node name="BG" type="Node2D" parent="." unique_id=1544554596]
+z_index = -100
 
 [node name="BG2" type="Sprite2D" parent="BG" unique_id=1083088022]
-position = Vector2(0, 22)
+position = Vector2(18, 25)
 scale = Vector2(3.8, 3.8)
 texture = ExtResource("4_g4kob")
-metadata/_edit_lock_ = true
 
 [node name="StaticBody2D" type="StaticBody2D" parent="BG" unique_id=432593465]
 position = Vector2(1, 41)
@@ -63,6 +158,108 @@ position = Vector2(0, 22)
 scale = Vector2(3.8, 3.8)
 texture = ExtResource("4_400sg")
 metadata/_edit_lock_ = true
+
+[node name="Props" type="Node2D" parent="BG" unique_id=1314156249]
+y_sort_enabled = true
+
+[node name="Rock1" type="Sprite2D" parent="BG/Props" unique_id=1480612877]
+y_sort_enabled = true
+position = Vector2(-471, 64)
+scale = Vector2(4, 4)
+texture = ExtResource("9_3xj3m")
+
+[node name="Seaweed4" type="AnimatedSprite2D" parent="BG/Props" unique_id=2033097957]
+y_sort_enabled = true
+position = Vector2(-457, 134)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_7ua8r")
+
+[node name="Log1" type="Sprite2D" parent="BG/Props" unique_id=1657274146]
+y_sort_enabled = true
+position = Vector2(-430, 267)
+scale = Vector2(4, 4)
+texture = ExtResource("8_2rd6h")
+
+[node name="Rock2" type="Sprite2D" parent="BG/Props" unique_id=337832543]
+y_sort_enabled = true
+position = Vector2(472, 67)
+scale = Vector2(4, 4)
+texture = ExtResource("10_mcffj")
+
+[node name="Rock5" type="Sprite2D" parent="BG/Props" unique_id=147509202]
+y_sort_enabled = true
+position = Vector2(405, 306)
+scale = Vector2(4, 4)
+texture = ExtResource("10_mcffj")
+flip_h = true
+
+[node name="Rock3" type="Sprite2D" parent="BG/Props" unique_id=767440676]
+y_sort_enabled = true
+position = Vector2(-520, 320)
+scale = Vector2(4, 4)
+texture = ExtResource("11_2rd6h")
+
+[node name="Rock4" type="Sprite2D" parent="BG/Props" unique_id=107203615]
+y_sort_enabled = true
+position = Vector2(509, 179)
+scale = Vector2(4, 4)
+texture = ExtResource("11_2rd6h")
+
+[node name="Seaweed1" type="AnimatedSprite2D" parent="BG/Props" unique_id=1320274558]
+y_sort_enabled = true
+position = Vector2(-363, 48)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_mod73")
+script = ExtResource("14_vjgi4")
+
+[node name="Seaweed5" type="AnimatedSprite2D" parent="BG/Props" unique_id=1115548731]
+y_sort_enabled = true
+position = Vector2(-545, 165)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_mod73")
+script = ExtResource("14_vjgi4")
+
+[node name="Seaweed6" type="AnimatedSprite2D" parent="BG/Props" unique_id=394168622]
+y_sort_enabled = true
+position = Vector2(470, 300)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_mod73")
+script = ExtResource("14_vjgi4")
+
+[node name="Seaweed7" type="AnimatedSprite2D" parent="BG/Props" unique_id=252729465]
+y_sort_enabled = true
+position = Vector2(379, 10)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_mod73")
+script = ExtResource("14_vjgi4")
+
+[node name="Seaweed8" type="AnimatedSprite2D" parent="BG/Props" unique_id=549791846]
+y_sort_enabled = true
+position = Vector2(379, 10)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_mod73")
+script = ExtResource("14_vjgi4")
+
+[node name="Seaweed2" type="AnimatedSprite2D" parent="BG/Props" unique_id=229547631]
+y_sort_enabled = true
+position = Vector2(383, 36)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_2rd6h")
+script = ExtResource("14_vjgi4")
+
+[node name="Seaweed9" type="AnimatedSprite2D" parent="BG/Props" unique_id=1822835902]
+y_sort_enabled = true
+position = Vector2(507, 311)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_2rd6h")
+script = ExtResource("14_vjgi4")
+
+[node name="Seaweed3" type="AnimatedSprite2D" parent="BG/Props" unique_id=734721757]
+y_sort_enabled = true
+position = Vector2(544, 250)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_7ua8r")
+script = ExtResource("14_vjgi4")
 
 [node name="Player" parent="." unique_id=1699568361 node_paths=PackedStringArray("healthbar") instance=ExtResource("2_qbsmt")]
 position = Vector2(0, 100)

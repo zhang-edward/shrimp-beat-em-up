@@ -3,7 +3,7 @@ extends PlayerState
 
 const AIR_MOVE_SPEED = 50.0
 const JUMP_VELOCITY = -500
-const RECOVERY_TIME := 0.3
+const RECOVERY_TIME := 0.5
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var recovery_timer = 0

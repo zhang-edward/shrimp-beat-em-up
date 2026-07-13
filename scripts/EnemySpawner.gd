@@ -39,7 +39,7 @@ func spawn_enemies():
 			new_enemy.initialize(player_ref, rand_config)
 			add_child(new_enemy)
 			var starting_pos = LEFT_SIDE if randi_range(0, 1) == 0 else RIGHT_SIDE
-			starting_pos.y = randi_range(100, -100)
+			starting_pos.y = randi_range(100, 400)
 			new_enemy.global_position = starting_pos
 
 func get_num_enemies_on_screen():

@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://pyemjxradddg" path="res://scripts/Enemy.gd" id="1_f08wl"]
 [ext_resource type="Script" uid="uid://bge0hmqmafyrt" path="res://scripts/fsm/StateMachine.gd" id="2_e3gy8"]
+[ext_resource type="Texture2D" uid="uid://dn5gt0a1iuba6" path="res://sprites/shadow.png" id="2_n3fxy"]
 [ext_resource type="Script" uid="uid://csf7xaemitdcb" path="res://scripts/Hurtbox.gd" id="5_2y5xi"]
 [ext_resource type="Script" uid="uid://do8t1vj4ygsrh" path="res://scripts/fsm/DebugStateMachineLabel.gd" id="5_y7302"]
 [ext_resource type="StyleBox" uid="uid://tu5xpycc3rfh" path="res://prefab/styles/healthbar_bg.tres" id="7_jca2b"]
@@ -17,9 +18,18 @@ size = Vector2(20, 13)
 radius = 4.1231055
 
 [node name="Enemy" type="CharacterBody2D" unique_id=1600955621]
+y_sort_enabled = true
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_f08wl")
+
+[node name="Shadow" type="Sprite2D" parent="." unique_id=1327308791]
+modulate = Color(1, 1, 1, 0.39215687)
+z_index = -1
+z_as_relative = false
+position = Vector2(0, 5)
+scale = Vector2(4, 4)
+texture = ExtResource("2_n3fxy")
 
 [node name="Healthbar" type="ProgressBar" parent="." unique_id=347754481]
 anchors_preset = 5

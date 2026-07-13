@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bjo46lyg30r3e"
-path="res://.godot/imported/crab_enemy_1.png-57e4526a3c4ee75eab063e47aa11f02f.ctex"
+uid="uid://dn5gt0a1iuba6"
+path="res://.godot/imported/shadow.png-0049ca2c90082486e7f945f45e0bfdde.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/crab_enemy_1.png"
-dest_files=["res://.godot/imported/crab_enemy_1.png-57e4526a3c4ee75eab063e47aa11f02f.ctex"]
+source_file="res://sprites/shadow.png"
+dest_files=["res://.godot/imported/shadow.png-0049ca2c90082486e7f945f45e0bfdde.ctex"]
 
 [params]
 

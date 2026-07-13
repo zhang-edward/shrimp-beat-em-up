@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://cyj1qui0kg5gk"]
 
 [ext_resource type="Script" uid="uid://yf1p7bejodo2" path="res://scripts/Player.gd" id="1_00yv1"]
-[ext_resource type="Texture2D" uid="uid://cgn8m5nc1o08m" path="res://sprites/shrimp.png" id="2_poo86"]
+[ext_resource type="Texture2D" uid="uid://cgn8m5nc1o08m" path="res://sprites/characters/shrimp.png" id="2_poo86"]
+[ext_resource type="Texture2D" uid="uid://dn5gt0a1iuba6" path="res://sprites/shadow.png" id="2_tx0ux"]
 [ext_resource type="Script" uid="uid://csf7xaemitdcb" path="res://scripts/Hurtbox.gd" id="3_poo86"]
 [ext_resource type="Script" uid="uid://bge0hmqmafyrt" path="res://scripts/fsm/StateMachine.gd" id="4_vga1c"]
 [ext_resource type="Script" uid="uid://deiw0ulusq62o" path="res://scripts/player_states/PlayerMoveState.gd" id="5_dbxf5"]
@@ -166,9 +167,9 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_4c3r8")
 }],
-"loop": 1,
+"loop": 0,
 "name": &"jump_uppercut",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -242,6 +243,14 @@ radius = 6.0
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_00yv1")
+
+[node name="Shadow" type="Sprite2D" parent="." unique_id=1051102670]
+modulate = Color(1, 1, 1, 0.39215687)
+z_index = -1
+z_as_relative = false
+position = Vector2(0, 5)
+scale = Vector2(4, 4)
+texture = ExtResource("2_tx0ux")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1104767220]
 scale = Vector2(4, 4)
