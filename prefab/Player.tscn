@@ -208,7 +208,7 @@ animations = [{
 "speed": 8.0
 }, {
 "frames": [{
-"duration": 1.0,
+"duration": 1.5,
 "texture": SubResource("AtlasTexture_wq2nr")
 }, {
 "duration": 1.0,
@@ -255,7 +255,7 @@ texture = ExtResource("2_tx0ux")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1104767220]
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_mod73")
-animation = &"jump_uppercut"
+animation = &"punch_2"
 offset = Vector2(0, -17.36)
 
 [node name="HurtBox" type="Area2D" parent="AnimatedSprite2D" unique_id=669237323 node_paths=PackedStringArray("parent")]
@@ -290,21 +290,29 @@ move_state = NodePath("../PlayerMoveState")
 jump_slam_state = NodePath("../PlayerJumpSlamState")
 uppercut_state = NodePath("../PlayerUppercutState")
 
-[node name="PlayerPunchState" type="Node" parent="StateMachine" unique_id=1541438198 node_paths=PackedStringArray("move_state")]
+[node name="PlayerPunchState" type="Node" parent="StateMachine" unique_id=370192196 node_paths=PackedStringArray("move_state")]
 script = ExtResource("7_dbxf5")
 move_state = NodePath("../PlayerMoveState")
-metadata/_custom_type_script = "uid://x410y8jwway8"
+
+[node name="HitLocation" type="Marker2D" parent="StateMachine/PlayerPunchState" unique_id=319063507]
+position = Vector2(79, -75)
 
 [node name="PlayerJumpSlamState" type="Node" parent="StateMachine" unique_id=1353709993 node_paths=PackedStringArray("move_state")]
 script = ExtResource("8_238m6")
 move_state = NodePath("../PlayerMoveState")
 metadata/_custom_type_script = "uid://bp0g6soj8yibj"
 
+[node name="HitLocation" type="Marker2D" parent="StateMachine/PlayerJumpSlamState" unique_id=1111550724]
+position = Vector2(53, -46)
+
 [node name="PlayerUppercutState" type="Node" parent="StateMachine" unique_id=1534132963 node_paths=PackedStringArray("move_state", "jump_state")]
 script = ExtResource("9_l5s2s")
 move_state = NodePath("../PlayerMoveState")
 jump_state = NodePath("../PlayerJumpState")
 metadata/_custom_type_script = "uid://bl1887ka2oobh"
+
+[node name="HitLocation" type="Marker2D" parent="StateMachine/PlayerUppercutState" unique_id=1409619424]
+position = Vector2(36, -157)
 
 [node name="DebugStateMachineLabel" type="Label" parent="." unique_id=11757401 node_paths=PackedStringArray("state_machine")]
 anchors_preset = 5

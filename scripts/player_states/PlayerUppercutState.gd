@@ -20,7 +20,7 @@ func enter(_msg := {}) -> void:
 	var hitbox = hitbox_scene.instantiate()
 	player.sprite.add_child(hitbox)
 	var hitbox_offset = Vector2(-10, -10) if player.sprite.flip_h else Vector2(10, -10)
-	hitbox.init(hitbox_offset, Vector2(24, 24), 0.25, Hitbox.CollideableTypes.Enemy, 10, player)
+	hitbox.init(hitbox_offset, Vector2(24, 24), 0.25, Hitbox.CollideableTypes.Enemy, 10, player, HitEffectRegistry.HIT_EFFECT_1)
 
 func physics_update(delta: float) -> void:
 	var direction_x = Input.get_axis("move_left", "move_right")

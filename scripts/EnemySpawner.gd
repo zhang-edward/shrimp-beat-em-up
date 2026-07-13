@@ -3,6 +3,7 @@ extends Node
 
 @export var player_ref: Player
 @export var enemy_scene: PackedScene
+@export var enemies_folder: Node2D # all y-sorted entities need to be under the same node
 var LEFT_SIDE: Vector2
 var RIGHT_SIDE: Vector2
 var spawn_config: WaveSpawnConfig
@@ -37,13 +38,13 @@ func spawn_enemies():
 			var rand_config = configs.pick_random() as EnemyConfig
 			var new_enemy = enemy_scene.instantiate() as Enemy
 			new_enemy.initialize(player_ref, rand_config)
-			add_child(new_enemy)
+			enemies_folder.add_child(new_enemy)
 			var starting_pos = LEFT_SIDE if randi_range(0, 1) == 0 else RIGHT_SIDE
 			starting_pos.y = randi_range(100, 400)
 			new_enemy.global_position = starting_pos
 
 func get_num_enemies_on_screen():
-	return get_children().filter(func(c): return is_instance_valid(c) and c is Enemy).size()
+	return enemies_folder.get_children().filter(func(c): return is_instance_valid(c) and c is Enemy).size()
 
 func clear_curr_enemies():
 	for c in get_children():

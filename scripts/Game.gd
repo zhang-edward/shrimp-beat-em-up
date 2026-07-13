@@ -1,7 +1,7 @@
 class_name Game
 extends Node2D
 
-@onready var enemy_spawner = $EnemySpawner as EnemySpawner
+@onready var enemy_spawner = %EnemySpawner as EnemySpawner
 @onready var wave_stats_label = $CanvasLayer/WaveStats as Label
 
 # Called when the node enters the scene tree for the first time.
@@ -23,7 +23,7 @@ func incr_enemy_defeated_count():
 				GameVariables.curr_level += 1
 				load_next_level()
 		else:
-			GameVariables.curr_wave += 1	
+			GameVariables.curr_wave += 1
 			load_next_wave()
 	update_wave_stats()
 		

@@ -9,10 +9,11 @@ var _collision_exceptions := {}
 var _collide_with: CollideableTypes = CollideableTypes.Enemy
 var _damage: int
 var _source: Node2D
+var _effect_anim: SpriteFrames
 
 @onready var _collision_shape: CollisionShape2D = $CollisionShape2D
 
-func init(pos: Vector2, size: Vector2, lifetime: float, collide_with: CollideableTypes, damage: int, source: Node2D):
+func init(pos: Vector2, size: Vector2, lifetime: float, collide_with: CollideableTypes, damage: int, source: Node2D, effect_anim: SpriteFrames = null):
 	position = pos
 	_collide_with = collide_with
 	_collision_shape.shape = RectangleShape2D.new()
@@ -20,6 +21,7 @@ func init(pos: Vector2, size: Vector2, lifetime: float, collide_with: Collideabl
 	_life_timer = lifetime
 	_damage = damage
 	_source = source
+	_effect_anim = effect_anim
 	area_entered.connect(_handle_area_entered)
 
 func _process(delta):
@@ -42,4 +44,11 @@ func _handle_area_entered(body: Area2D):
 		elif hurtbox.parent is Enemy and _collide_with == CollideableTypes.Enemy:
 			var enemy = hurtbox.parent as Enemy
 			enemy.damage(_damage, _source)
+			spawn_effect(lerp(global_position, enemy.position, 0.5))
 			Hitstop.freeze([_source, enemy])
+
+func spawn_effect(pos: Vector2):
+	var config = EffectConfig.new()
+	config.pos = pos
+	config.anim = _effect_anim
+	EffectManager.spawn_effect(config)

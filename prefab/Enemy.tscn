@@ -15,12 +15,12 @@
 size = Vector2(20, 13)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jca2b"]
-radius = 4.1231055
+radius = 14.035668
 
 [node name="Enemy" type="CharacterBody2D" unique_id=1600955621]
 y_sort_enabled = true
-collision_layer = 0
-collision_mask = 2
+position = Vector2(109, 1)
+collision_mask = 3
 script = ExtResource("1_f08wl")
 
 [node name="Shadow" type="Sprite2D" parent="." unique_id=1327308791]
@@ -32,13 +32,14 @@ scale = Vector2(4, 4)
 texture = ExtResource("2_n3fxy")
 
 [node name="Healthbar" type="ProgressBar" parent="." unique_id=347754481]
+z_index = 100
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -86.0
-offset_top = -134.0
-offset_right = 87.0
-offset_bottom = -119.0
+offset_left = -47.0
+offset_top = -119.0
+offset_right = 48.0
+offset_bottom = -110.0
 grow_horizontal = 2
 theme_override_styles/background = ExtResource("7_jca2b")
 theme_override_styles/fill = ExtResource("8_2y5xi")

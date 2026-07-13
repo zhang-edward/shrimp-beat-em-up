@@ -2,7 +2,7 @@ class_name PlayerPunchState
 extends PlayerState
 
 const NUDGE_MOVE_SPEED = 50.0
-const RECOVERY_TIME := 0.2
+const RECOVERY_TIMES := [0.2, 0.2, 0.4]
 const BUFFER_WINDOW := 0.2
 
 @export var move_state: PlayerMoveState
@@ -13,14 +13,15 @@ var recovery_timer = 0
 var comboing: bool
 
 func enter(msg := {}) -> void:
-	recovery_timer = RECOVERY_TIME
 	combo_index = msg["combo_index"] if msg.has("combo_index") else 0
+	recovery_timer = RECOVERY_TIMES[combo_index]
 
 	var hitbox = hitbox_scene.instantiate()
 	player.add_child(hitbox)
-	var sprite_size = player.get_sprite_size()
-	var hitbox_offset = Vector2(-50, -sprite_size.y / 3) if player.sprite.flip_h else Vector2(50, -sprite_size.y / 3)
-	hitbox.init(hitbox_offset, Vector2(48, 48), 0.25, Hitbox.CollideableTypes.Enemy, 10, player)
+	# var sprite_size = player.get_sprite_size()
+	var hitbox_offset = $HitLocation.position
+	hitbox_offset.x *= -1 if player.sprite.flip_h else 1
+	hitbox.init(hitbox_offset, Vector2(96, 96), 0.25, Hitbox.CollideableTypes.Enemy, 10, player, HitEffectRegistry.HIT_EFFECT_1)
 
 	var anim = "punch_" + str(combo_index)
 	player.sprite.play(anim)

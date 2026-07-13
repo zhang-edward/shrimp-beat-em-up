@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://coeiixbxymqrg"]
+
+[ext_resource type="Script" uid="uid://bhuhnuvvneosm" path="res://scripts/utils/Effect.gd" id="1_mujol"]
+
+[node name="Effect" type="AnimatedSprite2D" unique_id=1340604837]
+z_index = 1
+position = Vector2(0.99999994, 0.99999994)
+scale = Vector2(3.5, 3.5)
+script = ExtResource("1_mujol")
