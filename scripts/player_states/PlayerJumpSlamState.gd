@@ -10,6 +10,8 @@ var recovery_timer = 0
 
 @export var move_state: PlayerMoveState
 var hitbox_scene: PackedScene = preload("res://prefab/Hitbox.tscn")
+# Spikes them into the floor (positive launch is downward), so they bounce back up
+var hit: HitConfig = HitConfig.create(15, HitEffectRegistry.HIT_EFFECT_2, 200.0, 600.0, true, 0.12)
 
 func enter(_msg := {}) -> void:
 	recovery_timer = RECOVERY_TIME
@@ -19,7 +21,7 @@ func enter(_msg := {}) -> void:
 	var hitbox = hitbox_scene.instantiate()
 	player.sprite.add_child(hitbox)
 	var hitbox_offset = Vector2(-10, -10) if player.sprite.flip_h else Vector2(10, -10)
-	hitbox.init(hitbox_offset, Vector2(24, 24), 0.25, Hitbox.CollideableTypes.Enemy, 10, player, HitEffectRegistry.HIT_EFFECT_1)
+	hitbox.init(hitbox_offset, Vector2(24, 24), 0.25, Hitbox.CollideableTypes.Enemy, player, hit)
 
 func physics_update(delta: float) -> void:
 	var direction_x = Input.get_axis("move_left", "move_right")

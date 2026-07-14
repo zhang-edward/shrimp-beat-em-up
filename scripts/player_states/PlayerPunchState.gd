@@ -8,6 +8,12 @@ const BUFFER_WINDOW := 0.2
 @export var move_state: PlayerMoveState
 
 var hitbox_scene: PackedScene = preload("res://prefab/Hitbox.tscn")
+# The two jabs are ordinary hits; the finisher knocks them down and sends them skidding
+var hits: Array[HitConfig] = [
+	HitConfig.create(10, HitEffectRegistry.HIT_EFFECT_1),
+	HitConfig.create(10, HitEffectRegistry.HIT_EFFECT_1),
+	HitConfig.create(15, HitEffectRegistry.HIT_EFFECT_2, 450.0, -350.0, true, 0.12),
+]
 var combo_index := 0
 var recovery_timer = 0
 var comboing: bool
@@ -21,7 +27,7 @@ func enter(msg := {}) -> void:
 	# var sprite_size = player.get_sprite_size()
 	var hitbox_offset = $HitLocation.position
 	hitbox_offset.x *= -1 if player.sprite.flip_h else 1
-	hitbox.init(hitbox_offset, Vector2(96, 96), 0.25, Hitbox.CollideableTypes.Enemy, 10, player, HitEffectRegistry.HIT_EFFECT_1)
+	hitbox.init(hitbox_offset, Vector2(96, 96), 0.25, Hitbox.CollideableTypes.Enemy, player, hits[combo_index])
 
 	var anim = "punch_" + str(combo_index)
 	player.sprite.play(anim)

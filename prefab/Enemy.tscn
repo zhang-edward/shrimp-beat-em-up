@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://bge0hmqmafyrt" path="res://scripts/fsm/StateMachine.gd" id="2_e3gy8"]
 [ext_resource type="Texture2D" uid="uid://dn5gt0a1iuba6" path="res://sprites/shadow.png" id="2_n3fxy"]
 [ext_resource type="Script" uid="uid://csf7xaemitdcb" path="res://scripts/Hurtbox.gd" id="5_2y5xi"]
+[ext_resource type="SpriteFrames" uid="uid://p2743rvcgwd" path="res://animations/snail.tres" id="5_rh63n"]
 [ext_resource type="Script" uid="uid://do8t1vj4ygsrh" path="res://scripts/fsm/DebugStateMachineLabel.gd" id="5_y7302"]
 [ext_resource type="StyleBox" uid="uid://tu5xpycc3rfh" path="res://prefab/styles/healthbar_bg.tres" id="7_jca2b"]
 [ext_resource type="Script" uid="uid://bukmh6a1bpgy" path="res://scripts/enemy_states/EnemyAttackState.gd" id="7_n3fxy"]
@@ -11,10 +12,11 @@
 [ext_resource type="StyleBox" uid="uid://bpb3vlcuriyr1" path="res://prefab/styles/healthbar_fill.tres" id="8_2y5xi"]
 [ext_resource type="Script" uid="uid://cv7crwf5qo2jy" path="res://scripts/enemy_states/EnemyHurtState.gd" id="8_y16dy"]
 [ext_resource type="Script" uid="uid://dbujchdjs5x8u" path="res://scripts/enemy_states/EnemyWanderState.gd" id="9_kkroo"]
+[ext_resource type="Script" uid="uid://b0bfdsn84j8q8" path="res://scripts/enemy_states/EnemyRagdollState.gd" id="10_rgdll"]
 [ext_resource type="Script" uid="uid://cnqd8t0t6y57h" path="res://scripts/enemy_states/EnemyEnterArenaState.gd" id="11_kkroo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jca2b"]
-size = Vector2(20, 13)
+size = Vector2(25.75, 21)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jca2b"]
 radius = 14.035668
@@ -51,18 +53,19 @@ value = 50.0
 show_percentage = false
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=847188949]
+position = Vector2(0, 0.11)
 scale = Vector2(4, 4)
-offset = Vector2(0, -12)
+sprite_frames = ExtResource("5_rh63n")
+offset = Vector2(0, -9.935)
 
 [node name="HurtBox" type="Area2D" parent="AnimatedSprite2D" unique_id=1798380912 node_paths=PackedStringArray("parent")]
-position = Vector2(0, 5)
 collision_layer = 4
 collision_mask = 4
 script = ExtResource("5_2y5xi")
 parent = NodePath("../..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/HurtBox" unique_id=908512090]
-position = Vector2(0, -17.5)
+position = Vector2(-0.875, -7.7775)
 shape = SubResource("RectangleShape2D_jca2b")
 debug_color = Color(0.7967164, 0.42138872, 0.12490418, 0.41960785)
 
@@ -98,6 +101,12 @@ approach_state = NodePath("../EnemyApproachState")
 [node name="EnemyEnterArenaState" type="Node" parent="StateMachine" unique_id=441726873 node_paths=PackedStringArray("next_state")]
 script = ExtResource("11_kkroo")
 next_state = NodePath("../EnemyWanderState")
+
+[node name="EnemyRagdollState" type="Node" parent="StateMachine" unique_id=694318765 node_paths=PackedStringArray("approach_state", "wander_state")]
+unique_name_in_owner = true
+script = ExtResource("10_rgdll")
+approach_state = NodePath("../EnemyApproachState")
+wander_state = NodePath("../EnemyWanderState")
 
 [node name="DebugStateMachineLabel" type="Label" parent="." unique_id=155363593 node_paths=PackedStringArray("state_machine")]
 anchors_preset = 5

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="EnemyConfig" format=3 uid="uid://cgsbc7che016f"]
+
+[ext_resource type="Script" uid="uid://nudvt7fmanuk" path="res://scripts/levels/EnemyConfig.gd" id="1_0kp78"]
+[ext_resource type="SpriteFrames" uid="uid://p2743rvcgwd" path="res://animations/snail.tres" id="2_0kp78"]
+
+[resource]
+script = ExtResource("1_0kp78")
+sprite_frames = ExtResource("2_0kp78")
+max_health = 200
+metadata/_custom_type_script = "uid://nudvt7fmanuk"

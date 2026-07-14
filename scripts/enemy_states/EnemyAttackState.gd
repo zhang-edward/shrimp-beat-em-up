@@ -10,6 +10,7 @@ enum Phase {WINDUP, ACTIVE, RECOVERY}
 @export var wander_state: EnemyState
 
 var hitbox_scene: PackedScene = preload("res://prefab/Hitbox.tscn")
+var hit: HitConfig = HitConfig.create(10, HitEffectRegistry.HIT_EFFECT_1)
 var t: float
 var phase: Phase
 
@@ -50,7 +51,7 @@ func spawn_hitbox():
 	enemy.add_child(hitbox)
 	var sprite_size = enemy.get_sprite_size()
 	var hitbox_offset = Vector2(-50, -sprite_size.y / 3) if enemy.sprite.flip_h else Vector2(50, -sprite_size.y / 3)
-	hitbox.init(hitbox_offset, Vector2(64, 64), 0.25, Hitbox.CollideableTypes.Player, 10, enemy, HitEffectRegistry.HIT_EFFECT_1)
+	hitbox.init(hitbox_offset, Vector2(64, 64), 0.25, Hitbox.CollideableTypes.Player, enemy, hit)
 
 func exit() -> void:
 	enemy.sprite.play("default")
