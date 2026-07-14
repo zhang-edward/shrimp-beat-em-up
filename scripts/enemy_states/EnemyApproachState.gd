@@ -6,6 +6,7 @@ const ATTACK_RANGE_X := 100.0
 const ATTACK_RANGE_Y := 20.0
 const ATTACK_COOLDOWN_SECONDS := 1.0
 const STATE_DURATION_SECONDS := 10.0
+const AUTO_FACE_PLAYER_RANGE = 200
 
 @export var next_state: State
 @export var attack_state: EnemyAttackState
@@ -35,7 +36,20 @@ func update(_delta: float) -> void:
 		enemy.absolute_velocity = Vector2.ZERO
 		state_machine.transition_to(attack_state)
 		
+	animate()
 
 	state_timer -= _delta
 	if state_timer <= 0.0:
 		state_machine.transition_to(next_state)
+
+
+func animate():
+	if enemy.velocity.length_squared() > 0:
+		enemy.sprite.play("move")
+	else:
+		enemy.sprite.play("default")
+
+	if (enemy.player_ref.position - enemy.position).length() <= AUTO_FACE_PLAYER_RANGE:
+		enemy.sprite.flip_h = enemy.position.x > enemy.player_ref.position.x
+	elif enemy.velocity.x != 0:
+		enemy.sprite.flip_h = enemy.velocity.x < 0

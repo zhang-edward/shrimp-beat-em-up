@@ -68,7 +68,7 @@ debug_color = Color(0.7967164, 0.42138872, 0.12490418, 0.41960785)
 [node name="StateMachine" type="Node" parent="." unique_id=2094818322]
 unique_name_in_owner = true
 script = ExtResource("2_e3gy8")
-initial_state = NodePath("EnemyApproachState")
+initial_state = NodePath("EnemyWanderState")
 
 [node name="EnemyApproachState" type="Node" parent="StateMachine" unique_id=1482968835 node_paths=PackedStringArray("next_state", "attack_state")]
 script = ExtResource("7_y16dy")
@@ -76,21 +76,23 @@ next_state = NodePath("../EnemyWanderState")
 attack_state = NodePath("../EnemyAttackState")
 metadata/_custom_type_script = "uid://bukmh6a1bpgy"
 
-[node name="EnemyAttackState" type="Node" parent="StateMachine" unique_id=1390354486 node_paths=PackedStringArray("next_state")]
+[node name="EnemyAttackState" type="Node" parent="StateMachine" unique_id=1390354486 node_paths=PackedStringArray("approach_state", "wander_state")]
 script = ExtResource("7_n3fxy")
 windup_time_seconds = 0.5
 attack_active_time_seconds = 0.2
 recovery_time_seconds = 0.5
-next_state = NodePath("../EnemyApproachState")
+approach_state = NodePath("../EnemyApproachState")
+wander_state = NodePath("../EnemyWanderState")
 
-[node name="EnemyHurtState" type="Node" parent="StateMachine" unique_id=1114880896 node_paths=PackedStringArray("default_state")]
+[node name="EnemyHurtState" type="Node" parent="StateMachine" unique_id=1114880896 node_paths=PackedStringArray("approach_state", "wander_state")]
 unique_name_in_owner = true
 script = ExtResource("8_y16dy")
-default_state = NodePath("../EnemyWanderState")
+approach_state = NodePath("../EnemyApproachState")
+wander_state = NodePath("../EnemyWanderState")
 
-[node name="EnemyWanderState" type="Node" parent="StateMachine" unique_id=1147463591 node_paths=PackedStringArray("nextState")]
+[node name="EnemyWanderState" type="Node" parent="StateMachine" unique_id=1147463591 node_paths=PackedStringArray("approach_state")]
 script = ExtResource("9_kkroo")
-nextState = NodePath("../EnemyAttackState")
+approach_state = NodePath("../EnemyApproachState")
 
 [node name="DebugStateMachineLabel" type="Label" parent="." unique_id=155363593 node_paths=PackedStringArray("state_machine")]
 anchors_preset = 5

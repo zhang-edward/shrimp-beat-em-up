@@ -4,7 +4,8 @@ extends EnemyState
 const BASE_KNOCKBACK := 100
 const HITSTUN_SECONDS := 0.5
 
-@export var default_state: State
+@export var approach_state: EnemyApproachState
+@export var wander_state: EnemyWanderState
 var hitstun_timer = 0
 
 func enter(msg := {}):
@@ -18,7 +19,10 @@ func update(delta: float) -> void:
 
 	hitstun_timer -= delta
 	if hitstun_timer <= 0:
-		state_machine.transition_to(default_state)
+		if enemy.can_take_aggro_slot():
+			state_machine.transition_to(approach_state)
+		else:
+			state_machine.transition_to(wander_state)
 
 func exit() -> void:
 	enemy.velocity = Vector2.ZERO

@@ -1,7 +1,7 @@
 class_name Enemy
 extends CharacterBody2D
 
-const AUTO_FACE_PLAYER_RANGE = 200
+const MAX_AGGRO_ENEMIES := 2
 
 @export var move_speed := 100.0
 @export var player_ref: Player
@@ -25,20 +25,7 @@ func initialize(player: Player, config: EnemyConfig) -> void:
 	player_ref = player
 	enemy_config = config
 
-func _process(delta: float) -> void:
-	if state_machine.state is not EnemyAttackState:
-		if velocity.length_squared() > 0:
-			sprite.play("move")
-		else:
-			sprite.play("default")
-
-	if velocity.x != 0 and state_machine.state is not EnemyHurtState:
-		sprite.flip_h = velocity.x < 0
-
-	if (player_ref.position - position).length() <= AUTO_FACE_PLAYER_RANGE:
-		sprite.flip_h = position.x > player_ref.position.x
-
-
+# func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	velocity = MovementUtils.scale_velocity(absolute_velocity)
 	move_and_slide()
@@ -53,3 +40,14 @@ func damage(amount: int, source: Node2D):
 
 func get_sprite_size():
 	return sprite.sprite_frames.get_frame_texture("default", 0).get_size() * sprite.scale
+
+func is_aggroing() -> bool:
+	return state_machine.state is EnemyApproachState or state_machine.state is EnemyAttackState
+
+# Excludes self, so the answer holds whether claiming a slot or keeping one
+func can_take_aggro_slot() -> bool:
+	var others_aggroing := 0
+	for other in get_parent().get_children():
+		if other != self and is_instance_valid(other) and other is Enemy and other.is_aggroing():
+			others_aggroing += 1
+	return others_aggroing < MAX_AGGRO_ENEMIES
