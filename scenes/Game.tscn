@@ -108,8 +108,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mod73"]
 size = Vector2(1514, 57.5)
 
-[node name="Game" type="Node2D" unique_id=67653856]
+[node name="Game" type="Node2D" unique_id=67653856 node_paths=PackedStringArray("enemies_folder")]
 script = ExtResource("1_ibkli")
+enemies_folder = NodePath("Entities/Enemies")
 
 [node name="EffectManager" type="Node2D" parent="." unique_id=626913341]
 script = ExtResource("2_vjgi4")

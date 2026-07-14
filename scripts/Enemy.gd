@@ -6,6 +6,8 @@ const MAX_AGGRO_ENEMIES := 2
 @export var move_speed := 100.0
 @export var player_ref: Player
 
+@onready var ground_collider: CollisionShape2D = $CollisionShape2D
+@onready var shadow: Sprite2D = $Shadow
 @onready var game: Game = get_node("/root/Game") as Game
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var healthbar: ProgressBar = $Healthbar

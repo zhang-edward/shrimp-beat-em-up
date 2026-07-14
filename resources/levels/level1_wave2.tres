@@ -8,6 +8,6 @@
 script = ExtResource("2_qtp8g")
 enemy_configs = Array[ExtResource("1_eravj")]([ExtResource("2_5u7gj")])
 spawn_freq = 1.0
-num_enemies_to_defeat = 20
+num_enemies_to_defeat = 1
 max_enemies = 8
 metadata/_custom_type_script = "uid://d3l5nsti7vk1p"

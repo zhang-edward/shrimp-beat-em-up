@@ -1,0 +1,202 @@
+[gd_scene format=3 uid="uid://duph7oh3hqltg"]
+
+[ext_resource type="Script" uid="uid://dmm7whpqlpjs1" path="res://scripts/PiranhaBoss.gd" id="1_xgwx1"]
+[ext_resource type="Texture2D" uid="uid://cnqm0bvvya4c6" path="res://sprites/boss/piranha_boss-sheet.png" id="2_8idci"]
+[ext_resource type="Script" uid="uid://bge0hmqmafyrt" path="res://scripts/fsm/StateMachine.gd" id="3_a8i8s"]
+[ext_resource type="Script" uid="uid://chkdvk8nuu7nk" path="res://scripts/boss_states/BossEnterArenaState.gd" id="4_n2l5s"]
+[ext_resource type="Texture2D" uid="uid://dn5gt0a1iuba6" path="res://sprites/shadow.png" id="5_ub87s"]
+[ext_resource type="Script" uid="uid://do8t1vj4ygsrh" path="res://scripts/fsm/DebugStateMachineLabel.gd" id="6_ughef"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a8i8s"]
+atlas = ExtResource("2_8idci")
+region = Rect2(0, 120, 184, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n2l5s"]
+atlas = ExtResource("2_8idci")
+region = Rect2(184, 120, 184, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ub87s"]
+atlas = ExtResource("2_8idci")
+region = Rect2(368, 120, 184, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ughef"]
+atlas = ExtResource("2_8idci")
+region = Rect2(552, 120, 184, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cb02v"]
+atlas = ExtResource("2_8idci")
+region = Rect2(736, 120, 184, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8yf57"]
+atlas = ExtResource("2_8idci")
+region = Rect2(0, 240, 184, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bd71w"]
+atlas = ExtResource("2_8idci")
+region = Rect2(184, 240, 184, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8idci"]
+atlas = ExtResource("2_8idci")
+region = Rect2(368, 240, 184, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rlcvt"]
+atlas = ExtResource("2_8idci")
+region = Rect2(552, 240, 184, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0k8tf"]
+atlas = ExtResource("2_8idci")
+region = Rect2(736, 240, 184, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kgaf0"]
+atlas = ExtResource("2_8idci")
+region = Rect2(0, 360, 184, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4mim7"]
+atlas = ExtResource("2_8idci")
+region = Rect2(184, 360, 184, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s45h4"]
+atlas = ExtResource("2_8idci")
+region = Rect2(368, 360, 184, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wowj3"]
+atlas = ExtResource("2_8idci")
+region = Rect2(0, 0, 184, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ghgbw"]
+atlas = ExtResource("2_8idci")
+region = Rect2(184, 0, 184, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3g5ee"]
+atlas = ExtResource("2_8idci")
+region = Rect2(368, 0, 184, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eulky"]
+atlas = ExtResource("2_8idci")
+region = Rect2(552, 0, 184, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6hbhs"]
+atlas = ExtResource("2_8idci")
+region = Rect2(736, 0, 184, 120)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xgwx1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a8i8s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n2l5s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ub87s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ughef")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cb02v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8yf57")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bd71w")
+}],
+"loop": 0,
+"name": &"bite",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8idci")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rlcvt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0k8tf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kgaf0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4mim7")
+}],
+"loop": 1,
+"name": &"chomp",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s45h4")
+}],
+"loop": 0,
+"name": &"hurt",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wowj3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ghgbw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3g5ee")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eulky")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6hbhs")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ub87s"]
+radius = 14.035668
+
+[node name="PiranhaBoss" type="CharacterBody2D" unique_id=1799854651]
+script = ExtResource("1_xgwx1")
+
+[node name="Shadow" type="Sprite2D" parent="." unique_id=206225726]
+modulate = Color(1, 1, 1, 0.39215687)
+position = Vector2(0, 200)
+scale = Vector2(15, 15)
+texture = ExtResource("5_ub87s")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1129622105]
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_xgwx1")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="StateMachine" type="Node" parent="." unique_id=314033685]
+script = ExtResource("3_a8i8s")
+initial_state = NodePath("BossEnterArenaState")
+
+[node name="BossEnterArenaState" type="Node" parent="StateMachine" unique_id=638515764]
+script = ExtResource("4_n2l5s")
+
+[node name="DebugStateMachineLabel" type="Label" parent="." unique_id=303831490 node_paths=PackedStringArray("state_machine")]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -46.0
+offset_top = -112.0
+offset_right = 46.0
+offset_bottom = -89.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+text = "debug state"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("6_ughef")
+state_machine = NodePath("../StateMachine")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=81611931]
+position = Vector2(0, 200)
+shape = SubResource("CircleShape2D_ub87s")
