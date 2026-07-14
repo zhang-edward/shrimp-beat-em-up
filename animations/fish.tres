@@ -2,6 +2,18 @@
 
 [ext_resource type="Texture2D" uid="uid://mlbn5bvn88iy" path="res://sprites/characters/fish_enemy_1.png" id="1_mtwji"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_mtwji"]
+atlas = ExtResource("1_mtwji")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hyjlg"]
+atlas = ExtResource("1_mtwji")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pkglh"]
+atlas = ExtResource("1_mtwji")
+region = Rect2(128, 0, 32, 32)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_y16dy"]
 atlas = ExtResource("1_mtwji")
 region = Rect2(0, 0, 32, 32)
@@ -38,8 +50,31 @@ region = Rect2(64, 0, 32, 32)
 atlas = ExtResource("1_mtwji")
 region = Rect2(96, 0, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_pfnt3"]
+atlas = ExtResource("1_mtwji")
+region = Rect2(192, 0, 32, 32)
+
 [resource]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mtwji")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hyjlg")
+}],
+"loop": 0,
+"name": &"attack",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pkglh")
+}],
+"loop": 0,
+"name": &"attack_windup",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_y16dy")
@@ -80,5 +115,13 @@ animations = [{
 }],
 "loop": 1,
 "name": &"move",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pfnt3")
+}],
+"loop": 0,
+"name": &"recovery",
 "speed": 5.0
 }]

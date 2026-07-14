@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://do8t1vj4ygsrh" path="res://scripts/fsm/DebugStateMachineLabel.gd" id="5_y7302"]
 [ext_resource type="StyleBox" uid="uid://tu5xpycc3rfh" path="res://prefab/styles/healthbar_bg.tres" id="7_jca2b"]
 [ext_resource type="Script" uid="uid://bukmh6a1bpgy" path="res://scripts/enemy_states/EnemyAttackState.gd" id="7_n3fxy"]
+[ext_resource type="Script" uid="uid://k8dsemp7k2p1" path="res://scripts/enemy_states/EnemyApproachState.gd" id="7_y16dy"]
 [ext_resource type="StyleBox" uid="uid://bpb3vlcuriyr1" path="res://prefab/styles/healthbar_fill.tres" id="8_2y5xi"]
 [ext_resource type="Script" uid="uid://cv7crwf5qo2jy" path="res://scripts/enemy_states/EnemyHurtState.gd" id="8_y16dy"]
 [ext_resource type="Script" uid="uid://dbujchdjs5x8u" path="res://scripts/enemy_states/EnemyWanderState.gd" id="9_kkroo"]
@@ -67,11 +68,20 @@ debug_color = Color(0.7967164, 0.42138872, 0.12490418, 0.41960785)
 [node name="StateMachine" type="Node" parent="." unique_id=2094818322]
 unique_name_in_owner = true
 script = ExtResource("2_e3gy8")
-initial_state = NodePath("EnemyAttackState")
+initial_state = NodePath("EnemyApproachState")
 
-[node name="EnemyAttackState" type="Node" parent="StateMachine" unique_id=1390354486 node_paths=PackedStringArray("nextState")]
+[node name="EnemyApproachState" type="Node" parent="StateMachine" unique_id=1482968835 node_paths=PackedStringArray("next_state", "attack_state")]
+script = ExtResource("7_y16dy")
+next_state = NodePath("../EnemyWanderState")
+attack_state = NodePath("../EnemyAttackState")
+metadata/_custom_type_script = "uid://bukmh6a1bpgy"
+
+[node name="EnemyAttackState" type="Node" parent="StateMachine" unique_id=1390354486 node_paths=PackedStringArray("next_state")]
 script = ExtResource("7_n3fxy")
-nextState = NodePath("../EnemyWanderState")
+windup_time_seconds = 0.5
+attack_active_time_seconds = 0.2
+recovery_time_seconds = 0.5
+next_state = NodePath("../EnemyApproachState")
 
 [node name="EnemyHurtState" type="Node" parent="StateMachine" unique_id=1114880896 node_paths=PackedStringArray("default_state")]
 unique_name_in_owner = true

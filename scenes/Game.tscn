@@ -106,7 +106,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mod73"]
-size = Vector2(1216, 57.5)
+size = Vector2(1514, 57.5)
 
 [node name="Game" type="Node2D" unique_id=67653856]
 script = ExtResource("1_ibkli")
@@ -284,11 +284,11 @@ collision_layer = 2
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BG/Boundaries" unique_id=1428512183]
-position = Vector2(1, 36.75)
+position = Vector2(286, 36.75)
 shape = SubResource("RectangleShape2D_mod73")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="BG/Boundaries" unique_id=206786321]
-position = Vector2(1, 374)
+position = Vector2(273, 374)
 shape = SubResource("RectangleShape2D_mod73")
 
 [node name="BG" type="Sprite2D" parent="BG" unique_id=427071469]

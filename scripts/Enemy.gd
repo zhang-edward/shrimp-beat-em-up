@@ -26,11 +26,12 @@ func initialize(player: Player, config: EnemyConfig) -> void:
 	enemy_config = config
 
 func _process(delta: float) -> void:
-	if velocity.length_squared() > 0:
-		sprite.play("move")
-	else:
-		sprite.play("default")
-	
+	if state_machine.state is not EnemyAttackState:
+		if velocity.length_squared() > 0:
+			sprite.play("move")
+		else:
+			sprite.play("default")
+
 	if velocity.x != 0 and state_machine.state is not EnemyHurtState:
 		sprite.flip_h = velocity.x < 0
 
