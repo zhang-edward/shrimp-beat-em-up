@@ -23,6 +23,7 @@ y_sort_enabled = true
 position = Vector2(109, 1)
 collision_mask = 3
 script = ExtResource("1_f08wl")
+move_speed = null
 
 [node name="Shadow" type="Sprite2D" parent="." unique_id=1327308791]
 modulate = Color(1, 1, 1, 0.39215687)

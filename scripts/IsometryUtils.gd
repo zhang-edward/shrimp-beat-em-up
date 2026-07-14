@@ -1,5 +1,6 @@
-class_name MovementUtils
+class_name IsometryUtils
 
+const Y_AXIS_HIT_RANGE: float = 25
 const DEPTH_SCALE: float = 0.5 # Dampens vertical movement by 50%
 
 static func scale_velocity(v: Vector2) -> Vector2:

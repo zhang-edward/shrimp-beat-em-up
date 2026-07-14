@@ -27,7 +27,7 @@ func initialize(player: Player, config: EnemyConfig) -> void:
 
 # func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
-	velocity = MovementUtils.scale_velocity(absolute_velocity)
+	velocity = IsometryUtils.scale_velocity(absolute_velocity)
 	move_and_slide()
 
 func damage(amount: int, source: Node2D):

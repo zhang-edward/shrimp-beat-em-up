@@ -37,6 +37,10 @@ func _handle_area_entered(body: Area2D):
 	
 	if body is Hurtbox:
 		var hurtbox = body as Hurtbox
+		# Attack out of range (not on the same horizontal axis)
+		if _source.position.y - body.parent.position.y > IsometryUtils.Y_AXIS_HIT_RANGE:
+			print("out of range! misalignment: ", _source.position.y - body.parent.position.y)
+			return
 		if hurtbox.parent is Player and _collide_with == CollideableTypes.Player:
 			var player = hurtbox.parent as Player
 			player.damage(_damage)

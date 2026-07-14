@@ -19,7 +19,7 @@ func _process(_delta: float) -> void:
 		sprite.flip_h = velocity.x < 0
 
 func _physics_process(_delta: float) -> void:
-	velocity = MovementUtils.scale_velocity(velocity)
+	velocity = IsometryUtils.scale_velocity(velocity)
 	move_and_slide()
 
 func damage(amount: int):

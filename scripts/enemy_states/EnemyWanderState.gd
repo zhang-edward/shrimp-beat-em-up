@@ -68,12 +68,12 @@ func _start_new_orbit() -> void:
 func _orbit_point() -> Vector2:
 	return enemy.player_ref.global_position + Vector2(
 		cos(orbit_angle) * orbit_radius,
-		sin(orbit_angle) * orbit_radius * MovementUtils.DEPTH_SCALE * 0.5 # squashed on y axis so it reads as ellipse
+		sin(orbit_angle) * orbit_radius * IsometryUtils.DEPTH_SCALE * 0.5 # squashed on y axis so it reads as ellipse
 	)
 
 func _enemy_orbit_angle() -> float:
 	var offset = enemy.global_position - enemy.player_ref.global_position
-	return atan2(offset.y / MovementUtils.DEPTH_SCALE, offset.x)
+	return atan2(offset.y / IsometryUtils.DEPTH_SCALE, offset.x)
 
 func animate():
 	if enemy.velocity.length_squared() > 0:
