@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://s4vk1a005tvq" path="res://prefab/Enemy.tscn" id="4_78awf"]
 [ext_resource type="Texture2D" uid="uid://b6a6t3gkcmgxs" path="res://sprites/bg_sm.png" id="4_400sg"]
 [ext_resource type="Texture2D" uid="uid://8kdlujo1djqy" path="res://sprites/bg_sm_living_room.png" id="4_g4kob"]
+[ext_resource type="PackedScene" uid="uid://efld58y74mpo" path="res://prefab/BossHealth.tscn" id="5_kyk2p"]
 [ext_resource type="Texture2D" uid="uid://bhwt635b0jwv1" path="res://sprites/props/log1.png" id="8_2rd6h"]
 [ext_resource type="Texture2D" uid="uid://br5cp6d53s4vv" path="res://sprites/props/rock1.png" id="9_3xj3m"]
 [ext_resource type="Texture2D" uid="uid://dk704xgij5d80" path="res://sprites/props/seaweed_3.png" id="9_r7sob"]
@@ -122,6 +123,9 @@ enemy_scene = ExtResource("4_78awf")
 enemies_folder = NodePath("../Entities/Enemies")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1452419952]
+
+[node name="BossHealth" parent="CanvasLayer" unique_id=1458634735 instance=ExtResource("5_kyk2p")]
+visible = false
 
 [node name="Healthbar" type="ProgressBar" parent="CanvasLayer" unique_id=1146778923]
 offset_left = 20.0

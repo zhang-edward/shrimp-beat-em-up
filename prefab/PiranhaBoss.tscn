@@ -3,9 +3,14 @@
 [ext_resource type="Script" uid="uid://dmm7whpqlpjs1" path="res://scripts/PiranhaBoss.gd" id="1_xgwx1"]
 [ext_resource type="Texture2D" uid="uid://cnqm0bvvya4c6" path="res://sprites/boss/piranha_boss-sheet.png" id="2_8idci"]
 [ext_resource type="Script" uid="uid://bge0hmqmafyrt" path="res://scripts/fsm/StateMachine.gd" id="3_a8i8s"]
+[ext_resource type="Script" uid="uid://csf7xaemitdcb" path="res://scripts/Hurtbox.gd" id="4_cb02v"]
 [ext_resource type="Script" uid="uid://chkdvk8nuu7nk" path="res://scripts/boss_states/BossEnterArenaState.gd" id="4_n2l5s"]
 [ext_resource type="Texture2D" uid="uid://dn5gt0a1iuba6" path="res://sprites/shadow.png" id="5_ub87s"]
 [ext_resource type="Script" uid="uid://do8t1vj4ygsrh" path="res://scripts/fsm/DebugStateMachineLabel.gd" id="6_ughef"]
+[ext_resource type="Script" uid="uid://ch5ygeswvdqff" path="res://scripts/boss_states/BossHurtState.gd" id="7_8yf57"]
+[ext_resource type="Script" uid="uid://bvpg6c151aje0" path="res://scripts/boss_states/BossIdleState.gd" id="8_bd71w"]
+[ext_resource type="Script" uid="uid://dj0glhdiyexe0" path="res://scripts/boss_states/BossBiteState.gd" id="9_wowj3"]
+[ext_resource type="PackedScene" uid="uid://y3mvpybu4glb" path="res://prefab/Hitbox.tscn" id="10_ghgbw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a8i8s"]
 atlas = ExtResource("2_8idci")
@@ -91,7 +96,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ub87s")
 }, {
-"duration": 1.0,
+"duration": 2.0,
 "texture": SubResource("AtlasTexture_ughef")
 }, {
 "duration": 1.0,
@@ -156,11 +161,16 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qa2gp"]
+radius = 39.0
+height = 78.0
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_ub87s"]
 radius = 14.035668
 
-[node name="PiranhaBoss" type="CharacterBody2D" unique_id=1799854651]
+[node name="PiranhaBoss" type="CharacterBody2D" unique_id=1799854651 node_paths=PackedStringArray("hurt_state")]
 script = ExtResource("1_xgwx1")
+hurt_state = NodePath("StateMachine/BossHurtState")
 
 [node name="Shadow" type="Sprite2D" parent="." unique_id=206225726]
 modulate = Color(1, 1, 1, 0.39215687)
@@ -171,15 +181,40 @@ texture = ExtResource("5_ub87s")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1129622105]
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_xgwx1")
-animation = &"idle"
+animation = &"bite"
 autoplay = "idle"
+
+[node name="HurtBox" type="Area2D" parent="AnimatedSprite2D" unique_id=525148697 node_paths=PackedStringArray("parent")]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("4_cb02v")
+parent = NodePath("../..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/HurtBox" unique_id=553533506]
+position = Vector2(-3.75, 2)
+shape = SubResource("CapsuleShape2D_qa2gp")
+debug_color = Color(0.7967164, 0.42138872, 0.12490418, 0.41960785)
 
 [node name="StateMachine" type="Node" parent="." unique_id=314033685]
 script = ExtResource("3_a8i8s")
 initial_state = NodePath("BossEnterArenaState")
 
-[node name="BossEnterArenaState" type="Node" parent="StateMachine" unique_id=638515764]
+[node name="BossEnterArenaState" type="Node" parent="StateMachine" unique_id=638515764 node_paths=PackedStringArray("next_state")]
 script = ExtResource("4_n2l5s")
+next_state = NodePath("../BossIdleState")
+
+[node name="BossHurtState" type="Node" parent="StateMachine" unique_id=413514736 node_paths=PackedStringArray("idle_state")]
+script = ExtResource("7_8yf57")
+idle_state = NodePath("../BossIdleState")
+
+[node name="BossIdleState" type="Node" parent="StateMachine" unique_id=63631773 node_paths=PackedStringArray("bite_state")]
+script = ExtResource("8_bd71w")
+bite_state = NodePath("../BossBiteState")
+
+[node name="BossBiteState" type="Node" parent="StateMachine" unique_id=1907058246 node_paths=PackedStringArray("idle_state")]
+script = ExtResource("9_wowj3")
+idle_state = NodePath("../BossIdleState")
+hitbox_scene = ExtResource("10_ghgbw")
 
 [node name="DebugStateMachineLabel" type="Label" parent="." unique_id=303831490 node_paths=PackedStringArray("state_machine")]
 anchors_preset = 5

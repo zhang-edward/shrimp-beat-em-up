@@ -2,6 +2,7 @@ class_name Game
 extends Node2D
 
 @onready var enemy_spawner = %EnemySpawner as EnemySpawner
+@onready var boss_health = $CanvasLayer/BossHealth as BossHealth
 @export var enemies_folder: Node
 @onready var wave_stats_label = $CanvasLayer/WaveStats as Label
 
@@ -9,10 +10,10 @@ var BOSS_SPAWN_LOCATION: Vector2
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	load_next_wave()
 	update_wave_stats()
 	var screen_size = get_viewport().size	
 	BOSS_SPAWN_LOCATION = Vector2(screen_size.x / 2 - 100, -screen_size.y / 2 - 100)
+	load_level_boss()
 	
 func update_wave_stats():
 	var curr_wave_config = GameVariables.get_curr_wave_config() as WaveSpawnConfig
@@ -32,6 +33,8 @@ func load_level_boss():
 	var level_config = GameVariables.get_curr_level_config()
 	var boss = level_config.boss_scene.instantiate() as Boss
 	enemies_folder.add_child(boss)
+	boss_health.configure_from_boss(boss)
+	boss_health.show()
 	boss.global_position = BOSS_SPAWN_LOCATION
 		
 func load_next_wave():

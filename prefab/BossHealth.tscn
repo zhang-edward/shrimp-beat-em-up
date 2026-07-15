@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://efld58y74mpo"]
+
+[ext_resource type="StyleBox" uid="uid://tu5xpycc3rfh" path="res://prefab/styles/healthbar_bg.tres" id="1_3dyqe"]
+[ext_resource type="Script" uid="uid://d151qbuj1jdw4" path="res://scripts/BossHealth.gd" id="1_5bdu6"]
+[ext_resource type="StyleBox" uid="uid://w3irfpd1t67f" path="res://prefab/styles/boss_healthbar_fill.tres" id="2_5bdu6"]
+
+[node name="BossHealth" type="HBoxContainer" unique_id=1458634735]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -61.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+script = ExtResource("1_5bdu6")
+
+[node name="Label" type="Label" parent="." unique_id=1321867342]
+layout_mode = 2
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 35
+text = "Test: "
+
+[node name="Healthbar" type="ProgressBar" parent="." unique_id=192537846]
+custom_minimum_size = Vector2(800, 40)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/background = ExtResource("1_3dyqe")
+theme_override_styles/fill = ExtResource("2_5bdu6")
+step = 1.0
+value = 100.0
+show_percentage = false
