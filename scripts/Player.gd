@@ -6,6 +6,8 @@ extends CharacterBody2D
 @onready var shadow: Sprite2D = $Shadow
 @export var healthbar: ProgressBar
 
+var num_jumps_remaining = 2
+
 var z_velocity = 0.0
 var z = 0.0 # altitude
 var _shadow_base_scale: Vector2

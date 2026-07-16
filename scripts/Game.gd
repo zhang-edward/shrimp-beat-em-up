@@ -7,13 +7,14 @@ extends Node2D
 @onready var wave_stats_label = $CanvasLayer/WaveStats as Label
 
 var BOSS_SPAWN_LOCATION: Vector2
+var boss
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	update_wave_stats()
 	var screen_size = get_viewport().size	
 	BOSS_SPAWN_LOCATION = Vector2(screen_size.x / 2 - 100, -screen_size.y / 2 - 100)
-	load_level_boss()
+	load_next_wave()
 	
 func update_wave_stats():
 	var curr_wave_config = GameVariables.get_curr_wave_config() as WaveSpawnConfig
@@ -31,11 +32,19 @@ func incr_enemy_defeated_count():
 	
 func load_level_boss():
 	var level_config = GameVariables.get_curr_level_config()
-	var boss = level_config.boss_scene.instantiate() as Boss
-	enemies_folder.add_child(boss)
-	boss_health.configure_from_boss(boss)
-	boss_health.show()
-	boss.global_position = BOSS_SPAWN_LOCATION
+	if level_config.boss_scene != null:
+		boss = level_config.boss_scene.instantiate() as Boss
+		enemies_folder.add_child(boss)
+		boss_health.configure_from_boss(boss)
+		boss_health.show()
+		boss.global_position = BOSS_SPAWN_LOCATION
+	else:
+		if GameVariables.curr_level == GameVariables.level_configs.size() - 1:
+			get_tree().change_scene_to_file("res://scenes/GameOver.tscn")
+		else:
+			GameVariables.curr_level += 1
+			load_next_level()
+			update_wave_stats()
 		
 func load_next_wave():
 	var curr_wave_config = GameVariables.get_curr_wave_config()
@@ -47,3 +56,13 @@ func load_next_wave():
 func load_next_level():
 	GameVariables.curr_wave = 0
 	load_next_wave()
+
+func handle_boss_defeated():
+	boss.queue_free()
+	boss_health.hide()
+	if GameVariables.curr_level == GameVariables.level_configs.size() - 1:
+		get_tree().change_scene_to_file("res://scenes/GameOver.tscn")
+	else:
+		GameVariables.curr_level += 1
+		load_next_level()
+		update_wave_stats()

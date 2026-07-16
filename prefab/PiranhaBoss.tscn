@@ -11,6 +11,8 @@
 [ext_resource type="Script" uid="uid://bvpg6c151aje0" path="res://scripts/boss_states/BossIdleState.gd" id="8_bd71w"]
 [ext_resource type="Script" uid="uid://dj0glhdiyexe0" path="res://scripts/boss_states/BossBiteState.gd" id="9_wowj3"]
 [ext_resource type="PackedScene" uid="uid://y3mvpybu4glb" path="res://prefab/Hitbox.tscn" id="10_ghgbw"]
+[ext_resource type="Script" uid="uid://dhcrbhpwhbetb" path="res://scripts/boss_states/BossChompLungeState.gd" id="11_3g5ee"]
+[ext_resource type="Script" uid="uid://uewb46idky86" path="res://scripts/boss_states/BossDeathState.gd" id="12_eulky"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a8i8s"]
 atlas = ExtResource("2_8idci")
@@ -96,7 +98,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ub87s")
 }, {
-"duration": 2.0,
+"duration": 5.0,
 "texture": SubResource("AtlasTexture_ughef")
 }, {
 "duration": 1.0,
@@ -168,9 +170,10 @@ height = 78.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_ub87s"]
 radius = 14.035668
 
-[node name="PiranhaBoss" type="CharacterBody2D" unique_id=1799854651 node_paths=PackedStringArray("hurt_state")]
+[node name="PiranhaBoss" type="CharacterBody2D" unique_id=1799854651 node_paths=PackedStringArray("hurt_state", "death_state")]
 script = ExtResource("1_xgwx1")
 hurt_state = NodePath("StateMachine/BossHurtState")
+death_state = NodePath("StateMachine/BossDeathState")
 
 [node name="Shadow" type="Sprite2D" parent="." unique_id=206225726]
 modulate = Color(1, 1, 1, 0.39215687)
@@ -181,8 +184,10 @@ texture = ExtResource("5_ub87s")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1129622105]
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_xgwx1")
-animation = &"bite"
+animation = &"chomp"
 autoplay = "idle"
+frame = 1
+frame_progress = 0.52446854
 
 [node name="HurtBox" type="Area2D" parent="AnimatedSprite2D" unique_id=525148697 node_paths=PackedStringArray("parent")]
 collision_layer = 4
@@ -203,18 +208,29 @@ initial_state = NodePath("BossEnterArenaState")
 script = ExtResource("4_n2l5s")
 next_state = NodePath("../BossIdleState")
 
-[node name="BossHurtState" type="Node" parent="StateMachine" unique_id=413514736 node_paths=PackedStringArray("idle_state")]
+[node name="BossHurtState" type="Node" parent="StateMachine" unique_id=413514736 node_paths=PackedStringArray("idle_state", "bite_state", "chomp_lunge_state")]
 script = ExtResource("7_8yf57")
 idle_state = NodePath("../BossIdleState")
+bite_state = NodePath("../BossBiteState")
+chomp_lunge_state = NodePath("../BossChompLungeState")
 
-[node name="BossIdleState" type="Node" parent="StateMachine" unique_id=63631773 node_paths=PackedStringArray("bite_state")]
+[node name="BossIdleState" type="Node" parent="StateMachine" unique_id=63631773 node_paths=PackedStringArray("bite_state", "chomp_lunge_state")]
 script = ExtResource("8_bd71w")
 bite_state = NodePath("../BossBiteState")
+chomp_lunge_state = NodePath("../BossChompLungeState")
 
 [node name="BossBiteState" type="Node" parent="StateMachine" unique_id=1907058246 node_paths=PackedStringArray("idle_state")]
 script = ExtResource("9_wowj3")
 idle_state = NodePath("../BossIdleState")
 hitbox_scene = ExtResource("10_ghgbw")
+
+[node name="BossChompLungeState" type="Node" parent="StateMachine" unique_id=445798402 node_paths=PackedStringArray("idle_state")]
+script = ExtResource("11_3g5ee")
+idle_state = NodePath("../BossIdleState")
+hitbox_scene = ExtResource("10_ghgbw")
+
+[node name="BossDeathState" type="Node" parent="StateMachine" unique_id=2135527368]
+script = ExtResource("12_eulky")
 
 [node name="DebugStateMachineLabel" type="Label" parent="." unique_id=303831490 node_paths=PackedStringArray("state_machine")]
 anchors_preset = 5

@@ -3,7 +3,7 @@ extends BossState
 
 @export var idle_state: BossIdleState
 @export var hitbox_scene: PackedScene
-var hit: HitConfig = HitConfig.create(40, HitEffectRegistry.HIT_EFFECT_1)
+var hit: HitConfig = HitConfig.create(25, HitEffectRegistry.HIT_EFFECT_1)
 var hitbox: Hitbox
 
 func enter(msg := {}):
@@ -15,8 +15,8 @@ func update(_delta) -> void:
 		hitbox = hitbox_scene.instantiate()
 		boss.add_child(hitbox)
 		var sprite_size = boss.get_sprite_size()
-		var hitbox_offset = Vector2(-sprite_size.x / 3, 0)
-		hitbox.init(hitbox_offset, Vector2(300, 300), 0.25, Hitbox.CollideableTypes.Player, boss, hit)
+		var hitbox_offset = Vector2(-50 if !boss.sprite.flip_h else 50, 0)
+		hitbox.init(hitbox_offset, Vector2(550, 335), 0.25, Hitbox.CollideableTypes.Player, boss, hit)
 		
 func exit():
 	hitbox = null

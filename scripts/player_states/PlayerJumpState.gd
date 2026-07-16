@@ -8,14 +8,23 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @export var move_state: PlayerMoveState
 @export var jump_slam_state: PlayerJumpSlamState
 @export var uppercut_state: PlayerUppercutState
+@export var dash_state: PlayerDashState
 
 var from_uppercut: bool
+var from_dash: bool
 
 func enter(msg := {}) -> void:
-	player.sprite.play("jump")
-	from_uppercut = msg.has("from_uppercut") and msg["from_uppercut"] == true
-	if !from_uppercut:
-		player.z_velocity = - JUMP_VELOCITY
+	if player.num_jumps_remaining == 0:
+		return
+	from_dash = msg.has("from_dash") and msg["from_dash"] == true
+	if !from_dash:
+		player.sprite.play("jump")
+		from_uppercut = msg.has("from_uppercut") and msg["from_uppercut"] == true
+		if !from_uppercut:
+			player.num_jumps_remaining -= 1
+			player.z_velocity = - JUMP_VELOCITY
+	else:
+		player.z_velocity = 0
 
 func physics_update(delta: float) -> void:
 	var direction_x = Input.get_axis("move_left", "move_right")
@@ -27,9 +36,15 @@ func physics_update(delta: float) -> void:
 	if player.z < 0:
 		player.z_velocity += gravity * delta
 	else:
+		player.num_jumps_remaining = 2
 		player.z = 0
 		player.z_velocity = 0
 		state_machine.transition_to(move_state)
+		
+	if Input.is_action_just_pressed("dash"):
+		state_machine.transition_to(dash_state, { "prev_state": self })
+	if Input.is_action_just_pressed("jump"):
+		state_machine.transition_to(self)
 
 
 func update(_delta: float) -> void:

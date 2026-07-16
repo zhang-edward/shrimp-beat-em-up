@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="LevelSpawnConfig" format=3 uid="uid://dj7gnfyn75eyd"]
+
+[ext_resource type="Script" uid="uid://btol4gs0wscxe" path="res://scripts/levels/LevelSpawnConfig.gd" id="1_cs0ij"]
+[ext_resource type="Script" uid="uid://d3l5nsti7vk1p" path="res://scripts/levels/WaveSpawnConfig.gd" id="2_k7ewe"]
+[ext_resource type="Resource" uid="uid://d1y7o3ibnl7ni" path="res://resources/levels/level2_wave1.tres" id="3_k7ewe"]
+
+[resource]
+script = ExtResource("1_cs0ij")
+wave_configs = Array[ExtResource("2_k7ewe")]([ExtResource("3_k7ewe")])
+metadata/_custom_type_script = "uid://btol4gs0wscxe"

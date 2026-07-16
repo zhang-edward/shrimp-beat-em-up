@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" uid="uid://nudvt7fmanuk" path="res://scripts/levels/EnemyConfig.gd" id="1_mpng1"]
 [ext_resource type="Script" uid="uid://d3l5nsti7vk1p" path="res://scripts/levels/WaveSpawnConfig.gd" id="2_4f3qp"]
-[ext_resource type="Resource" uid="uid://cgsbc7che016f" path="res://resources/enemies/Snail.tres" id="2_32et7"]
+[ext_resource type="Resource" uid="uid://d181lclxi3agf" path="res://resources/enemies/Fish.tres" id="2_32et7"]
 
 [resource]
 script = ExtResource("2_4f3qp")
 enemy_configs = Array[ExtResource("1_mpng1")]([ExtResource("2_32et7")])
-num_enemies_to_defeat = 1
+num_enemies_to_defeat = 5
 metadata/_custom_type_script = "uid://d3l5nsti7vk1p"

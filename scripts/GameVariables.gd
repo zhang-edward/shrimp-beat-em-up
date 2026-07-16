@@ -6,7 +6,7 @@ var curr_level := 0
 var enemies_defeated_for_curr_wave := 0
 
 func _ready():
-	var level_resources = ["level1"]
+	var level_resources = ["level1", "level2"]
 	for res in level_resources:
 		var level_config = load("res://resources/levels/" + res + ".tres")
 		level_configs.append(level_config)

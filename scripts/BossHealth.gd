@@ -11,3 +11,6 @@ func configure_from_boss(boss: Boss):
 
 func take_damage(damage: int):
 	healthbar.value -= damage
+
+func get_health():
+	return healthbar.value
