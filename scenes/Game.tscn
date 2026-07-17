@@ -169,7 +169,6 @@ boss_health = NodePath("../../CanvasLayer/BossHealth")
 player_ref = NodePath("../Player")
 
 [node name="Player" parent="Entities" unique_id=1699568361 node_paths=PackedStringArray("healthbar") instance=ExtResource("2_qbsmt")]
-y_sort_enabled = true
 position = Vector2(-11, 192)
 healthbar = NodePath("../../CanvasLayer/Healthbar")
 

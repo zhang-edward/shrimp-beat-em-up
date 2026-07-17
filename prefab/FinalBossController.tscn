@@ -154,7 +154,7 @@ debug_color = Color(0.7967164, 0.42138872, 0.12490418, 0.41960785)
 
 [node name="StateMachine" type="Node" parent="." unique_id=1377153393]
 script = ExtResource("5_b0c5c")
-initial_state = NodePath("FinalBossPunchState")
+initial_state = NodePath("FinalBossPlayExpressionState")
 metadata/_custom_type_script = "uid://bge0hmqmafyrt"
 
 [node name="FinalBossPunchState" type="Node" parent="StateMachine" unique_id=643711401 node_paths=PackedStringArray("next_state")]

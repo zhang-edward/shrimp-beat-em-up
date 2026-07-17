@@ -36,7 +36,7 @@ func charge_forward():
 		hitbox = hitbox_scene.instantiate()
 		boss.add_child(hitbox)
 		var sprite_size = boss.get_sprite_size()
-		var hitbox_offset = Vector2(0, 0)
+		var hitbox_offset = Vector2(0, -150)
 		hitbox.init(hitbox_offset, Vector2(450, 335), 1.0, Hitbox.CollideableTypes.Player, boss, hit)
 	
 func flash_red(cb: Callable):

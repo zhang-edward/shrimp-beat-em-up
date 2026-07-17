@@ -14,8 +14,7 @@ func update(_delta) -> void:
 	if boss.sprite.frame == 4 and hitbox == null:
 		hitbox = hitbox_scene.instantiate()
 		boss.add_child(hitbox)
-		var sprite_size = boss.get_sprite_size()
-		var hitbox_offset = Vector2(-50 if !boss.sprite.flip_h else 50, 0)
+		var hitbox_offset = Vector2(-50 if !boss.sprite.flip_h else 50, -150)
 		hitbox.init(hitbox_offset, Vector2(550, 335), 0.25, Hitbox.CollideableTypes.Player, boss, hit)
 		
 func exit():
