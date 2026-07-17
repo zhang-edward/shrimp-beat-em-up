@@ -6,6 +6,7 @@ const RECOVERY_TIMES := [0.2, 0.2, 0.4]
 const BUFFER_WINDOW := 0.2
 
 @export var move_state: PlayerMoveState
+@export var dash_state: PlayerDashState
 
 var hitbox_scene: PackedScene = preload("res://prefab/Hitbox.tscn")
 # The two jabs are ordinary hits; the finisher knocks them down and sends them skidding
@@ -24,7 +25,6 @@ func enter(msg := {}) -> void:
 
 	var hitbox = hitbox_scene.instantiate()
 	player.add_child(hitbox)
-	# var sprite_size = player.get_sprite_size()
 	var hitbox_offset = $HitLocation.position
 	hitbox_offset.x *= -1 if player.sprite.flip_h else 1
 	hitbox.init(hitbox_offset, Vector2(96, 96), 0.25, Hitbox.CollideableTypes.Enemy, player, hits[combo_index])
@@ -45,6 +45,9 @@ func physics_update(_delta: float) -> void:
 	player.velocity = Vector2(direction_x * NUDGE_MOVE_SPEED, direction_y * NUDGE_MOVE_SPEED)
 
 func update(delta: float) -> void:
+	if Input.is_action_just_pressed("dash"):
+		state_machine.transition_to(dash_state, {"prev_state": move_state})
+
 	recovery_timer -= delta
 
 	if recovery_timer <= BUFFER_WINDOW and Input.is_action_just_pressed("attack") and combo_index < 2:

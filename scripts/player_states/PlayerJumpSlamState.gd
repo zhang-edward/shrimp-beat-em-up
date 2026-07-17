@@ -9,6 +9,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var recovery_timer = 0
 
 @export var move_state: PlayerMoveState
+@export var fall_state: PlayerFallState
 var hitbox_scene: PackedScene = preload("res://prefab/Hitbox.tscn")
 # Spikes them into the floor (positive launch is downward), so they bounce back up
 var hit: HitConfig = HitConfig.create(15, HitEffectRegistry.HIT_EFFECT_2, 200.0, 600.0, true, 0.12)
@@ -40,10 +41,12 @@ func physics_update(delta: float) -> void:
 func update(delta: float) -> void:
 	recovery_timer -= delta
 	if recovery_timer <= 0:
-		# if player.z < 0:
-		# 	state_machine.transition_to(jump_state)
-		state_machine.transition_to(move_state)
+		if player.z < 0:
+			state_machine.transition_to(fall_state)
+		else:
+			state_machine.transition_to(move_state)
 
 func exit() -> void:
-	player.z = 0
-	player.z_velocity = 0
+	pass
+	# player.z = 0
+	# player.z_velocity = 0

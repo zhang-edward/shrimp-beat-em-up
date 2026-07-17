@@ -1,19 +1,13 @@
-class_name PlayerJumpState
+class_name PlayerFallState
 extends PlayerState
 
 const AIR_MOVE_SPEED = 200.0
-const JUMP_VELOCITY = 500
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
+@export var move_state: PlayerMoveState
+@export var jump_state: PlayerJumpState
 @export var jump_slam_state: PlayerJumpSlamState
-@export var uppercut_state: PlayerUppercutState
 @export var dash_state: PlayerDashState
-@export var fall_state: PlayerFallState
-
-func enter(_msg := {}) -> void:
-	player.num_jumps_remaining -= 1
-	player.z_velocity = - JUMP_VELOCITY
-	player.sprite.play("jump")
 
 
 func physics_update(delta: float) -> void:
@@ -24,20 +18,22 @@ func physics_update(delta: float) -> void:
 	player.z += player.z_velocity * delta
 	player.z_velocity += gravity * delta
 
-	if player.z_velocity >= 0:
-		state_machine.transition_to(fall_state)
+	if player.z >= 0:
+		player.z = 0
+		player.z_velocity = 0
+		state_machine.transition_to(move_state)
 		return
 
 	if Input.is_action_just_pressed("dash"):
-		state_machine.transition_to(dash_state, {"prev_state": fall_state})
+		state_machine.transition_to(dash_state, {"prev_state": self})
 		return
 	if Input.is_action_just_pressed("jump") and player.num_jumps_remaining > 0:
-		state_machine.transition_to(self)
+		state_machine.transition_to(jump_state)
 
 
 func update(_delta: float) -> void:
+	if player.z_velocity > 0:
+		player.sprite.play("fall")
+
 	if Input.is_action_just_pressed("attack"):
-		if player.z_velocity > -100:
-			state_machine.transition_to(jump_slam_state)
-		elif not player.uppercut_used:
-			state_machine.transition_to(uppercut_state)
+		state_machine.transition_to(jump_slam_state)

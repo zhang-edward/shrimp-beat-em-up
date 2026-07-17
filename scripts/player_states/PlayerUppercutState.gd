@@ -9,12 +9,13 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var recovery_timer = 0
 
 @export var move_state: PlayerMoveState
-@export var jump_state: PlayerJumpState
+@export var fall_state: PlayerFallState
 var hitbox_scene: PackedScene = preload("res://prefab/Hitbox.tscn")
 # Launches them near-vertically: the juggle starter
 var hit: HitConfig = HitConfig.create(10, HitEffectRegistry.HIT_EFFECT_2, 120.0, -800.0, true, 0.12)
 
 func enter(_msg := {}) -> void:
+	player.uppercut_used = true;
 	recovery_timer = RECOVERY_TIME
 	player.sprite.play("jump_uppercut")
 	player.z_velocity = JUMP_VELOCITY
@@ -44,6 +45,6 @@ func update(delta: float) -> void:
 	recovery_timer -= delta
 	if recovery_timer <= 0:
 		if player.z < 0:
-			state_machine.transition_to(jump_state, {"from_uppercut": true})
+			state_machine.transition_to(fall_state)
 		else:
 			state_machine.transition_to(move_state)

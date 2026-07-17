@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://do8t1vj4ygsrh" path="res://scripts/fsm/DebugStateMachineLabel.gd" id="8_msqmi"]
 [ext_resource type="Script" uid="uid://bl1887ka2oobh" path="res://scripts/player_states/PlayerUppercutState.gd" id="9_l5s2s"]
 [ext_resource type="Script" uid="uid://b7b880008kws6" path="res://scripts/player_states/PlayerDashState.gd" id="11_74yla"]
+[ext_resource type="Script" uid="uid://gw70s1y11ftd" path="res://scripts/player_states/PlayerFallState.gd" id="12_m05ay"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fetod"]
 atlas = ExtResource("2_poo86")
@@ -286,32 +287,34 @@ punch_state = NodePath("../PlayerPunchState")
 dash_state = NodePath("../PlayerDashState")
 metadata/_custom_type_script = "uid://deiw0ulusq62o"
 
-[node name="PlayerJumpState" type="Node" parent="StateMachine" unique_id=1612350408 node_paths=PackedStringArray("move_state", "jump_slam_state", "uppercut_state", "dash_state")]
+[node name="PlayerJumpState" type="Node" parent="StateMachine" unique_id=1612350408 node_paths=PackedStringArray("jump_slam_state", "uppercut_state", "dash_state", "fall_state")]
 script = ExtResource("6_msqmi")
-move_state = NodePath("../PlayerMoveState")
 jump_slam_state = NodePath("../PlayerJumpSlamState")
 uppercut_state = NodePath("../PlayerUppercutState")
 dash_state = NodePath("../PlayerDashState")
+fall_state = NodePath("../PlayerFallState")
 
-[node name="PlayerPunchState" type="Node" parent="StateMachine" unique_id=370192196 node_paths=PackedStringArray("move_state")]
+[node name="PlayerPunchState" type="Node" parent="StateMachine" unique_id=370192196 node_paths=PackedStringArray("move_state", "dash_state")]
 script = ExtResource("7_dbxf5")
 move_state = NodePath("../PlayerMoveState")
+dash_state = NodePath("../PlayerDashState")
 
 [node name="HitLocation" type="Marker2D" parent="StateMachine/PlayerPunchState" unique_id=319063507]
 position = Vector2(79, -75)
 
-[node name="PlayerJumpSlamState" type="Node" parent="StateMachine" unique_id=1353709993 node_paths=PackedStringArray("move_state")]
+[node name="PlayerJumpSlamState" type="Node" parent="StateMachine" unique_id=1353709993 node_paths=PackedStringArray("move_state", "fall_state")]
 script = ExtResource("8_238m6")
 move_state = NodePath("../PlayerMoveState")
+fall_state = NodePath("../PlayerFallState")
 metadata/_custom_type_script = "uid://bp0g6soj8yibj"
 
 [node name="HitLocation" type="Marker2D" parent="StateMachine/PlayerJumpSlamState" unique_id=1111550724]
 position = Vector2(53, -46)
 
-[node name="PlayerUppercutState" type="Node" parent="StateMachine" unique_id=1534132963 node_paths=PackedStringArray("move_state", "jump_state")]
+[node name="PlayerUppercutState" type="Node" parent="StateMachine" unique_id=1534132963 node_paths=PackedStringArray("move_state", "fall_state")]
 script = ExtResource("9_l5s2s")
 move_state = NodePath("../PlayerMoveState")
-jump_state = NodePath("../PlayerJumpState")
+fall_state = NodePath("../PlayerFallState")
 metadata/_custom_type_script = "uid://bl1887ka2oobh"
 
 [node name="HitLocation" type="Marker2D" parent="StateMachine/PlayerUppercutState" unique_id=1409619424]
@@ -319,6 +322,14 @@ position = Vector2(36, -157)
 
 [node name="PlayerDashState" type="Node" parent="StateMachine" unique_id=339753115]
 script = ExtResource("11_74yla")
+
+[node name="PlayerFallState" type="Node" parent="StateMachine" unique_id=43727589 node_paths=PackedStringArray("move_state", "jump_state", "jump_slam_state", "dash_state")]
+script = ExtResource("12_m05ay")
+move_state = NodePath("../PlayerMoveState")
+jump_state = NodePath("../PlayerJumpState")
+jump_slam_state = NodePath("../PlayerJumpSlamState")
+dash_state = NodePath("../PlayerDashState")
+metadata/_custom_type_script = "uid://gw70s1y11ftd"
 
 [node name="DebugStateMachineLabel" type="Label" parent="." unique_id=11757401 node_paths=PackedStringArray("state_machine")]
 anchors_preset = 5

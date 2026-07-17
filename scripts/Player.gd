@@ -6,7 +6,10 @@ extends CharacterBody2D
 @onready var shadow: Sprite2D = $Shadow
 @export var healthbar: ProgressBar
 
-var num_jumps_remaining = 2
+const MAX_JUMPS = 2
+
+var num_jumps_remaining = MAX_JUMPS
+var uppercut_used = false;
 
 var z_velocity = 0.0
 var z = 0.0 # altitude
@@ -23,6 +26,9 @@ func _process(_delta: float) -> void:
 	if velocity.x != 0 and state_machine.state is not PlayerJumpSlamState:
 		sprite.flip_h = velocity.x < 0
 	shadow.scale = _shadow_base_scale * IsometryUtils.scale_shadow_from(z)
+
+	if z == 0:
+		uppercut_used = false;
 
 func _physics_process(_delta: float) -> void:
 	velocity = IsometryUtils.scale_velocity(velocity)
