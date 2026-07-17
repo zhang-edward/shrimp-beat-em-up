@@ -159,20 +159,6 @@ fg_sprite = NodePath("FGMan")
 boss_health = NodePath("../../CanvasLayer/BossHealth")
 player_ref = NodePath("../Player")
 
-[node name="Sprite" parent="Entities/FinalBossController/Hand1" parent_id_path=PackedInt32Array(862737750, 132289877) index="1" unique_id=1943213980]
-animation = &"neutral"
-
-[node name="ManSpriteR" parent="Entities/FinalBossController" index="4" unique_id=1606828923]
-visible = false
-
-[node name="ManSpriteL" parent="Entities/FinalBossController" index="5" unique_id=949003926]
-visible = false
-
-[node name="FGMan" parent="Entities/FinalBossController" index="6" unique_id=1492421727]
-position = Vector2(21.000002, -20.99997)
-sprite_frames = ExtResource("9_sv1m6")
-animation = &"determined_1"
-
 [node name="Player" parent="Entities" unique_id=1699568361 node_paths=PackedStringArray("healthbar") instance=ExtResource("2_qbsmt")]
 y_sort_enabled = true
 position = Vector2(-11, 192)
@@ -336,5 +322,3 @@ shape = SubResource("RectangleShape2D_mod73")
 position = Vector2(0, 22)
 scale = Vector2(5.5081506, 3.8)
 texture = ExtResource("4_400sg")
-
-[editable path="Entities/FinalBossController"]
