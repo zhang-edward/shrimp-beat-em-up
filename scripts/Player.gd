@@ -1,10 +1,13 @@
 class_name Player
 extends CharacterBody2D
 
+signal grab_escaped
+
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var state_machine: StateMachine = %StateMachine
 @onready var shadow: Sprite2D = $Shadow
 @export var healthbar: ProgressBar
+@export var grabbed_state: PlayerGrabbedState
 
 const MAX_JUMPS = 2
 
@@ -36,6 +39,24 @@ func _physics_process(_delta: float) -> void:
 
 func damage(amount: int):
 	healthbar.value -= amount
+
+func kill():
+	healthbar.value = 0
+
+func is_grabbed() -> bool:
+	return state_machine.state is PlayerGrabbedState
+
+# Shuts the player inside `hand` until they mash out or it lets go. Returns false if
+# they are not in a state to be taken hold of.
+func try_grab(hand: Node2D) -> bool:
+	if is_grabbed():
+		return false
+	state_machine.transition_to(grabbed_state, {"hand": hand})
+	return true
+
+func release_from_grab() -> void:
+	if is_grabbed():
+		grabbed_state.release()
 
 func get_sprite_size():
 	return sprite.sprite_frames.get_frame_texture("default", 0).get_size() * sprite.scale

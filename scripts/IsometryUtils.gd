@@ -1,6 +1,6 @@
 class_name IsometryUtils
 
-const Y_AXIS_HIT_RANGE: float = 25
+const Y_AXIS_HIT_RANGE: float = 50
 const DEPTH_SCALE: float = 0.5 # Dampens vertical movement by 50%
 
 const SHADOW_MIN_SCALE := 0.45

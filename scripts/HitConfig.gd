@@ -12,18 +12,18 @@ extends Resource
 @export var effect_anim: SpriteFrames
 
 static func create(
-	damage: int,
-	effect_anim: SpriteFrames,
-	knockback: float = 100.0,
-	launch: float = 0.0,
-	knockdown: bool = false,
-	hitstop: float = Hitstop.DEFAULT_DURATION
+	damage_: int,
+	effect_anim_: SpriteFrames,
+	knockback_: float = 100.0,
+	launch_: float = 0.0,
+	knockdown_: bool = false,
+	hitstop_: float = Hitstop.DEFAULT_DURATION
 ) -> HitConfig:
 	var hit := HitConfig.new()
-	hit.damage = damage
-	hit.effect_anim = effect_anim
-	hit.knockback = knockback
-	hit.launch = launch
-	hit.knockdown = knockdown
-	hit.hitstop = hitstop
+	hit.damage = damage_
+	hit.effect_anim = effect_anim_
+	hit.knockback = knockback_
+	hit.launch = launch_
+	hit.knockdown = knockdown_
+	hit.hitstop = hitstop_
 	return hit

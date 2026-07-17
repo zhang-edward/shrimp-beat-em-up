@@ -13,6 +13,7 @@
 [ext_resource type="Script" uid="uid://bl1887ka2oobh" path="res://scripts/player_states/PlayerUppercutState.gd" id="9_l5s2s"]
 [ext_resource type="Script" uid="uid://b7b880008kws6" path="res://scripts/player_states/PlayerDashState.gd" id="11_74yla"]
 [ext_resource type="Script" uid="uid://gw70s1y11ftd" path="res://scripts/player_states/PlayerFallState.gd" id="12_m05ay"]
+[ext_resource type="Script" uid="uid://c4nw6rt2haj6p" path="res://scripts/player_states/PlayerGrabbedState.gd" id="13_gr4bd"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fetod"]
 atlas = ExtResource("2_poo86")
@@ -241,10 +242,11 @@ size = Vector2(14, 25)
 [sub_resource type="CircleShape2D" id="CircleShape2D_mod73"]
 radius = 6.0
 
-[node name="Player" type="CharacterBody2D" unique_id=2117824229]
+[node name="Player" type="CharacterBody2D" unique_id=2117824229 node_paths=PackedStringArray("grabbed_state")]
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_00yv1")
+grabbed_state = NodePath("StateMachine/PlayerGrabbedState")
 
 [node name="Shadow" type="Sprite2D" parent="." unique_id=1051102670]
 modulate = Color(1, 1, 1, 0.39215687)
@@ -330,6 +332,11 @@ jump_state = NodePath("../PlayerJumpState")
 jump_slam_state = NodePath("../PlayerJumpSlamState")
 dash_state = NodePath("../PlayerDashState")
 metadata/_custom_type_script = "uid://gw70s1y11ftd"
+
+[node name="PlayerGrabbedState" type="Node" parent="StateMachine" unique_id=1284470351 node_paths=PackedStringArray("fall_state")]
+script = ExtResource("13_gr4bd")
+fall_state = NodePath("../PlayerFallState")
+metadata/_custom_type_script = "uid://c4nw6rt2haj6p"
 
 [node name="DebugStateMachineLabel" type="Label" parent="." unique_id=11757401 node_paths=PackedStringArray("state_machine")]
 anchors_preset = 5

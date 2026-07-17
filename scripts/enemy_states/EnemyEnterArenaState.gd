@@ -8,14 +8,13 @@ const AUTO_FACE_PLAYER_RANGE = 200
 func enter(_msg := {}) -> void:
 	enemy.shadow.hide()
 	enemy.ground_collider.disabled = true
-	fall_speed = randi_range(enemy.move_speed, enemy.move_speed * 5)
+	fall_speed = randf_range(enemy.move_speed, enemy.move_speed * 5)
 	
 func exit() -> void:
 	enemy.shadow.show()
 	enemy.ground_collider.disabled = false
 
 func update(_delta: float) -> void:
-	var player = enemy.player_ref
 	if enemy.global_position.y >= 165: # Top boundary of arena
 		state_machine.transition_to(next_state)
 	enemy.absolute_velocity.y = fall_speed
