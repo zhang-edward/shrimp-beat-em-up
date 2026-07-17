@@ -15,7 +15,7 @@ var boss
 func _ready() -> void:
 	update_wave_stats()
 	var screen_size = get_viewport().size
-	BOSS_SPAWN_LOCATION = Vector2(screen_size.x / 2 - 100, -screen_size.y / 2 - 100)
+	BOSS_SPAWN_LOCATION = Vector2(screen_size.x / 2 - 200, -screen_size.y / 2 - 100)
 	load_next_wave()
 
 func update_wave_stats():

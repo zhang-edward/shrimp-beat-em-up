@@ -5,9 +5,9 @@ extends BossState
 @export var hitbox_scene: PackedScene
 
 const BOSS_LUNGE_SPEED = 1000
-const DASH_DURATION = 3.0
+const DASH_DURATION = 3.5
 var dash_timer := 0.0
-var damping_factor = 1.5
+var damping_factor = 1.0
 var is_dashing = false
 var hitbox: Hitbox = null
 

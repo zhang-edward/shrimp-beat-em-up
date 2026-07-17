@@ -35,15 +35,14 @@ func _handle_area_entered(body: Area2D):
 
 	if body is Hurtbox:
 		var hurtbox = body as Hurtbox
+		if hurtbox.parent is Player and _collide_with == CollideableTypes.Player:
+			var player = hurtbox.parent as Player
+			player.damage(_hit.damage)
+			Hitstop.freeze([_source, player], _hit.hitstop)		
 		var is_hitting_boss = hurtbox.parent is Boss or hurtbox.parent is FinalBossController
 		# Attack out of range (not on the same horizontal axis)
 		if !is_hitting_boss and (abs(_source.position.y - body.parent.position.y) > IsometryUtils.Y_AXIS_HIT_RANGE):
 			return
-
-		if hurtbox.parent is Player and _collide_with == CollideableTypes.Player:
-			var player = hurtbox.parent as Player
-			player.damage(_hit.damage)
-			Hitstop.freeze([_source, player], _hit.hitstop)
 		elif (hurtbox.parent is Enemy or is_hitting_boss) and _collide_with == CollideableTypes.Enemy:
 			var enemy = hurtbox.parent
 			enemy.take_hit(_hit, _source)
