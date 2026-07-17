@@ -11,8 +11,10 @@
 [ext_resource type="Texture2D" uid="uid://8kdlujo1djqy" path="res://sprites/bg_sm_living_room.png" id="4_g4kob"]
 [ext_resource type="PackedScene" uid="uid://efld58y74mpo" path="res://prefab/BossHealth.tscn" id="5_kyk2p"]
 [ext_resource type="Texture2D" uid="uid://bhwt635b0jwv1" path="res://sprites/props/log1.png" id="8_2rd6h"]
+[ext_resource type="PackedScene" uid="uid://b2jp4cfwceahd" path="res://prefab/FinalBossController.tscn" id="8_sv1m6"]
 [ext_resource type="Texture2D" uid="uid://br5cp6d53s4vv" path="res://sprites/props/rock1.png" id="9_3xj3m"]
 [ext_resource type="Texture2D" uid="uid://dk704xgij5d80" path="res://sprites/props/seaweed_3.png" id="9_r7sob"]
+[ext_resource type="SpriteFrames" uid="uid://b453dpnwlsx6" path="res://animations/man.tres" id="9_sv1m6"]
 [ext_resource type="Texture2D" uid="uid://blp8ap5yk36w3" path="res://sprites/props/rock2.png" id="10_mcffj"]
 [ext_resource type="Texture2D" uid="uid://duf8us6pj3mfr" path="res://sprites/props/rock3.png" id="11_2rd6h"]
 [ext_resource type="Texture2D" uid="uid://800mviy7djks" path="res://sprites/props/seaweed_1.png" id="12_7ua8r"]
@@ -109,9 +111,10 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mod73"]
 size = Vector2(1514, 57.5)
 
-[node name="Game" type="Node2D" unique_id=67653856 node_paths=PackedStringArray("enemies_folder")]
+[node name="Game" type="Node2D" unique_id=67653856 node_paths=PackedStringArray("enemies_folder", "final_boss_controller")]
 script = ExtResource("1_ibkli")
 enemies_folder = NodePath("Entities/Enemies")
+final_boss_controller = NodePath("Entities/FinalBossController")
 
 [node name="EffectManager" type="Node2D" parent="." unique_id=626913341]
 script = ExtResource("2_vjgi4")
@@ -150,6 +153,12 @@ text = "Wave 1: 0/15"
 [node name="Entities" type="Node2D" parent="." unique_id=1719935909]
 y_sort_enabled = true
 
+[node name="FinalBossController" parent="Entities" unique_id=862737750 node_paths=PackedStringArray("bg_sprite", "fg_sprite", "boss_health", "player_ref") instance=ExtResource("8_sv1m6")]
+bg_sprite = NodePath("../../BG/ParallaxManLayer/BGMan")
+fg_sprite = NodePath("FGMan")
+boss_health = NodePath("../../CanvasLayer/BossHealth")
+player_ref = NodePath("../Player")
+
 [node name="Player" parent="Entities" unique_id=1699568361 node_paths=PackedStringArray("healthbar") instance=ExtResource("2_qbsmt")]
 y_sort_enabled = true
 position = Vector2(-11, 192)
@@ -158,15 +167,16 @@ healthbar = NodePath("../../CanvasLayer/Healthbar")
 [node name="Camera2D" type="Camera2D" parent="Entities/Player" unique_id=983189321]
 position = Vector2(34, -172)
 zoom = Vector2(0.9, 0.9)
-limit_left = -600
+limit_left = -875
 limit_top = -343
-limit_right = 1144
+limit_right = 875
 limit_bottom = 382
 limit_smoothed = true
 position_smoothing_enabled = true
 
 [node name="Props" type="Node2D" parent="Entities" unique_id=1314156249]
 y_sort_enabled = true
+position = Vector2(-283, 0)
 
 [node name="Seaweed1" type="AnimatedSprite2D" parent="Entities/Props" unique_id=1320274558]
 y_sort_enabled = true
@@ -275,28 +285,40 @@ y_sort_enabled = true
 [node name="BG" type="Node2D" parent="." unique_id=1544554596]
 z_index = -100
 
-[node name="Parallax2D" type="Parallax2D" parent="BG" unique_id=2063531772]
-scroll_scale = Vector2(0.1, 0.1)
+[node name="ParallaxLivingRoomLayer" type="Parallax2D" parent="BG" unique_id=2063531772]
+scroll_scale = Vector2(0.1, 1)
 
-[node name="BG2" type="Sprite2D" parent="BG/Parallax2D" unique_id=1083088022]
-position = Vector2(558.00006, 305)
+[node name="BGLivingRoom" type="Sprite2D" parent="BG/ParallaxLivingRoomLayer" unique_id=1083088022]
+z_index = -100
+position = Vector2(532, 35)
 scale = Vector2(4.3, 4.35)
 texture = ExtResource("4_g4kob")
 
+[node name="ParallaxManLayer" type="Parallax2D" parent="BG" unique_id=1790726403]
+scroll_scale = Vector2(0.7, 1)
+
+[node name="BGMan" type="AnimatedSprite2D" parent="BG/ParallaxManLayer" unique_id=237595909]
+modulate = Color(0.75, 0.75, 0.75, 1)
+z_index = -100
+position = Vector2(-195, 487)
+scale = Vector2(3, 3)
+sprite_frames = ExtResource("9_sv1m6")
+animation = &"determined_1"
+
 [node name="Boundaries" type="StaticBody2D" parent="BG" unique_id=432593465]
-position = Vector2(1, 41)
+position = Vector2(0, 41)
 collision_layer = 2
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BG/Boundaries" unique_id=1428512183]
-position = Vector2(286, 56)
+position = Vector2(0, 56)
 shape = SubResource("RectangleShape2D_mod73")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="BG/Boundaries" unique_id=206786321]
-position = Vector2(273, 374)
+position = Vector2(0, 374)
 shape = SubResource("RectangleShape2D_mod73")
 
 [node name="BG" type="Sprite2D" parent="BG" unique_id=427071469]
-position = Vector2(272.44998, 22)
+position = Vector2(0, 22)
 scale = Vector2(5.5081506, 3.8)
 texture = ExtResource("4_400sg")
