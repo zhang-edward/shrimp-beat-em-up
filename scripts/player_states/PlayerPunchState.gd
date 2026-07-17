@@ -11,9 +11,9 @@ const BUFFER_WINDOW := 0.2
 var hitbox_scene: PackedScene = preload("res://prefab/Hitbox.tscn")
 # The two jabs are ordinary hits; the finisher knocks them down and sends them skidding
 var hits: Array[HitConfig] = [
-	HitConfig.create(10, HitEffectRegistry.HIT_EFFECT_1),
-	HitConfig.create(10, HitEffectRegistry.HIT_EFFECT_1),
-	HitConfig.create(15, HitEffectRegistry.HIT_EFFECT_2, 450.0, -350.0, true, 0.12),
+	HitConfig.create(10, HitEffectRegistry.HIT_EFFECT_1, PI / 4),
+	HitConfig.create(10, HitEffectRegistry.HIT_EFFECT_1, PI / 4),
+	HitConfig.create(15, HitEffectRegistry.HIT_EFFECT_2, PI / 4, 450.0, -350.0, true, 0.12),
 ]
 var combo_index := 0
 var recovery_timer = 0

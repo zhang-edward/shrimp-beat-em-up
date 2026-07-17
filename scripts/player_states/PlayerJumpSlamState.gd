@@ -2,7 +2,7 @@ class_name PlayerJumpSlamState
 extends PlayerState
 
 const AIR_MOVE_SPEED = 50.0
-const JUMP_VELOCITY = 500
+const SLAM_VELOCITY = 1000
 const RECOVERY_TIME := 0.3
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -12,13 +12,14 @@ var recovery_timer = 0
 @export var fall_state: PlayerFallState
 var hitbox_scene: PackedScene = preload("res://prefab/Hitbox.tscn")
 # Spikes them into the floor (positive launch is downward), so they bounce back up
-var hit: HitConfig = HitConfig.create(15, HitEffectRegistry.HIT_EFFECT_2, 200.0, 600.0, true, 0.12)
+var hit: HitConfig = HitConfig.create(15, HitEffectRegistry.HIT_EFFECT_2, PI / 8, 200.0, 600.0, true, 0.12)
 
 func enter(_msg := {}) -> void:
 	recovery_timer = RECOVERY_TIME
 	player.sprite.play("jump_slam")
-	player.z_velocity = 800
 
+	await get_tree().create_timer(0.1).timeout
+	player.z_velocity = SLAM_VELOCITY
 	var hitbox = hitbox_scene.instantiate()
 	player.sprite.add_child(hitbox)
 	var hitbox_offset = Vector2(-10, -10) if player.sprite.flip_h else Vector2(10, -10)

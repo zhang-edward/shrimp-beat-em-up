@@ -61,6 +61,7 @@ func load_next_wave():
 	enemy_spawner.load_wave_config(curr_wave_config)
 	enemy_spawner.start()
 	
+	await get_tree().create_timer(1.0).timeout
 	final_boss_controller.done_spawning_wave_animation()
 
 func load_next_level():

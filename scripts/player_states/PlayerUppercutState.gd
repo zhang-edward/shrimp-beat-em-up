@@ -12,7 +12,7 @@ var recovery_timer = 0
 @export var fall_state: PlayerFallState
 var hitbox_scene: PackedScene = preload("res://prefab/Hitbox.tscn")
 # Launches them near-vertically: the juggle starter
-var hit: HitConfig = HitConfig.create(10, HitEffectRegistry.HIT_EFFECT_2, 120.0, -800.0, true, 0.12)
+var hit: HitConfig = HitConfig.create(10, HitEffectRegistry.HIT_EFFECT_2, PI / 4, 120.0, -800.0, true, 0.12)
 
 func enter(_msg := {}) -> void:
 	player.uppercut_used = true;

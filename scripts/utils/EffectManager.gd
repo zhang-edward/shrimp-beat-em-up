@@ -16,6 +16,6 @@ static func spawn_effect(config: EffectConfig):
 	instance.add_child(effect)
 	effect.position = config.pos + Vector2(randf_range(-20, 20), randf_range(-20, 20))
 	effect.sprite_frames = config.anim
-	effect.rotation = randf_range(0, TAU)
+	effect.rotation = config.dir.angle() + randf_range(-config.angle_range_rad / 2, config.angle_range_rad / 2)
 	effect.scale *= randf_range(0.9, 1.1)
 	effect.play()

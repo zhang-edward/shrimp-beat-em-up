@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://do8t1vj4ygsrh" path="res://scripts/fsm/DebugStateMachineLabel.gd" id="8_144q2"]
 [ext_resource type="Script" uid="uid://bp2ggec3cdcbn" path="res://scripts/final_boss/FinalBossPlayExpressionState.gd" id="8_x76vf"]
 [ext_resource type="Texture2D" uid="uid://c6qoolct8od51" path="res://sprites/guy.png" id="10_b0c5c"]
+[ext_resource type="SpriteFrames" uid="uid://b453dpnwlsx6" path="res://animations/man.tres" id="10_pe7lp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_144q2"]
 atlas = ExtResource("3_144q2")
@@ -92,61 +93,9 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ocgqw"]
-atlas = ExtResource("10_b0c5c")
-region = Rect2(240, 0, 120, 192)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jbgew"]
-atlas = ExtResource("10_b0c5c")
-region = Rect2(0, 0, 120, 192)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0bq3a"]
-atlas = ExtResource("10_b0c5c")
-region = Rect2(480, 0, 120, 192)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_a85ww"]
-atlas = ExtResource("10_b0c5c")
-region = Rect2(120, 0, 120, 192)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_b0c5c"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ocgqw")
-}],
-"loop": 1,
-"name": &"angry",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jbgew")
-}],
-"loop": 1,
-"name": &"default",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0bq3a")
-}],
-"loop": 1,
-"name": &"determined",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_a85ww")
-}],
-"loop": 1,
-"name": &"worried",
-"speed": 5.0
-}]
-
-[node name="FinalBossController" type="Node2D" unique_id=862737750 node_paths=PackedStringArray("fg_head_sprite", "hand1", "hand2")]
+[node name="FinalBossController" type="Node2D" unique_id=862737750 node_paths=PackedStringArray("hand1", "hand2")]
 y_sort_enabled = true
 script = ExtResource("1_5w4rv")
-fg_head_sprite = NodePath("FGMan")
 hand1 = NodePath("Hand1")
 hand2 = NodePath("Hand2")
 
@@ -205,7 +154,7 @@ debug_color = Color(0.7967164, 0.42138872, 0.12490418, 0.41960785)
 
 [node name="StateMachine" type="Node" parent="." unique_id=1377153393]
 script = ExtResource("5_b0c5c")
-initial_state = NodePath("FinalBossPlayExpressionState")
+initial_state = NodePath("FinalBossPunchState")
 metadata/_custom_type_script = "uid://bge0hmqmafyrt"
 
 [node name="FinalBossPunchState" type="Node" parent="StateMachine" unique_id=643711401 node_paths=PackedStringArray("next_state")]
@@ -218,7 +167,7 @@ script = ExtResource("7_h3ded")
 next_state = NodePath("../FinalBossPunchState")
 metadata/_custom_type_script = "uid://bq7x2mv8ndkr3"
 
-[node name="FinalBossPlayExpressionState" type="Node" parent="StateMachine" unique_id=1109708716]
+[node name="FinalBossPlayExpressionState" type="Node" parent="StateMachine" unique_id=1342484727]
 script = ExtResource("8_x76vf")
 metadata/_custom_type_script = "uid://bp2ggec3cdcbn"
 
@@ -237,6 +186,7 @@ script = ExtResource("8_144q2")
 state_machine = NodePath("../../StateMachine")
 
 [node name="ManSpriteR" type="AnimatedSprite2D" parent="." unique_id=1606828923]
+visible = false
 z_index = -101
 position = Vector2(747.00006, -63.000004)
 rotation = 0.0046243123
@@ -244,6 +194,7 @@ scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_ggxpt")
 
 [node name="ManSpriteL" type="AnimatedSprite2D" parent="." unique_id=949003926]
+visible = false
 z_index = -101
 position = Vector2(-825, 194)
 rotation = 0.0046243123
@@ -252,7 +203,7 @@ sprite_frames = SubResource("SpriteFrames_ggxpt")
 flip_h = true
 
 [node name="FGMan" type="AnimatedSprite2D" parent="." unique_id=1492421727]
+visible = false
 z_index = -101
-rotation = 0.009248625
 scale = Vector2(4, 4)
-sprite_frames = SubResource("SpriteFrames_b0c5c")
+sprite_frames = ExtResource("10_pe7lp")
