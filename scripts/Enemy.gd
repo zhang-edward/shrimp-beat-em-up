@@ -24,7 +24,6 @@ const DEATH_KNOCKBACK_MIN := 260.0
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var absolute_velocity := Vector2.ZERO
-var enemy_config: EnemyConfig = preload("res://resources/enemies/Fish.tres")
 
 # Altitude, faked the same way the player does it: negative is up, 0 is the floor.
 # Rendered by offsetting the sprite, which carries the hurtbox up with it.
@@ -36,17 +35,15 @@ var _shadow_base_scale: Vector2
 var _sprite_pivot: Vector2
 
 func _ready() -> void:
-	sprite.sprite_frames = enemy_config.sprite_frames
-	healthbar.max_value = enemy_config.max_health
+	# Health (Healthbar.max_value) and sprite frames come from the enemy scene itself
 	healthbar.value = healthbar.max_value
 	_shadow_base_scale = shadow.scale
 	# The sprite's origin sits at the bottom, so rotating the node alone would swing the body around
 	# the bottom - define a pivot where the sprite's centre actually sits
 	_sprite_pivot = sprite.offset * sprite.scale
 
-func initialize(player: Player, config: EnemyConfig) -> void:
+func initialize(player: Player) -> void:
 	player_ref = player
-	enemy_config = config
 
 func _physics_process(_delta: float) -> void:
 	velocity = IsometryUtils.scale_velocity(absolute_velocity)

@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://cyj1qui0kg5gk" path="res://prefab/Player.tscn" id="2_qbsmt"]
 [ext_resource type="Script" uid="uid://daxls4bv7fclg" path="res://scripts/utils/EffectManager.gd" id="2_vjgi4"]
 [ext_resource type="StyleBox" uid="uid://bpb3vlcuriyr1" path="res://prefab/styles/healthbar_fill.tres" id="3_400sg"]
-[ext_resource type="PackedScene" uid="uid://s4vk1a005tvq" path="res://prefab/Enemy.tscn" id="4_78awf"]
 [ext_resource type="Texture2D" uid="uid://b6a6t3gkcmgxs" path="res://sprites/bg_sm.png" id="4_400sg"]
 [ext_resource type="Texture2D" uid="uid://8kdlujo1djqy" path="res://sprites/bg_sm_living_room.png" id="4_g4kob"]
 [ext_resource type="Texture2D" uid="uid://bnic6wrxno6ao" path="res://sprites/ui/9patch-panel.png" id="6_a8wo8"]
@@ -136,7 +135,6 @@ script = ExtResource("2_vjgi4")
 [node name="EnemySpawner" parent="." unique_id=1590747713 node_paths=PackedStringArray("player_ref", "enemies_folder") instance=ExtResource("2_aug50")]
 unique_name_in_owner = true
 player_ref = NodePath("../Entities/Player")
-enemy_scene = ExtResource("4_78awf")
 enemies_folder = NodePath("../Entities/Enemies")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1452419952]

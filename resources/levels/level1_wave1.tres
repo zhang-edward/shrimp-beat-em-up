@@ -1,11 +1,10 @@
 [gd_resource type="Resource" script_class="WaveSpawnConfig" format=3 uid="uid://mpy7q250ilgi"]
 
-[ext_resource type="Script" uid="uid://nudvt7fmanuk" path="res://scripts/levels/EnemyConfig.gd" id="1_mpng1"]
-[ext_resource type="Script" uid="uid://d3l5nsti7vk1p" path="res://scripts/levels/WaveSpawnConfig.gd" id="2_4f3qp"]
-[ext_resource type="Resource" uid="uid://d181lclxi3agf" path="res://resources/enemies/Fish.tres" id="2_32et7"]
+[ext_resource type="Script" uid="uid://d3l5nsti7vk1p" path="res://scripts/levels/WaveSpawnConfig.gd" id="1_wsc"]
+[ext_resource type="PackedScene" uid="uid://bx2dwaci10oaa" path="res://prefab/enemies/Crab.tscn" id="2_4f3qp"]
 
 [resource]
-script = ExtResource("2_4f3qp")
-enemy_configs = Array[ExtResource("1_mpng1")]([ExtResource("2_32et7")])
+script = ExtResource("1_wsc")
+enemy_scenes = Array[PackedScene]([ExtResource("2_4f3qp")])
 num_enemies_to_defeat = 5
 metadata/_custom_type_script = "uid://d3l5nsti7vk1p"

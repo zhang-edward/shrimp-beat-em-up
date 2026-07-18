@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://3i3idrorsh4f"]
+
+[ext_resource type="PackedScene" uid="uid://s4vk1a005tvq" path="res://prefab/Enemy.tscn" id="1_base"]
+[ext_resource type="SpriteFrames" uid="uid://d4bijqkyhwkgn" path="res://animations/fish.tres" id="2_fish"]
+
+[node name="Enemy" unique_id=1089066712 instance=ExtResource("1_base")]
+
+[node name="Healthbar" parent="." index="1" unique_id=347754481]
+max_value = 30.0
+value = 30.0
+
+[node name="AnimatedSprite2D" parent="." index="2" unique_id=847188949]
+sprite_frames = ExtResource("2_fish")

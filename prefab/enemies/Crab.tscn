@@ -1,0 +1,113 @@
+[gd_scene format=3 uid="uid://bx2dwaci10oaa"]
+
+[ext_resource type="PackedScene" uid="uid://s4vk1a005tvq" path="res://prefab/Enemy.tscn" id="1_wf0ib"]
+[ext_resource type="Texture2D" uid="uid://bjo46lyg30r3e" path="res://sprites/characters/crab_enemy_1.png" id="2_0ltij"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uf84a"]
+atlas = ExtResource("2_0ltij")
+region = Rect2(432, 0, 72, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_saf6v"]
+atlas = ExtResource("2_0ltij")
+region = Rect2(504, 0, 72, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_balfr"]
+atlas = ExtResource("2_0ltij")
+region = Rect2(360, 0, 72, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_olsi4"]
+atlas = ExtResource("2_0ltij")
+region = Rect2(0, 0, 72, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u83dt"]
+atlas = ExtResource("2_0ltij")
+region = Rect2(576, 0, 72, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2pj5h"]
+atlas = ExtResource("2_0ltij")
+region = Rect2(0, 0, 72, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jidjv"]
+atlas = ExtResource("2_0ltij")
+region = Rect2(72, 0, 72, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2mhtj"]
+atlas = ExtResource("2_0ltij")
+region = Rect2(144, 0, 72, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mjmmd"]
+atlas = ExtResource("2_0ltij")
+region = Rect2(216, 0, 72, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e3glk"]
+atlas = ExtResource("2_0ltij")
+region = Rect2(504, 0, 72, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0ltij"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uf84a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_saf6v")
+}],
+"loop": 0,
+"name": &"attack",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_balfr")
+}],
+"loop": 0,
+"name": &"attack_windup",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_olsi4")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u83dt")
+}],
+"loop": 1,
+"name": &"hurt",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2pj5h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jidjv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2mhtj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mjmmd")
+}],
+"loop": 1,
+"name": &"move",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e3glk")
+}],
+"loop": 0,
+"name": &"recovery",
+"speed": 5.0
+}]
+
+[node name="Enemy" unique_id=65027616 instance=ExtResource("1_wf0ib")]
+
+[node name="AnimatedSprite2D" parent="." index="2" unique_id=847188949]
+sprite_frames = SubResource("SpriteFrames_0ltij")
+animation = &"hurt"

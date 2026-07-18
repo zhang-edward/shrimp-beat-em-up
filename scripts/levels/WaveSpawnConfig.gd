@@ -1,7 +1,7 @@
 class_name WaveSpawnConfig
 extends Resource
 
-@export var enemy_configs: Array[EnemyConfig]
+@export var enemy_scenes: Array[PackedScene]
 @export var spawn_freq := 2.0
 @export var num_to_spawn_low := 2
 @export var num_to_spawn_high := 4

@@ -2,7 +2,6 @@ class_name EnemySpawner
 extends Node
 
 @export var player_ref: Player
-@export var enemy_scene: PackedScene
 @export var enemies_folder: Node2D # all y-sorted entities need to be under the same node
 var TOP_LEFT: Vector2
 var TOP_MIDDLE: Vector2
@@ -31,16 +30,16 @@ func start():
 	
 func spawn_enemies():
 	var spawn_locations = [TOP_LEFT, TOP_MIDDLE, TOP_RIGHT]
-	var configs = spawn_config.enemy_configs
+	var enemy_scenes = spawn_config.enemy_scenes
 	var num_enemies_to_spawn = randi_range(spawn_config.num_to_spawn_low, spawn_config.num_to_spawn_high)
 	var num_enemies_left_to_spawn = (spawn_config.num_enemies_to_defeat - GameVariables.enemies_defeated_for_curr_wave) - get_num_enemies_on_screen()
 	num_enemies_to_spawn = min(num_enemies_to_spawn, num_enemies_left_to_spawn)
 	for i in range(0, num_enemies_to_spawn):
 		var num_enemies_on_screen = get_num_enemies_on_screen()
 		if get_num_enemies_on_screen() < spawn_config.max_enemies:
-			var rand_config = configs.pick_random() as EnemyConfig
-			var new_enemy = enemy_scene.instantiate() as Enemy
-			new_enemy.initialize(player_ref, rand_config)
+			var rand_scene = enemy_scenes.pick_random() as PackedScene
+			var new_enemy = rand_scene.instantiate() as Enemy
+			new_enemy.initialize(player_ref)
 			enemies_folder.add_child(new_enemy)
 			var rand_spawn_location = spawn_locations.pick_random()
 			rand_spawn_location.x += randi_range(-40, 40)

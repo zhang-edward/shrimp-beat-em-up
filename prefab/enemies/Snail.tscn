@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://br7ss8l7gw7a0"]
+
+[ext_resource type="PackedScene" uid="uid://s4vk1a005tvq" path="res://prefab/Enemy.tscn" id="1_base"]
+[ext_resource type="SpriteFrames" uid="uid://p2743rvcgwd" path="res://animations/snail.tres" id="2_snail"]
+
+[node name="Enemy" instance=ExtResource("1_base")]
+
+[node name="Healthbar" parent="." index="1"]
+max_value = 50.0
+value = 50.0
+
+[node name="AnimatedSprite2D" parent="." index="2"]
+sprite_frames = ExtResource("2_snail")

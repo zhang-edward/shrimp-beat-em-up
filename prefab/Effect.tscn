@@ -4,6 +4,5 @@
 
 [node name="Effect" type="AnimatedSprite2D" unique_id=1340604837]
 z_index = 1
-position = Vector2(0.99999994, 0.99999994)
 scale = Vector2(3.5, 3.5)
 script = ExtResource("1_mujol")
