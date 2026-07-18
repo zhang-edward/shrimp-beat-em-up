@@ -2,8 +2,9 @@ class_name Game
 extends Node2D
 
 @onready var enemy_spawner = %EnemySpawner as EnemySpawner
-@onready var boss_health = $CanvasLayer/BossHealth as BossHealth
 @onready var wave_stats_label = $CanvasLayer/WaveStats as Label
+@onready var canvas_layer = $CanvasLayer as CanvasLayer
+@onready var player = $Entities/Player as Player
 
 @export var enemies_folder: Node
 @export var final_boss_controller: FinalBossController
@@ -15,8 +16,9 @@ var boss
 func _ready() -> void:
 	update_wave_stats()
 	var screen_size = get_viewport().size
-	BOSS_SPAWN_LOCATION = Vector2(screen_size.x / 2 - 200, -screen_size.y / 2 - 100)
-	load_next_wave()
+	BOSS_SPAWN_LOCATION = Vector2(screen_size.x / 2 - 512, -screen_size.y / 2 - 100)
+	#load_next_wave()
+	load_level_boss()
 
 func update_wave_stats():
 	var curr_wave_config = GameVariables.get_curr_wave_config() as WaveSpawnConfig
@@ -37,8 +39,7 @@ func load_level_boss():
 	if level_config.boss_scene != null:
 		boss = level_config.boss_scene.instantiate() as Boss
 		enemies_folder.add_child(boss)
-		boss_health.configure(boss.boss_name, boss.max_health)
-		boss_health.show()
+		boss.setup()
 		boss.global_position = BOSS_SPAWN_LOCATION
 	else:
 		if GameVariables.curr_level == GameVariables.level_configs.size() - 1:
@@ -59,7 +60,6 @@ func load_next_wave():
 	GameVariables.enemies_defeated_for_curr_wave = 0
 	enemy_spawner.load_wave_config(curr_wave_config)
 	enemy_spawner.start()
-	load_level_boss()
 	
 	# await get_tree().create_timer(1.0).timeout
 	# final_boss_controller.done_spawning_wave_animation()
@@ -70,7 +70,6 @@ func load_next_level():
 
 func handle_boss_defeated():
 	boss.queue_free()
-	boss_health.hide()
 	if GameVariables.curr_level == GameVariables.level_configs.size() - 1:
 		get_tree().change_scene_to_file("res://scenes/GameOver.tscn")
 	else:

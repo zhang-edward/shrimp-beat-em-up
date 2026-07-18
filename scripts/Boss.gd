@@ -9,6 +9,7 @@ extends CharacterBody2D
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var ground_collider: CollisionShape2D = $CollisionShape2D
 @onready var state_machine: StateMachine = $StateMachine as StateMachine
+@onready var boss_health = $CanvasLayer/BossHealth as BossHealth
 
 var absolute_velocity := Vector2.ZERO
 var boss_name: String
@@ -23,11 +24,14 @@ func _physics_process(delta: float) -> void:
 	
 func has_super_armor():
 	return state_machine.state is BossEnterArenaState or state_machine.state is BossDeathState
+	
+func setup():
+	game.canvas_layer.add_child(boss_health)	
+	boss_health.configure(boss_name, max_health)
 
 func take_hit(hit: HitConfig, source: Node2D) -> void:
 	if has_super_armor():
 		return
-	var boss_health = game.boss_health as BossHealth
 	boss_health.take_damage(hit.damage)
 	if boss_health.get_health() == 0:
 		state_machine.transition_to(death_state)
@@ -35,7 +39,7 @@ func take_hit(hit: HitConfig, source: Node2D) -> void:
 		var dir := Vector2(signf(position.x - source.position.x), 0.0)
 		if dir.x == 0.0: # Directly on top of us; shove them the way the attacker faces
 			dir.x = -1.0 if source.sprite.flip_h else 1.0
-		state_machine.transition_to(hurt_state)
+		state_machine.transition_to(hurt_state, { "dir": dir })
 	
 func get_sprite_size():
 	return sprite.sprite_frames.get_frame_texture("idle", 0).get_size() * sprite.scale

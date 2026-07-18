@@ -1,12 +1,12 @@
 [gd_resource type="Resource" script_class="LevelSpawnConfig" format=3 uid="uid://cc0mgqrbgadk5"]
 
+[ext_resource type="PackedScene" uid="uid://drqhyaekojui6" path="res://prefab/LobsterBoss.tscn" id="1_a2ghr"]
 [ext_resource type="Script" uid="uid://btol4gs0wscxe" path="res://scripts/levels/LevelSpawnConfig.gd" id="1_nvddv"]
-[ext_resource type="PackedScene" uid="uid://duph7oh3hqltg" path="res://prefab/PiranhaBoss.tscn" id="1_tdr2p"]
 [ext_resource type="Script" uid="uid://d3l5nsti7vk1p" path="res://scripts/levels/WaveSpawnConfig.gd" id="2_6yuri"]
 [ext_resource type="Resource" uid="uid://mpy7q250ilgi" path="res://resources/levels/level1_wave1.tres" id="3_a2ghr"]
 
 [resource]
 script = ExtResource("1_nvddv")
 wave_configs = Array[ExtResource("2_6yuri")]([ExtResource("3_a2ghr")])
-boss_scene = ExtResource("1_tdr2p")
+boss_scene = ExtResource("1_a2ghr")
 metadata/_custom_type_script = "uid://btol4gs0wscxe"

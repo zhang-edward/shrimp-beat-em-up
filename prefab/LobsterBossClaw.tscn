@@ -1,0 +1,152 @@
+[gd_scene format=3 uid="uid://7attgk18iruj"]
+
+[ext_resource type="Script" uid="uid://cwtcb2axa3357" path="res://scripts/LobsterBossClaw.gd" id="1_wngec"]
+[ext_resource type="Texture2D" uid="uid://8qx2wb82nw27" path="res://sprites/boss/lobster-boss-claw-Sheet.png" id="2_4m320"]
+[ext_resource type="Script" uid="uid://csf7xaemitdcb" path="res://scripts/Hurtbox.gd" id="3_fn755"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fn755"]
+atlas = ExtResource("2_4m320")
+region = Rect2(0, 0, 164, 157)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t2v5c"]
+atlas = ExtResource("2_4m320")
+region = Rect2(164, 0, 164, 157)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ai5v"]
+atlas = ExtResource("2_4m320")
+region = Rect2(328, 0, 164, 157)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y8nga"]
+atlas = ExtResource("2_4m320")
+region = Rect2(492, 0, 164, 157)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k4snh"]
+atlas = ExtResource("2_4m320")
+region = Rect2(656, 0, 164, 157)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ynl1a"]
+atlas = ExtResource("2_4m320")
+region = Rect2(820, 0, 164, 157)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5pi5h"]
+atlas = ExtResource("2_4m320")
+region = Rect2(1968, 0, 164, 157)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v15g2"]
+atlas = ExtResource("2_4m320")
+region = Rect2(2132, 0, 164, 157)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k1p6u"]
+atlas = ExtResource("2_4m320")
+region = Rect2(2296, 0, 164, 157)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3kgux"]
+atlas = ExtResource("2_4m320")
+region = Rect2(984, 0, 164, 157)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_31xwt"]
+atlas = ExtResource("2_4m320")
+region = Rect2(1148, 0, 164, 157)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7jrug"]
+atlas = ExtResource("2_4m320")
+region = Rect2(1312, 0, 164, 157)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7d5o1"]
+atlas = ExtResource("2_4m320")
+region = Rect2(1476, 0, 164, 157)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rjeyj"]
+atlas = ExtResource("2_4m320")
+region = Rect2(1640, 0, 164, 157)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ecmbe"]
+atlas = ExtResource("2_4m320")
+region = Rect2(1804, 0, 164, 157)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wngec"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fn755")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t2v5c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ai5v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y8nga")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k4snh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ynl1a")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5pi5h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v15g2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k1p6u")
+}],
+"loop": 0,
+"name": &"slam",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3kgux")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_31xwt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7jrug")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7d5o1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rjeyj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ecmbe")
+}],
+"loop": 0,
+"name": &"snap",
+"speed": 10.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t2v5c"]
+radius = 43.05
+height = 110.0
+
+[node name="LobsterBossClaw" type="CharacterBody2D" unique_id=1639082949]
+script = ExtResource("1_wngec")
+metadata/_custom_type_script = "uid://cjfs5hdtch37w"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=394359658]
+sprite_frames = SubResource("SpriteFrames_wngec")
+animation = &"snap"
+autoplay = "idle"
+
+[node name="HurtBox" type="Area2D" parent="AnimatedSprite2D" unique_id=707131411 node_paths=PackedStringArray("parent")]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("3_fn755")
+parent = NodePath("../..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/HurtBox" unique_id=1325675462]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_t2v5c")
+debug_color = Color(0.7967164, 0.42138872, 0.12490418, 0.41960785)

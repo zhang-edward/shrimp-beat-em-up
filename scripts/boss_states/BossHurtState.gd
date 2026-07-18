@@ -2,8 +2,7 @@ class_name BossHurtState
 extends BossState
 
 @export var idle_state: BossIdleState
-@export var bite_state: BossBiteState
-@export var chomp_lunge_state: BossChompLungeState
+@export var attack_states: Array[BossState]
 
 var hitstun_timer = 0
 var should_go_to_attack: bool = false
@@ -22,8 +21,9 @@ func update(delta: float) -> void:
 	boss.sprite.play("hurt")
 	
 	if should_go_to_attack:
-		var rand_state = [bite_state, chomp_lunge_state].pick_random()
-		state_machine.transition_to(rand_state, {})
+		var rand_state = attack_states.pick_random()
+		if rand_state != null:
+			state_machine.transition_to(rand_state, {})
 	else:
 		hitstun_timer -= delta
 		if hitstun_timer <= 0:

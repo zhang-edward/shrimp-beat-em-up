@@ -1,0 +1,126 @@
+[gd_scene format=3 uid="uid://drqhyaekojui6"]
+
+[ext_resource type="Script" uid="uid://cjrmf44vjeorn" path="res://scripts/LobsterBoss.gd" id="1_kw31t"]
+[ext_resource type="SpriteFrames" uid="uid://ca2nt6iv6qm6p" path="res://animations/lobster-body.tres" id="2_7h66f"]
+[ext_resource type="PackedScene" uid="uid://efld58y74mpo" path="res://prefab/BossHealth.tscn" id="2_7icou"]
+[ext_resource type="Texture2D" uid="uid://brm5158mut8gj" path="res://sprites/shadow_lg.png" id="2_20q81"]
+[ext_resource type="PackedScene" uid="uid://7attgk18iruj" path="res://prefab/LobsterBossClaw.tscn" id="4_7e8c4"]
+[ext_resource type="Script" uid="uid://bge0hmqmafyrt" path="res://scripts/fsm/StateMachine.gd" id="4_n6puv"]
+[ext_resource type="Script" uid="uid://do8t1vj4ygsrh" path="res://scripts/fsm/DebugStateMachineLabel.gd" id="5_dqi2w"]
+[ext_resource type="Script" uid="uid://chkdvk8nuu7nk" path="res://scripts/boss_states/BossEnterArenaState.gd" id="5_h2bar"]
+[ext_resource type="Script" uid="uid://lwe0qhrnton8" path="res://scripts/boss_states/LobsterBossIdleState.gd" id="7_xnlq3"]
+[ext_resource type="Script" uid="uid://ch5ygeswvdqff" path="res://scripts/boss_states/BossHurtState.gd" id="8_42dhm"]
+[ext_resource type="Script" uid="uid://b24oh4a5yr2vb" path="res://scripts/boss_states/BossSnapState.gd" id="9_xnlq3"]
+[ext_resource type="PackedScene" uid="uid://y3mvpybu4glb" path="res://prefab/Hitbox.tscn" id="10_grdob"]
+[ext_resource type="Script" uid="uid://ccd6itv5dy00" path="res://scripts/boss_states/BossSlamState.gd" id="11_n5f5x"]
+[ext_resource type="Script" uid="uid://dqc6yf45o4yos" path="res://scripts/boss_states/BossClawDestroyState.gd" id="12_pllld"]
+[ext_resource type="Script" uid="uid://uewb46idky86" path="res://scripts/boss_states/BossDeathState.gd" id="12_v1kf3"]
+
+[node name="LobsterBoss" type="CharacterBody2D" unique_id=1068858689 node_paths=PackedStringArray("claw_destroy_state", "hurt_state", "death_state")]
+script = ExtResource("1_kw31t")
+claw_destroy_state = NodePath("StateMachine/BossClawDestroyState")
+hurt_state = NodePath("StateMachine/BossHurtState")
+death_state = NodePath("StateMachine/BossDeathState")
+
+[node name="Shadow" type="Sprite2D" parent="." unique_id=1729656497]
+modulate = Color(1, 1, 1, 0.39215687)
+position = Vector2(0, 26)
+scale = Vector2(11.038, 10)
+texture = ExtResource("2_20q81")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=987436777]
+scale = Vector2(4, 4)
+sprite_frames = ExtResource("2_7h66f")
+animation = &"hurt"
+autoplay = "idle"
+offset = Vector2(0, -50)
+
+[node name="LeftClaw" parent="AnimatedSprite2D" unique_id=612295625 instance=ExtResource("4_7e8c4")]
+position = Vector2(-70, -15)
+
+[node name="AnimatedSprite2D" parent="AnimatedSprite2D/LeftClaw" index="0" unique_id=394359658]
+position = Vector2(-15.25, -10.75)
+frame = 5
+frame_progress = 1.0
+
+[node name="RightClaw" parent="AnimatedSprite2D" unique_id=1668483975 instance=ExtResource("4_7e8c4")]
+position = Vector2(110, -11.75)
+
+[node name="AnimatedSprite2D" parent="AnimatedSprite2D/RightClaw" index="0" unique_id=394359658]
+position = Vector2(-25.75, -13)
+flip_h = true
+
+[node name="StateMachine" type="Node" parent="." unique_id=838753697]
+script = ExtResource("4_n6puv")
+initial_state = NodePath("BossEnterArenaState")
+
+[node name="BossEnterArenaState" type="Node" parent="StateMachine" unique_id=1213929568 node_paths=PackedStringArray("next_state")]
+script = ExtResource("5_h2bar")
+next_state = NodePath("../BossSlamState")
+y_stop_pos = 300
+fall_speed = 400.0
+
+[node name="BossIdleState" type="Node" parent="StateMachine" unique_id=1996083466 node_paths=PackedStringArray("attack_states")]
+script = ExtResource("7_xnlq3")
+attack_states = [NodePath("../BossSnapState")]
+idle_time_seconds_max = 2.0
+idle_time_seconds_min = 1.0
+
+[node name="BossHurtState" type="Node" parent="StateMachine" unique_id=586926337 node_paths=PackedStringArray("idle_state", "attack_states")]
+script = ExtResource("8_42dhm")
+idle_state = NodePath("../BossIdleState")
+attack_states = [NodePath("../BossSnapState")]
+
+[node name="BossSnapState" type="Node" parent="StateMachine" unique_id=1190741741 node_paths=PackedStringArray("idle_state")]
+script = ExtResource("9_xnlq3")
+idle_state = NodePath("../BossIdleState")
+hitbox_scene = ExtResource("10_grdob")
+
+[node name="BossSlamState" type="Node" parent="StateMachine" unique_id=1432335334 node_paths=PackedStringArray("idle_state")]
+script = ExtResource("11_n5f5x")
+idle_state = NodePath("../BossIdleState")
+hitbox_scene = ExtResource("10_grdob")
+
+[node name="BossClawDestroyState" type="Node" parent="StateMachine" unique_id=501932656 node_paths=PackedStringArray("death_state")]
+script = ExtResource("12_pllld")
+death_state = NodePath("../BossDeathState")
+
+[node name="BossDeathState" type="Node" parent="StateMachine" unique_id=1685718029]
+script = ExtResource("12_v1kf3")
+
+[node name="DebugStateMachineLabel" type="Label" parent="." unique_id=1148073961 node_paths=PackedStringArray("state_machine")]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -46.0
+offset_top = -112.0
+offset_right = 46.0
+offset_bottom = -89.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+text = "debug state"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("5_dqi2w")
+state_machine = NodePath("../StateMachine")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1911275279]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer" unique_id=557109128]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -49.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 3
+
+[node name="LeftClawHealth" parent="CanvasLayer/HBoxContainer" unique_id=1458634735 instance=ExtResource("2_7icou")]
+layout_mode = 2
+
+[node name="RightClawHealth" parent="CanvasLayer/HBoxContainer" unique_id=2132998765 instance=ExtResource("2_7icou")]
+layout_mode = 2
+
+[editable path="AnimatedSprite2D/LeftClaw"]
+[editable path="AnimatedSprite2D/RightClaw"]
