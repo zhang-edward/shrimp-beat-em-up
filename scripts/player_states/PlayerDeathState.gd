@@ -5,6 +5,7 @@ extends PlayerState
 
 func enter(msg := {}) -> void:
 	Engine.time_scale = 0.5
+	player.velocity = Vector2.ZERO
 	player.sprite.modulate = Color(0, 0, 0, 0.75)
 	await get_tree().create_timer(0.5).timeout
 

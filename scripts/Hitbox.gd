@@ -38,7 +38,7 @@ func _handle_area_entered(body: Area2D):
 		if hurtbox.parent is Player and _collide_with == CollideableTypes.Player:
 			var player = hurtbox.parent as Player
 			if !player.is_invincible():
-				spawn_effect(lerp(global_position, player.position, 0.5), player.position - _source.position)
+				spawn_effect(lerp(global_position, player.global_position, 0.5), player.global_position - _source.global_position)
 				player.damage(_hit.damage)
 				Hitstop.freeze([_source, player], _hit.hitstop)
 		var is_hitting_boss = hurtbox.parent is Boss or hurtbox.parent is FinalBossController
@@ -48,7 +48,7 @@ func _handle_area_entered(body: Area2D):
 		elif (hurtbox.parent is Enemy or is_hitting_boss) and _collide_with == CollideableTypes.Enemy:
 			var enemy = hurtbox.parent
 			enemy.take_hit(_hit, _source)
-			spawn_effect(lerp(global_position, enemy.position, 0.5), enemy.position - _source.position)
+			spawn_effect(lerp(global_position, body.global_position, 0.5), body.global_position - _source.global_position)
 			Hitstop.freeze([_source, enemy], _hit.hitstop)
 
 func spawn_effect(pos: Vector2, dir: Vector2):
