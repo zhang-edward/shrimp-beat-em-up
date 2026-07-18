@@ -7,7 +7,6 @@ extends CharacterBody2D
 @onready var game = get_node("/root/Game") as Game
 @onready var shadow: Sprite2D = $Shadow
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
-@onready var ground_collider: CollisionShape2D = $CollisionShape2D
 @onready var state_machine: StateMachine = $StateMachine as StateMachine
 @onready var boss_health = $CanvasLayer/BossHealth as BossHealth
 

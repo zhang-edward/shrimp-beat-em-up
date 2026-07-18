@@ -8,31 +8,34 @@
 [ext_resource type="Script" uid="uid://21kurj1y2k1q" path="res://scripts/final_boss/FinalBossPunchState.gd" id="6_pe7lp"]
 [ext_resource type="Script" uid="uid://bq7x2mv8ndkr3" path="res://scripts/final_boss/FinalBossGrabState.gd" id="7_h3ded"]
 [ext_resource type="Script" uid="uid://do8t1vj4ygsrh" path="res://scripts/fsm/DebugStateMachineLabel.gd" id="8_144q2"]
-[ext_resource type="Script" uid="uid://bp2ggec3cdcbn" path="res://scripts/final_boss/FinalBossPlayExpressionState.gd" id="8_x76vf"]
+[ext_resource type="Script" uid="uid://ndmsx1dd3ovq" path="res://scripts/final_boss/FinalBossSideWallState.gd" id="8_pe7lp"]
+[ext_resource type="PackedScene" uid="uid://s4vk1a005tvq" path="res://prefab/Enemy.tscn" id="9_enemy"]
+[ext_resource type="Script" uid="uid://dfxfw3qtltj7h" path="res://scripts/final_boss/FinalBossSpawnEnemiesState.gd" id="9_spawn"]
 [ext_resource type="Texture2D" uid="uid://c6qoolct8od51" path="res://sprites/guy.png" id="10_b0c5c"]
 [ext_resource type="SpriteFrames" uid="uid://b453dpnwlsx6" path="res://animations/man.tres" id="10_pe7lp"]
+[ext_resource type="PackedScene" uid="uid://efld58y74mpo" path="res://prefab/BossHealth.tscn" id="12_51jxd"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_144q2"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ggxpt"]
+atlas = ExtResource("3_144q2")
+region = Rect2(480, 0, 120, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_adlve"]
 atlas = ExtResource("3_144q2")
 region = Rect2(360, 0, 120, 192)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_x76vf"]
-atlas = ExtResource("3_144q2")
-region = Rect2(240, 0, 120, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_754j2"]
 atlas = ExtResource("3_144q2")
 region = Rect2(0, 0, 120, 192)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_h3ded"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_51jxd"]
 atlas = ExtResource("3_144q2")
-region = Rect2(480, 0, 120, 192)
+region = Rect2(600, 0, 120, 192)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_0nowu"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_144q2")
+"texture": SubResource("AtlasTexture_ggxpt")
 }],
 "loop": 1,
 "name": &"clasp",
@@ -40,7 +43,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_x76vf")
+"texture": SubResource("AtlasTexture_adlve")
 }],
 "loop": 1,
 "name": &"fist",
@@ -56,7 +59,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_h3ded")
+"texture": SubResource("AtlasTexture_51jxd")
 }],
 "loop": 1,
 "name": &"open_hand",
@@ -64,21 +67,21 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a85ww"]
-size = Vector2(50.75, 56.472504)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jhsr3"]
-atlas = ExtResource("10_b0c5c")
-region = Rect2(600, 0, 120, 192)
+size = Vector2(50.75, 52.650146)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pe7lp"]
 atlas = ExtResource("10_b0c5c")
-region = Rect2(720, 0, 120, 192)
+region = Rect2(1344, 0, 192, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rn34i"]
+atlas = ExtResource("10_b0c5c")
+region = Rect2(1536, 0, 192, 384)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ggxpt"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_jhsr3")
+"texture": SubResource("AtlasTexture_pe7lp")
 }],
 "loop": 1,
 "name": &"default",
@@ -86,18 +89,19 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_pe7lp")
+"texture": SubResource("AtlasTexture_rn34i")
 }],
 "loop": 1,
 "name": &"hurt",
 "speed": 5.0
 }]
 
-[node name="FinalBossController" type="Node2D" unique_id=862737750 node_paths=PackedStringArray("hand1", "hand2")]
+[node name="FinalBossController" type="Node2D" unique_id=862737750 node_paths=PackedStringArray("hand1", "hand2", "boss_health")]
 y_sort_enabled = true
 script = ExtResource("1_5w4rv")
 hand1 = NodePath("Hand1")
 hand2 = NodePath("Hand2")
+boss_health = NodePath("CanvasLayer/BossHealth")
 
 [node name="Hand1" type="Node2D" parent="." unique_id=132289877]
 position = Vector2(-319, -800)
@@ -154,7 +158,7 @@ debug_color = Color(0.7967164, 0.42138872, 0.12490418, 0.41960785)
 
 [node name="StateMachine" type="Node" parent="." unique_id=1377153393]
 script = ExtResource("5_b0c5c")
-initial_state = NodePath("FinalBossPlayExpressionState")
+initial_state = NodePath("FinalBossSideWallState")
 metadata/_custom_type_script = "uid://bge0hmqmafyrt"
 
 [node name="FinalBossPunchState" type="Node" parent="StateMachine" unique_id=643711401 node_paths=PackedStringArray("next_state")]
@@ -162,14 +166,19 @@ script = ExtResource("6_pe7lp")
 next_state = NodePath("../FinalBossGrabState")
 metadata/_custom_type_script = "uid://21kurj1y2k1q"
 
-[node name="FinalBossGrabState" type="Node" parent="StateMachine" unique_id=2078556991 node_paths=PackedStringArray("next_state")]
+[node name="FinalBossGrabState" type="Node" parent="StateMachine" unique_id=2078556991 node_paths=PackedStringArray("potential_next_states")]
 script = ExtResource("7_h3ded")
-next_state = NodePath("../FinalBossPunchState")
+potential_next_states = [NodePath("../FinalBossPunchState"), NodePath("../FinalBossSpawnEnemiesState")]
 metadata/_custom_type_script = "uid://bq7x2mv8ndkr3"
 
-[node name="FinalBossPlayExpressionState" type="Node" parent="StateMachine" unique_id=1342484727]
-script = ExtResource("8_x76vf")
-metadata/_custom_type_script = "uid://bp2ggec3cdcbn"
+[node name="FinalBossSideWallState" type="Node" parent="StateMachine" unique_id=1485787703 node_paths=PackedStringArray("potential_next_states")]
+script = ExtResource("8_pe7lp")
+potential_next_states = [NodePath("../FinalBossPunchState"), NodePath("../FinalBossGrabState")]
+
+[node name="FinalBossSpawnEnemiesState" type="Node" parent="StateMachine" unique_id=333912681 node_paths=PackedStringArray("next_state")]
+script = ExtResource("9_spawn")
+next_state = NodePath("../FinalBossSideWallState")
+enemy_scenes = Array[PackedScene]([ExtResource("9_enemy"), ExtResource("9_enemy"), ExtResource("9_enemy")])
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=272432548]
 
@@ -185,25 +194,60 @@ text = "hello"
 script = ExtResource("8_144q2")
 state_machine = NodePath("../../StateMachine")
 
+[node name="BossHealth" parent="CanvasLayer" unique_id=1458634735 instance=ExtResource("12_51jxd")]
+offset_top = -49.0
+
 [node name="ManSpriteR" type="AnimatedSprite2D" parent="." unique_id=1606828923]
 visible = false
 z_index = -101
-position = Vector2(747.00006, -63.000004)
+position = Vector2(747, 520)
 rotation = 0.0046243123
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_ggxpt")
 
+[node name="HurtBox2" type="Area2D" parent="ManSpriteR" unique_id=107045085 node_paths=PackedStringArray("parent")]
+position = Vector2(-1.9566422, -98.74201)
+rotation = -0.0046243123
+scale = Vector2(-1.7047127, 4.075547)
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("4_x76vf")
+parent = NodePath("../..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ManSpriteR/HurtBox2" unique_id=1027071515]
+position = Vector2(-1.9064789, 3.4868698)
+scale = Vector2(0.99999994, 0.99999994)
+shape = SubResource("RectangleShape2D_a85ww")
+debug_color = Color(0.7967164, 0.42138872, 0.12490418, 0.41960785)
+
 [node name="ManSpriteL" type="AnimatedSprite2D" parent="." unique_id=949003926]
 visible = false
 z_index = -101
-position = Vector2(-825, 194)
+position = Vector2(-825, 520)
 rotation = 0.0046243123
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_ggxpt")
 flip_h = true
+
+[node name="HurtBox3" type="Area2D" parent="ManSpriteL" unique_id=1181136131 node_paths=PackedStringArray("parent")]
+position = Vector2(-2.6846313, -93.98856)
+rotation = 3.1369684
+scale = Vector2(1.7047127, -4.0755477)
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("4_x76vf")
+parent = NodePath("../..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ManSpriteL/HurtBox3" unique_id=262432239]
+position = Vector2(-1.9064789, 3.4868698)
+scale = Vector2(0.99999994, 0.99999994)
+shape = SubResource("RectangleShape2D_a85ww")
+debug_color = Color(0.7967164, 0.42138872, 0.12490418, 0.41960785)
 
 [node name="FGMan" type="AnimatedSprite2D" parent="." unique_id=1492421727]
 visible = false
 z_index = -101
 scale = Vector2(4, 4)
 sprite_frames = ExtResource("10_pe7lp")
+animation = &"worried"
+offset = Vector2(0, 96)

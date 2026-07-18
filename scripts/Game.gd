@@ -18,7 +18,7 @@ func _ready() -> void:
 	var screen_size = get_viewport().size
 	BOSS_SPAWN_LOCATION = Vector2(screen_size.x / 2 - 512, -screen_size.y / 2 - 100)
 	#load_next_wave()
-	load_level_boss()
+	# load_level_boss()
 
 func update_wave_stats():
 	var curr_wave_config = GameVariables.get_curr_wave_config() as WaveSpawnConfig
@@ -35,6 +35,7 @@ func incr_enemy_defeated_count():
 	update_wave_stats()
 	
 func load_level_boss():
+	return
 	var level_config = GameVariables.get_curr_level_config()
 	if level_config.boss_scene != null:
 		boss = level_config.boss_scene.instantiate() as Boss

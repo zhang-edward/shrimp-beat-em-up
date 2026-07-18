@@ -5,43 +5,43 @@ const PUNCH_WINDUP_SECONDS = 1.0
 const PUNCH_ACTIVE_SECONDS = 0.05
 const PUNCH_RECOVERY_SECONDS = 0.5
 const PUNCH_STARTING_Y = -800
-const STATE_DURATION_SECONDS = 10
 
 @export var next_state: FinalBossState
-var timer := 0.0
-var punching: Array[bool] = [false, false]
+var punching: bool = false
 var hitbox_scene: PackedScene = preload("res://prefab/Hitbox.tscn")
 
 func enter(_msg := {}) -> void:
-	timer = STATE_DURATION_SECONDS
+	punching = true
+	await controller.move_face_to(FinalBossController.FacePos.BACK_WALL_RISEN, "determined_1")
+	controller.play_emote("determined_3")
+
 	controller.hand1.get_node("Sprite").play("fist")
 	controller.hand2.get_node("Sprite").play("fist")
-	punching = [false, false]
+	punching = false
+
 
 func update(delta: float) -> void:
-	timer -= delta
-	if timer <= 0:
-		if not punching[0] and not punching[1]:
-			state_machine.transition_to(next_state)
-		return
-	if not punching[0]:
-		# pick a random spot on the left side of the arena
-		var targetPos = Vector2(randf_range(0, -600), randf_range(150, 350))
-		controller.hand1.position = targetPos
-		_punch(0)
-	if not punching[1]:
-		# pick a random spot on the right side of the arena
-		var targetPos = Vector2(randf_range(0, 600), randf_range(150, 350))
-		controller.hand2.position = targetPos
-		_punch(1)
+	if not punching:
+		punching = true
+		var target_pos = Vector2(randf_range(-400, 400), randf_range(150, 350))
+		var separation = randf_range(100, 250)
+		controller.hand1.position.x = target_pos.x - separation
+		controller.hand1.position.y = target_pos.y
+		controller.hand2.position.x = target_pos.x + separation
+		controller.hand2.position.y = target_pos.y
+		controller.track_face_x(target_pos.x)
+		_punch()
 		
+func _punch():
+	_punch_hand(0)
+	_punch_hand(1)
 
-func _punch(idx: int):
-	punching[idx] = true
+func _punch_hand(idx: int):
 	var hand_controller = controller.hand1 if idx == 0 else controller.hand2
 	var sprite = hand_controller.get_node("Sprite")
 	sprite.position.y = PUNCH_STARTING_Y
 	var tween = controller.get_tree().create_tween()
+
 	# Punch telegraph
 	tween.set_parallel(false)
 	tween.set_ease(Tween.EASE_OUT)
@@ -51,7 +51,8 @@ func _punch(idx: int):
 
 	# Punch 
 	tween.set_trans(Tween.TRANS_LINEAR)
-	tween.tween_property(sprite, "position:y", 0, 0.2)
+	tween.tween_property(sprite, "position:y", 0, 0.1)
+	tween.tween_callback(func(): controller.face_impact_bounce())
 	tween.tween_callback(_spawn_punch_hitbox.bind(hand_controller))
 	tween.tween_interval(2)
 
@@ -61,8 +62,11 @@ func _punch(idx: int):
 	tween.tween_property(sprite, "position:y", -800, PUNCH_WINDUP_SECONDS)
 
 	# Random cooldown
-	tween.tween_interval(randf_range(0, 1))
-	tween.tween_callback(func(): punching[idx] = false)
+	tween.tween_interval(1.0)
+	tween.tween_callback(func(): punching = false)
+	if idx == 0:
+		tween.tween_callback(func(): state_machine.transition_to(next_state))
+
 
 func _spawn_punch_hitbox(hand_controller: Node2D):
 	var hitbox = hitbox_scene.instantiate() as Hitbox

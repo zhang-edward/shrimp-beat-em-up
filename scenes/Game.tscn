@@ -238,10 +238,9 @@ show_percentage = false
 [node name="Entities" type="Node2D" parent="." unique_id=1719935909]
 y_sort_enabled = true
 
-[node name="FinalBossController" parent="Entities" unique_id=862737750 node_paths=PackedStringArray("bg_sprite", "fg_sprite", "boss_health", "player_ref") instance=ExtResource("8_sv1m6")]
+[node name="FinalBossController" parent="Entities" unique_id=862737750 node_paths=PackedStringArray("bg_sprite", "fg_sprite", "player_ref") instance=ExtResource("8_sv1m6")]
 bg_sprite = NodePath("../../BG/ParallaxManLayer/BGMan")
 fg_sprite = NodePath("FGMan")
-boss_health = NodePath("")
 player_ref = NodePath("../Player")
 
 [node name="Player" parent="Entities" unique_id=1699568361 node_paths=PackedStringArray("healthbar") instance=ExtResource("2_qbsmt")]
@@ -383,6 +382,7 @@ position = Vector2(-195, 487)
 scale = Vector2(3, 3)
 sprite_frames = ExtResource("9_sv1m6")
 animation = &"determined_1"
+offset = Vector2(0, 96)
 
 [node name="Boundaries" type="StaticBody2D" parent="BG" unique_id=432593465]
 position = Vector2(0, 41)
