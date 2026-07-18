@@ -229,7 +229,7 @@ idle_state = NodePath("../BossIdleState")
 hitbox_scene = ExtResource("10_ghgbw")
 
 [node name="Marker2D" type="Marker2D" parent="StateMachine/BossChompLungeState" unique_id=1138795082]
-position = Vector2(-5, -153)
+position = Vector2(-6, -154)
 
 [node name="BossDeathState" type="Node" parent="StateMachine" unique_id=2135527368]
 script = ExtResource("12_eulky")

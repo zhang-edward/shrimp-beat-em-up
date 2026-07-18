@@ -10,6 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://b6a6t3gkcmgxs" path="res://sprites/bg_sm.png" id="4_400sg"]
 [ext_resource type="Texture2D" uid="uid://8kdlujo1djqy" path="res://sprites/bg_sm_living_room.png" id="4_g4kob"]
 [ext_resource type="PackedScene" uid="uid://efld58y74mpo" path="res://prefab/BossHealth.tscn" id="5_kyk2p"]
+[ext_resource type="Texture2D" uid="uid://bnic6wrxno6ao" path="res://sprites/ui/9patch-panel.png" id="6_a8wo8"]
+[ext_resource type="Texture2D" uid="uid://cgn8m5nc1o08m" path="res://sprites/characters/shrimp.png" id="7_attvq"]
 [ext_resource type="Texture2D" uid="uid://bhwt635b0jwv1" path="res://sprites/props/log1.png" id="8_2rd6h"]
 [ext_resource type="PackedScene" uid="uid://b2jp4cfwceahd" path="res://prefab/FinalBossController.tscn" id="8_sv1m6"]
 [ext_resource type="Texture2D" uid="uid://br5cp6d53s4vv" path="res://sprites/props/rock1.png" id="9_3xj3m"]
@@ -20,6 +22,10 @@
 [ext_resource type="Texture2D" uid="uid://800mviy7djks" path="res://sprites/props/seaweed_1.png" id="12_7ua8r"]
 [ext_resource type="Script" uid="uid://ghmm1evp356x" path="res://scripts/PropWithRandomizedAnimation.gd" id="14_vjgi4"]
 [ext_resource type="Texture2D" uid="uid://bugjdi2mb3dmu" path="res://sprites/props/seaweed_2.png" id="14_y5y3l"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mod73"]
+atlas = ExtResource("7_attvq")
+region = Rect2(0, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r7sob"]
 atlas = ExtResource("12_7ua8r")
@@ -139,17 +145,6 @@ enemies_folder = NodePath("../Entities/Enemies")
 [node name="BossHealth" parent="CanvasLayer" unique_id=1458634735 instance=ExtResource("5_kyk2p")]
 visible = false
 
-[node name="Healthbar" type="ProgressBar" parent="CanvasLayer" unique_id=1146778923]
-offset_left = 20.0
-offset_top = 20.0
-offset_right = 304.0
-offset_bottom = 47.0
-theme_override_styles/background = ExtResource("2_kiw3p")
-theme_override_styles/fill = ExtResource("3_400sg")
-step = 1.0
-value = 100.0
-show_percentage = false
-
 [node name="WaveStats" type="Label" parent="CanvasLayer" unique_id=964023802]
 anchors_preset = 1
 anchor_left = 1.0
@@ -158,6 +153,91 @@ offset_left = -40.0
 offset_bottom = 23.0
 grow_horizontal = 0
 text = "Wave 1: 0/15"
+
+[node name="HUD" type="HBoxContainer" parent="CanvasLayer" unique_id=812965530]
+offset_left = 48.0
+offset_top = 48.0
+offset_right = 372.0
+offset_bottom = 112.0
+
+[node name="Portrait" type="NinePatchRect" parent="CanvasLayer/HUD" unique_id=1617087055]
+custom_minimum_size = Vector2(64, 32)
+layout_mode = 2
+texture = ExtResource("6_a8wo8")
+region_rect = Rect2(0, 0, 16, 16)
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/HUD/Portrait" unique_id=350693171]
+clip_children = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -26.0
+offset_top = -26.0
+offset_right = 26.0
+offset_bottom = 26.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.18431373, 0.6117647, 0.69411767, 1)
+
+[node name="Portrait" type="TextureRect" parent="CanvasLayer/HUD/Portrait/ColorRect" unique_id=2142667129]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -61.0
+offset_top = -49.0
+offset_right = -13.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2.5, 2.5)
+texture = SubResource("AtlasTexture_mod73")
+
+[node name="HealthBarContainer" type="NinePatchRect" parent="CanvasLayer/HUD" unique_id=1585851407]
+custom_minimum_size = Vector2(256, 40)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("6_a8wo8")
+region_rect = Rect2(0, 0, 16, 16)
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/HUD/HealthBarContainer" unique_id=459769362]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="Healthbar" type="ProgressBar" parent="CanvasLayer/HUD/HealthBarContainer/MarginContainer" unique_id=1146778923]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_styles/background = ExtResource("2_kiw3p")
+theme_override_styles/fill = ExtResource("3_400sg")
+step = 1.0
+value = 100.0
+show_percentage = false
 
 [node name="Entities" type="Node2D" parent="." unique_id=1719935909]
 y_sort_enabled = true
@@ -170,7 +250,7 @@ player_ref = NodePath("../Player")
 
 [node name="Player" parent="Entities" unique_id=1699568361 node_paths=PackedStringArray("healthbar") instance=ExtResource("2_qbsmt")]
 position = Vector2(-11, 192)
-healthbar = NodePath("../../CanvasLayer/Healthbar")
+healthbar = NodePath("../../CanvasLayer/HUD/HealthBarContainer/MarginContainer/Healthbar")
 
 [node name="Camera2D" type="Camera2D" parent="Entities/Player" unique_id=983189321]
 position = Vector2(34, -172)
