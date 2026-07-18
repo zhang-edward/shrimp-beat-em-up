@@ -7,12 +7,18 @@ signal grab_escaped
 @onready var state_machine: StateMachine = %StateMachine
 @onready var shadow: Sprite2D = $Shadow
 @export var healthbar: ProgressBar
+@export var lives_counter: Label #TODO: Replace this with better UI
 @export var grabbed_state: PlayerGrabbedState
+@export var hurt_state: PlayerHurtState
+@export var death_state: PlayerDeathState
 
 const MAX_JUMPS = 2
+const MAX_LIVES = 3
+const MAX_HEALTH = 100
 
 var num_jumps_remaining = MAX_JUMPS
 var uppercut_used = false;
+var num_lives := MAX_LIVES
 
 var z_velocity = 0.0
 var z = 0.0 # altitude
@@ -21,6 +27,7 @@ var _shadow_base_scale: Vector2
 func _ready() -> void:
 	sprite.play("default")
 	_shadow_base_scale = shadow.scale
+	update_lives(0)
 	pass
 	
 func _process(_delta: float) -> void:
@@ -38,10 +45,26 @@ func _physics_process(_delta: float) -> void:
 	move_and_slide()
 
 func damage(amount: int):
+	state_machine.transition_to(hurt_state)
 	healthbar.value -= amount
 
 func kill():
+	state_machine.transition_to(death_state)
+	update_lives(-1)
 	healthbar.value = 0
+
+func update_lives(amt: int):
+	num_lives += amt
+	lives_counter.text = "Lives: " + str(num_lives)
+	if num_lives == 0:
+		GameVariables.game_over_state = GameVariables.GameOverState.DEFEAT
+		get_tree().change_scene_to_file("res://scenes/GameOver.tscn")
+
+# I-frames when the player is hurt or dead
+func is_invincible():
+	return state_machine.state is PlayerHurtState or \
+		   state_machine.state is PlayerDeathState or \
+		   state_machine.state is PlayerGrabbedState
 
 func is_grabbed() -> bool:
 	return state_machine.state is PlayerGrabbedState

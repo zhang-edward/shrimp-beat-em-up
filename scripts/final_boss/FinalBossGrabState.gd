@@ -103,8 +103,9 @@ func _lift() -> void:
 func _carry_out_of_tank() -> void:
 	var player := controller.player_ref
 	player.kill()
-	player.release_from_grab()
-	_retreat()
+	if player.num_lives > 0:
+		player.release_from_grab()
+		_retreat()
 
 func _on_player_escaped() -> void:
 	if _tween and _tween.is_valid():

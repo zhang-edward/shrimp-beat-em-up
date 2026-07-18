@@ -1,9 +1,15 @@
 extends Node
 
+enum GameOverState {
+	DEFEAT,
+	VICTORY
+}
+
 var level_configs = []
 var curr_wave := 0
 var curr_level := 0
 var enemies_defeated_for_curr_wave := 0
+var game_over_state: GameOverState
 
 func _ready():
 	var level_resources = ["level1", "level2"]

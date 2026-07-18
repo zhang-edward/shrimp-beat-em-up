@@ -1,6 +1,10 @@
 [gd_scene format=3 uid="uid://bsmpj13anhsyd"]
 
-[node name="GameOver" type="Node2D" unique_id=712809338]
+[ext_resource type="Script" uid="uid://bjvahu884mx8v" path="res://scripts/GameOver.gd" id="1_6bcno"]
+
+[node name="GameOver" type="Node2D" unique_id=712809338 node_paths=PackedStringArray("game_over_label")]
+script = ExtResource("1_6bcno")
+game_over_label = NodePath("CanvasLayer/Label")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1282215310]
 

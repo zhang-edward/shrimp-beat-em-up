@@ -14,6 +14,9 @@
 [ext_resource type="Script" uid="uid://b7b880008kws6" path="res://scripts/player_states/PlayerDashState.gd" id="11_74yla"]
 [ext_resource type="Script" uid="uid://gw70s1y11ftd" path="res://scripts/player_states/PlayerFallState.gd" id="12_m05ay"]
 [ext_resource type="Script" uid="uid://c4nw6rt2haj6p" path="res://scripts/player_states/PlayerGrabbedState.gd" id="13_gr4bd"]
+[ext_resource type="Script" uid="uid://csfyvf4dskwu3" path="res://scripts/player_states/PlayerHurtState.gd" id="14_ykq77"]
+[ext_resource type="Script" uid="uid://0ifc1qqeumxh" path="res://scripts/player_states/PlayerDeathState.gd" id="15_72431"]
+[ext_resource type="Script" uid="uid://2e8y83u61lnw" path="res://scripts/player_states/PlayerSpawnState.gd" id="16_1n0hs"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fetod"]
 atlas = ExtResource("2_poo86")
@@ -242,11 +245,13 @@ size = Vector2(14, 25)
 [sub_resource type="CircleShape2D" id="CircleShape2D_mod73"]
 radius = 6.0
 
-[node name="Player" type="CharacterBody2D" unique_id=2117824229 node_paths=PackedStringArray("grabbed_state")]
+[node name="Player" type="CharacterBody2D" unique_id=2117824229 node_paths=PackedStringArray("grabbed_state", "hurt_state", "death_state")]
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_00yv1")
 grabbed_state = NodePath("StateMachine/PlayerGrabbedState")
+hurt_state = NodePath("StateMachine/PlayerHurtState")
+death_state = NodePath("StateMachine/PlayerDeathState")
 
 [node name="Shadow" type="Sprite2D" parent="." unique_id=1051102670]
 modulate = Color(1, 1, 1, 0.39215687)
@@ -280,7 +285,7 @@ shape = SubResource("CircleShape2D_mod73")
 [node name="StateMachine" type="Node" parent="." unique_id=766052711]
 unique_name_in_owner = true
 script = ExtResource("4_vga1c")
-initial_state = NodePath("PlayerMoveState")
+initial_state = NodePath("PlayerSpawnState")
 
 [node name="PlayerMoveState" type="Node" parent="StateMachine" unique_id=1599645225 node_paths=PackedStringArray("jump_state", "punch_state", "dash_state")]
 script = ExtResource("5_dbxf5")
@@ -337,6 +342,18 @@ metadata/_custom_type_script = "uid://gw70s1y11ftd"
 script = ExtResource("13_gr4bd")
 fall_state = NodePath("../PlayerFallState")
 metadata/_custom_type_script = "uid://c4nw6rt2haj6p"
+
+[node name="PlayerHurtState" type="Node" parent="StateMachine" unique_id=443629329 node_paths=PackedStringArray("move_state")]
+script = ExtResource("14_ykq77")
+move_state = NodePath("../PlayerMoveState")
+
+[node name="PlayerDeathState" type="Node" parent="StateMachine" unique_id=1337886798 node_paths=PackedStringArray("spawn_state")]
+script = ExtResource("15_72431")
+spawn_state = NodePath("../PlayerSpawnState")
+
+[node name="PlayerSpawnState" type="Node" parent="StateMachine" unique_id=957243090 node_paths=PackedStringArray("move_state")]
+script = ExtResource("16_1n0hs")
+move_state = NodePath("../PlayerMoveState")
 
 [node name="DebugStateMachineLabel" type="Label" parent="." unique_id=11757401 node_paths=PackedStringArray("state_machine")]
 anchors_preset = 5

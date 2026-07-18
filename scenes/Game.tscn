@@ -150,13 +150,17 @@ offset_bottom = 23.0
 grow_horizontal = 0
 text = "Wave 1: 0/15"
 
-[node name="HUD" type="HBoxContainer" parent="CanvasLayer" unique_id=812965530]
-offset_left = 48.0
-offset_top = 48.0
-offset_right = 372.0
-offset_bottom = 112.0
+[node name="HUD" type="VBoxContainer" parent="CanvasLayer" unique_id=345337649]
+offset_left = 30.0
+offset_top = 30.0
+offset_right = 430.0
+offset_bottom = 124.0
 
-[node name="Portrait" type="NinePatchRect" parent="CanvasLayer/HUD" unique_id=1617087055]
+[node name="PlayerPortraitContainer" type="HBoxContainer" parent="CanvasLayer/HUD" unique_id=812965530]
+custom_minimum_size = Vector2(0, 65)
+layout_mode = 2
+
+[node name="Portrait" type="NinePatchRect" parent="CanvasLayer/HUD/PlayerPortraitContainer" unique_id=1617087055]
 custom_minimum_size = Vector2(64, 32)
 layout_mode = 2
 texture = ExtResource("6_a8wo8")
@@ -168,7 +172,7 @@ patch_margin_bottom = 2
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/HUD/Portrait" unique_id=350693171]
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/HUD/PlayerPortraitContainer/Portrait" unique_id=350693171]
 clip_children = 2
 layout_mode = 1
 anchors_preset = 8
@@ -184,7 +188,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.18431373, 0.6117647, 0.69411767, 1)
 
-[node name="Portrait" type="TextureRect" parent="CanvasLayer/HUD/Portrait/ColorRect" unique_id=2142667129]
+[node name="Portrait" type="TextureRect" parent="CanvasLayer/HUD/PlayerPortraitContainer/Portrait/ColorRect" unique_id=2142667129]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -200,7 +204,7 @@ grow_vertical = 2
 scale = Vector2(2.5, 2.5)
 texture = SubResource("AtlasTexture_mod73")
 
-[node name="HealthBarContainer" type="NinePatchRect" parent="CanvasLayer/HUD" unique_id=1585851407]
+[node name="HealthBarContainer" type="NinePatchRect" parent="CanvasLayer/HUD/PlayerPortraitContainer" unique_id=1585851407]
 custom_minimum_size = Vector2(256, 40)
 layout_mode = 2
 size_flags_vertical = 4
@@ -213,7 +217,7 @@ patch_margin_bottom = 2
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/HUD/HealthBarContainer" unique_id=459769362]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/HUD/PlayerPortraitContainer/HealthBarContainer" unique_id=459769362]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -225,7 +229,7 @@ theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 
-[node name="Healthbar" type="ProgressBar" parent="CanvasLayer/HUD/HealthBarContainer/MarginContainer" unique_id=1146778923]
+[node name="Healthbar" type="ProgressBar" parent="CanvasLayer/HUD/PlayerPortraitContainer/HealthBarContainer/MarginContainer" unique_id=1146778923]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -235,6 +239,11 @@ step = 1.0
 value = 100.0
 show_percentage = false
 
+[node name="LivesLabel" type="Label" parent="CanvasLayer/HUD" unique_id=1719625438]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Lives: 3"
+
 [node name="Entities" type="Node2D" parent="." unique_id=1719935909]
 y_sort_enabled = true
 
@@ -243,9 +252,10 @@ bg_sprite = NodePath("../../BG/ParallaxManLayer/BGMan")
 fg_sprite = NodePath("FGMan")
 player_ref = NodePath("../Player")
 
-[node name="Player" parent="Entities" unique_id=1699568361 node_paths=PackedStringArray("healthbar") instance=ExtResource("2_qbsmt")]
+[node name="Player" parent="Entities" unique_id=1699568361 node_paths=PackedStringArray("healthbar", "lives_counter") instance=ExtResource("2_qbsmt")]
 position = Vector2(-11, 192)
-healthbar = NodePath("../../CanvasLayer/HUD/HealthBarContainer/MarginContainer/Healthbar")
+healthbar = NodePath("../../CanvasLayer/HUD/PlayerPortraitContainer/HealthBarContainer/MarginContainer/Healthbar")
+lives_counter = NodePath("../../CanvasLayer/HUD/LivesLabel")
 
 [node name="Camera2D" type="Camera2D" parent="Entities/Player" unique_id=983189321]
 position = Vector2(34, -172)
