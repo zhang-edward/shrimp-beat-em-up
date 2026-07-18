@@ -7,7 +7,7 @@ signal grab_escaped
 @onready var state_machine: StateMachine = %StateMachine
 @onready var shadow: Sprite2D = $Shadow
 @export var healthbar: ProgressBar
-@export var lives_counter: Label #TODO: Replace this with better UI
+@export var lives_counter: Label # TODO: Replace this with better UI
 @export var grabbed_state: PlayerGrabbedState
 @export var hurt_state: PlayerHurtState
 @export var death_state: PlayerDeathState
@@ -47,6 +47,8 @@ func _physics_process(_delta: float) -> void:
 func damage(amount: int):
 	state_machine.transition_to(hurt_state)
 	healthbar.value -= amount
+	if healthbar.value <= 0:
+		kill()
 
 func kill():
 	state_machine.transition_to(death_state)

@@ -14,9 +14,13 @@
 [ext_resource type="Script" uid="uid://b7b880008kws6" path="res://scripts/player_states/PlayerDashState.gd" id="11_74yla"]
 [ext_resource type="Script" uid="uid://gw70s1y11ftd" path="res://scripts/player_states/PlayerFallState.gd" id="12_m05ay"]
 [ext_resource type="Script" uid="uid://c4nw6rt2haj6p" path="res://scripts/player_states/PlayerGrabbedState.gd" id="13_gr4bd"]
-[ext_resource type="Script" uid="uid://csfyvf4dskwu3" path="res://scripts/player_states/PlayerHurtState.gd" id="14_ykq77"]
+[ext_resource type="Script" path="res://scripts/player_states/PlayerHurtState.gd" id="14_ykq77"]
 [ext_resource type="Script" uid="uid://0ifc1qqeumxh" path="res://scripts/player_states/PlayerDeathState.gd" id="15_72431"]
 [ext_resource type="Script" uid="uid://2e8y83u61lnw" path="res://scripts/player_states/PlayerSpawnState.gd" id="16_1n0hs"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h2mwl"]
+atlas = ExtResource("2_poo86")
+region = Rect2(1344, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fetod"]
 atlas = ExtResource("2_poo86")
@@ -37,6 +41,10 @@ region = Rect2(144, 0, 48, 48)
 [sub_resource type="AtlasTexture" id="AtlasTexture_m05ay"]
 atlas = ExtResource("2_poo86")
 region = Rect2(288, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2aj4y"]
+atlas = ExtResource("2_poo86")
+region = Rect2(1296, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tx0ux"]
 atlas = ExtResource("2_poo86")
@@ -118,6 +126,14 @@ region = Rect2(864, 0, 48, 48)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_h2mwl")
+}],
+"loop": 1,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_fetod")
 }, {
 "duration": 1.0,
@@ -139,6 +155,14 @@ animations = [{
 }],
 "loop": 1,
 "name": &"fall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2aj4y")
+}],
+"loop": 1,
+"name": &"hurt",
 "speed": 5.0
 }, {
 "frames": [{
@@ -264,7 +288,7 @@ texture = ExtResource("2_tx0ux")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1104767220]
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_mod73")
-animation = &"punch_2"
+animation = &"hurt"
 offset = Vector2(0, -17.36)
 
 [node name="HurtBox" type="Area2D" parent="AnimatedSprite2D" unique_id=669237323 node_paths=PackedStringArray("parent")]
@@ -343,10 +367,6 @@ script = ExtResource("13_gr4bd")
 fall_state = NodePath("../PlayerFallState")
 metadata/_custom_type_script = "uid://c4nw6rt2haj6p"
 
-[node name="PlayerHurtState" type="Node" parent="StateMachine" unique_id=443629329 node_paths=PackedStringArray("move_state")]
-script = ExtResource("14_ykq77")
-move_state = NodePath("../PlayerMoveState")
-
 [node name="PlayerDeathState" type="Node" parent="StateMachine" unique_id=1337886798 node_paths=PackedStringArray("spawn_state")]
 script = ExtResource("15_72431")
 spawn_state = NodePath("../PlayerSpawnState")
@@ -354,6 +374,11 @@ spawn_state = NodePath("../PlayerSpawnState")
 [node name="PlayerSpawnState" type="Node" parent="StateMachine" unique_id=957243090 node_paths=PackedStringArray("move_state")]
 script = ExtResource("16_1n0hs")
 move_state = NodePath("../PlayerMoveState")
+
+[node name="PlayerHurtState" type="Node" parent="StateMachine" unique_id=126120328 node_paths=PackedStringArray("move_state", "fall_state")]
+script = ExtResource("14_ykq77")
+move_state = NodePath("../PlayerMoveState")
+fall_state = NodePath("../PlayerFallState")
 
 [node name="DebugStateMachineLabel" type="Label" parent="." unique_id=11757401 node_paths=PackedStringArray("state_machine")]
 anchors_preset = 5
