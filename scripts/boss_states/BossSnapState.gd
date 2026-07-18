@@ -1,7 +1,7 @@
 class_name BossSnapState
 extends BossState
 
-@export var idle_state: BossIdleState
+@export var possible_next_states: Array[BossState]
 @export var hitbox_scene: PackedScene
 
 var claw_to_attack_with: LobsterBossClaw
@@ -12,17 +12,16 @@ var is_running: bool = false
 var hit: HitConfig = HitConfig.create(25, HitEffectRegistry.HIT_EFFECT_1)
 
 func enter(msg := {}) -> void:
-	if !is_running:
-		var lobster_boss = boss as LobsterBoss
-		lobster_boss.sprite.play("idle")
-		choose_claw_to_attack_with()
-		var tween = create_tween()
-		var x_diff = -100 if is_left else 100
-		var orig_x = claw_to_attack_with.global_position.x
-		var windup_x = claw_to_attack_with.global_position.x + x_diff
-		tween.tween_property(claw_to_attack_with, "global_position:x", windup_x, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-		var callable = Callable(self, "play_attack_animation").bind(orig_x)
-		tween.finished.connect(callable)
+	var lobster_boss = boss as LobsterBoss
+	lobster_boss.reset_anims()
+	choose_claw_to_attack_with()
+	var tween = create_tween()
+	var x_diff = -100 if is_left else 100
+	var orig_x = claw_to_attack_with.global_position.x
+	var windup_x = claw_to_attack_with.global_position.x + x_diff
+	tween.tween_property(claw_to_attack_with, "global_position:x", windup_x, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	var callable = Callable(self, "play_attack_animation").bind(orig_x)
+	tween.finished.connect(callable)
 	
 func play_attack_animation(orig_x):
 	await get_tree().create_timer(1.0).timeout
@@ -48,7 +47,8 @@ func on_animation_complete(orig_x):
 	var tween = create_tween()
 	tween.tween_property(claw_to_attack_with, "global_position:x", orig_x, 0.5)
 	var on_complete = func _on_complete():
-		state_machine.transition_to(idle_state)
+		var rand_state = possible_next_states.pick_random()
+		state_machine.transition_to(rand_state)
 	tween.finished.connect(on_complete)
 	
 func choose_claw_to_attack_with():

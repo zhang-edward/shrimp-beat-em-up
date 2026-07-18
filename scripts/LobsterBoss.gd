@@ -34,3 +34,8 @@ func handle_claw_destroy(claw: LobsterBossClaw):
 
 func die():
 	super.die()
+	
+func reset_anims():
+	sprite.play("idle")
+	left_claw.sprite.play("idle")
+	right_claw.sprite.play("idle")

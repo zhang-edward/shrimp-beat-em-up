@@ -62,7 +62,7 @@ fall_speed = 400.0
 
 [node name="BossIdleState" type="Node" parent="StateMachine" unique_id=1996083466 node_paths=PackedStringArray("attack_states")]
 script = ExtResource("7_xnlq3")
-attack_states = [NodePath("../BossSnapState")]
+attack_states = [NodePath("../BossSnapState"), NodePath("../BossSlamState")]
 idle_time_seconds_max = 2.0
 idle_time_seconds_min = 1.0
 
@@ -71,14 +71,14 @@ script = ExtResource("8_42dhm")
 idle_state = NodePath("../BossIdleState")
 attack_states = [NodePath("../BossSnapState")]
 
-[node name="BossSnapState" type="Node" parent="StateMachine" unique_id=1190741741 node_paths=PackedStringArray("idle_state")]
+[node name="BossSnapState" type="Node" parent="StateMachine" unique_id=1190741741 node_paths=PackedStringArray("possible_next_states")]
 script = ExtResource("9_xnlq3")
-idle_state = NodePath("../BossIdleState")
+possible_next_states = [NodePath("."), NodePath("../BossSlamState"), NodePath("../BossIdleState")]
 hitbox_scene = ExtResource("10_grdob")
 
-[node name="BossSlamState" type="Node" parent="StateMachine" unique_id=1432335334 node_paths=PackedStringArray("idle_state")]
+[node name="BossSlamState" type="Node" parent="StateMachine" unique_id=1432335334 node_paths=PackedStringArray("possible_next_states")]
 script = ExtResource("11_n5f5x")
-idle_state = NodePath("../BossIdleState")
+possible_next_states = [NodePath("../BossIdleState")]
 hitbox_scene = ExtResource("10_grdob")
 
 [node name="BossClawDestroyState" type="Node" parent="StateMachine" unique_id=501932656 node_paths=PackedStringArray("death_state")]

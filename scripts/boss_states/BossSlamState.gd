@@ -1,7 +1,7 @@
 class_name BossSlamState
 extends BossState
 
-@export var idle_state: BossIdleState
+@export var possible_next_states: Array[BossState]
 @export var hitbox_scene: PackedScene
 
 var claw_to_attack_with: LobsterBossClaw
@@ -11,8 +11,8 @@ var hitbox: Hitbox
 var hit: HitConfig = HitConfig.create(30, HitEffectRegistry.HIT_EFFECT_1)
 
 func enter(msg := {}) -> void:
-	boss.sprite.play("idle")
 	var lobster_boss = boss as LobsterBoss
+	lobster_boss.reset_anims()
 	choose_claw_to_attack_with()
 	claw_to_attack_with.sprite.play("slam")
 	var tween = create_tween()
@@ -39,8 +39,8 @@ func on_animation_complete(orig_y):
 	var tween = create_tween()
 	tween.tween_property(claw_to_attack_with, "global_position:y", orig_y, 0.5)
 	var on_complete = func _on_complete():
-		print("Transition to idle state!")
-		state_machine.transition_to(idle_state)
+		var rand_state = possible_next_states.pick_random()
+		state_machine.transition_to(rand_state)
 	tween.finished.connect(on_complete)
 	
 func choose_claw_to_attack_with():
