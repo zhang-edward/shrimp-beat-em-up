@@ -237,6 +237,7 @@ position = Vector2(-6, -154)
 script = ExtResource("12_eulky")
 
 [node name="DebugStateMachineLabel" type="Label" parent="." unique_id=303831490 node_paths=PackedStringArray("state_machine")]
+visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5

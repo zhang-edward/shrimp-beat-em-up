@@ -89,6 +89,7 @@ death_state = NodePath("../BossDeathState")
 script = ExtResource("12_v1kf3")
 
 [node name="DebugStateMachineLabel" type="Label" parent="." unique_id=1148073961 node_paths=PackedStringArray("state_machine")]
+visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5

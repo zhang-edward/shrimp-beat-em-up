@@ -155,13 +155,41 @@ enemies_folder = NodePath("../Entities/Enemies")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1452419952]
 
-[node name="WaveStats" type="Label" parent="CanvasLayer" unique_id=964023802]
+[node name="WavePanel" type="NinePatchRect" parent="CanvasLayer" unique_id=1660627889]
+custom_minimum_size = Vector2(64, 32)
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -40.0
-offset_bottom = 23.0
+offset_left = -212.0
+offset_top = 30.0
+offset_right = -51.0
+offset_bottom = 83.0
 grow_horizontal = 0
+pivot_offset_ratio = Vector2(1, 0)
+texture = ExtResource("6_a8wo8")
+region_rect = Rect2(0, 0, 16, 16)
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="WaveStats" type="Label" parent="CanvasLayer/WavePanel" unique_id=964023802]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -60.0
+offset_top = -11.5
+offset_right = 60.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("24_1gdd5")
 text = "Wave 1: 0/15"
 
 [node name="HUD" type="VBoxContainer" parent="CanvasLayer" unique_id=345337649]

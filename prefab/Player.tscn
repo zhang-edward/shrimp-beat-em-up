@@ -382,6 +382,7 @@ move_state = NodePath("../PlayerMoveState")
 fall_state = NodePath("../PlayerFallState")
 
 [node name="DebugStateMachineLabel" type="Label" parent="." unique_id=11757401 node_paths=PackedStringArray("state_machine")]
+visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5

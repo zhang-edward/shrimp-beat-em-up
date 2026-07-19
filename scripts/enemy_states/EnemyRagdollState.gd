@@ -174,7 +174,7 @@ func _on_wall_hit() -> void:
 func _spawn_dust() -> void:
 	var config := EffectConfig.new()
 	config.pos = enemy.global_position
-	config.anim = HitEffectRegistry.HIT_EFFECT_2
+	config.anim = HitEffectRegistry.DUST
 	EffectManager.spawn_effect(config)
 
 func exit() -> void:

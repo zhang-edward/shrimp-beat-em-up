@@ -84,6 +84,7 @@ script = ExtResource("12_fjddv")
 wander_state = NodePath("../EnemyWanderState")
 
 [node name="DebugStateMachineLabel" type="Label" parent="." unique_id=155363593 node_paths=PackedStringArray("state_machine")]
+visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
