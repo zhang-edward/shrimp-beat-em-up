@@ -15,6 +15,10 @@ run/main_scene="uid://cp58vyi3mqs47"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 
+[audio]
+
+general/default_playback_type.web=0
+
 [autoload]
 
 GameVariables="*uid://kbq7sl0u6fqk"

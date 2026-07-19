@@ -283,9 +283,8 @@ size_flags_horizontal = 3
 size_flags_vertical = 1
 theme_override_styles/background = ExtResource("2_kiw3p")
 theme_override_styles/fill = ExtResource("3_400sg")
-max_value = 120.0
 step = 1.0
-value = 120.0
+value = 100.0
 show_percentage = false
 
 [node name="LivesContainer" type="HBoxContainer" parent="CanvasLayer/HUD" unique_id=1719625438]

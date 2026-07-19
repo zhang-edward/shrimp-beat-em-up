@@ -12,3 +12,6 @@
 
 # Local History for Visual Studio Code
 .history/
+
+# Releases folder
+/releases/
