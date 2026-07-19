@@ -38,6 +38,13 @@ func play_attack_animation(orig_y):
 func on_animation_complete(orig_y):
 	var lobster_boss = boss as LobsterBoss	
 	lobster_boss.play_slam_sfx()
+	ScreenShake.shake_vertical(20, 0.5, 10)
+	
+	# Spawn dust under the claw that was slammed
+	var dust_pos_x = claw_to_attack_with.global_position.x - 225
+	for i in range(0, 15):
+		dust_pos_x += randi_range(20, 25)
+		_spawn_dust(Vector2(dust_pos_x, claw_to_attack_with.global_position.y + 10))
 	await get_tree().create_timer(0.5).timeout
 	var tween = create_tween()
 	tween.tween_property(claw_to_attack_with, "global_position:y", orig_y, 0.5)
@@ -58,3 +65,10 @@ func choose_claw_to_attack_with():
 		is_left = randi_range(0, 1) == 0
 		claw_to_attack_with = lobster_boss.left_claw if is_left else lobster_boss.right_claw
 	
+
+func _spawn_dust(position) -> void:
+	print("Spawning dust!")
+	var config := EffectConfig.new()
+	config.pos = position
+	config.anim = HitEffectRegistry.DUST
+	EffectManager.spawn_effect(config)
