@@ -30,7 +30,7 @@ func enter(_msg := {}) -> void:
 func update(_delta: float) -> void:
 	state_timer -= _delta
 	if state_timer <= 0.0:
-		if enemy.can_take_aggro_slot():
+		if enemy.can_take_aggro_slot() and approach_state != null:
 			state_machine.transition_to(approach_state)
 			return
 		state_timer = AGGRO_RETRY_SECONDS

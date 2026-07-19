@@ -92,7 +92,10 @@ func update(delta: float) -> void:
 	if phase == Phase.DOWNED:
 		downed_timer -= delta
 		if downed_timer <= 0.0:
-			state_machine.transition_to(approach_state if enemy.can_take_aggro_slot() else wander_state)
+			if enemy.can_take_aggro_slot() and approach_state != null:
+				state_machine.transition_to(approach_state)
+			else:
+				state_machine.transition_to(wander_state)
 
 func _enter_phase(next_phase: Phase) -> void:
 	phase = next_phase

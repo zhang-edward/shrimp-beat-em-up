@@ -12,7 +12,7 @@ var enemies_defeated_for_curr_wave := 0
 var game_over_state: GameOverState
 
 func _ready():
-	var level_resources = ["level1", "level2"]
+	var level_resources = ["level1", "level2", "level3"]
 	for res in level_resources:
 		var level_config = load("res://resources/levels/" + res + ".tres")
 		level_configs.append(level_config)

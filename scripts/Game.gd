@@ -11,6 +11,8 @@ extends Node2D
 
 var BOSS_SPAWN_LOCATION: Vector2
 var boss
+var is_tutorial := true
+var tutorial_fish_killed = 0 # total of 3 tutorial fish
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -18,7 +20,14 @@ func _ready() -> void:
 	var screen_size = get_viewport().size
 	BOSS_SPAWN_LOCATION = Vector2(screen_size.x / 2 - 512, -screen_size.y / 2 - 100)
 	final_boss_controller.defeated.connect(handle_final_boss_defeated)
-	load_next_wave()
+
+	var tutorial = %Tutorial
+	var tween = get_tree().create_tween()
+	tween.tween_callback(func(): tutorial.modulate = Color.GRAY)
+	tween.tween_interval(0.5)
+	tween.tween_callback(func(): tutorial.modulate = Color.WHITE)
+	tween.tween_interval(0.5)
+	tween.set_loops()
 
 func update_wave_stats():
 	var curr_wave_config = GameVariables.get_curr_wave_config() as WaveSpawnConfig
@@ -27,6 +36,14 @@ func update_wave_stats():
 func incr_enemy_defeated_count():
 	# Fighting final boss -> don't load any more levels / waves
 	if final_boss_controller.state_machine.state is not FinalBossInactiveState:
+		return
+
+	if is_tutorial:
+		tutorial_fish_killed += 1
+		if tutorial_fish_killed >= 3:
+			load_next_wave()
+			is_tutorial = false
+			%Tutorial.visible = false
 		return
 
 	GameVariables.enemies_defeated_for_curr_wave += 1
@@ -57,7 +74,12 @@ func start_final_boss_fight():
 	final_boss_controller.start_final_boss_fight()
 
 func load_next_wave():
-	final_boss_controller.spawn_new_wave_animation()
+	var boss_animation_variation = 1
+	if GameVariables.curr_level == 1:
+		boss_animation_variation = 2
+	elif GameVariables.curr_level >= 2:
+		boss_animation_variation = 3
+	final_boss_controller.spawn_new_wave_animation(boss_animation_variation)
 	await final_boss_controller.animation_sequence_finished
 	var curr_wave_config = GameVariables.get_curr_wave_config()
 	enemy_spawner.clear_curr_enemies()
@@ -75,6 +97,7 @@ func load_next_level():
 ### Debug: skip straight to a level/wave or a level's boss (see DebugMenu.gd)
 
 func debug_jump_to_wave(level: int, wave: int) -> void:
+	is_tutorial = false;
 	_debug_clear_combatants()
 	GameVariables.curr_level = level
 	GameVariables.curr_wave = wave
@@ -83,6 +106,7 @@ func debug_jump_to_wave(level: int, wave: int) -> void:
 	update_wave_stats()
 
 func debug_jump_to_boss(level: int) -> void:
+	is_tutorial = false;
 	_debug_clear_combatants()
 	var level_config := GameVariables.level_configs[level] as LevelSpawnConfig
 	GameVariables.curr_level = level
@@ -92,6 +116,7 @@ func debug_jump_to_boss(level: int) -> void:
 	update_wave_stats()
 
 func debug_jump_to_final_boss() -> void:
+	is_tutorial = false;
 	_debug_clear_combatants()
 	GameVariables.curr_level = GameVariables.level_configs.size() - 1
 	start_final_boss_fight()

@@ -1,16 +1,16 @@
-[gd_resource type="Resource" script_class="WaveSpawnConfig" format=3 uid="uid://mpy7q250ilgi"]
+[gd_resource type="Resource" script_class="WaveSpawnConfig" format=3 uid="uid://lfl8u0g2k3lc"]
 
 [ext_resource type="Script" uid="uid://d3l5nsti7vk1p" path="res://scripts/levels/WaveSpawnConfig.gd" id="1_wsc"]
 [ext_resource type="PackedScene" uid="uid://3i3idrorsh4f" path="res://prefab/enemies/Fish.tscn" id="2_fish"]
 [ext_resource type="Script" uid="uid://bqx8n2vw3ktle" path="res://scripts/levels/WaveEnemyGroup.gd" id="3_weg"]
 
-[sub_resource type="Resource" id="Group_fish"]
+[sub_resource type="Resource" id="Resource_afrj7"]
 script = ExtResource("3_weg")
 enemy_scene = ExtResource("2_fish")
-count = 5
+count = 3
 metadata/_custom_type_script = "uid://bqx8n2vw3ktle"
 
 [resource]
 script = ExtResource("1_wsc")
-enemy_groups = Array[ExtResource("3_weg")]([SubResource("Group_fish")])
+enemy_groups = Array[ExtResource("3_weg")]([SubResource("Resource_afrj7")])
 metadata/_custom_type_script = "uid://d3l5nsti7vk1p"

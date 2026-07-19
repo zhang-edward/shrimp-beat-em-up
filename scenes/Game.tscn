@@ -19,8 +19,19 @@
 [ext_resource type="Texture2D" uid="uid://duf8us6pj3mfr" path="res://sprites/props/rock3.png" id="11_2rd6h"]
 [ext_resource type="Texture2D" uid="uid://800mviy7djks" path="res://sprites/props/seaweed_1.png" id="12_7ua8r"]
 [ext_resource type="Script" uid="uid://ghmm1evp356x" path="res://scripts/PropWithRandomizedAnimation.gd" id="14_vjgi4"]
-[ext_resource type="Script" path="res://scripts/DebugMenu.gd" id="15_dbgmn"]
 [ext_resource type="Texture2D" uid="uid://bugjdi2mb3dmu" path="res://sprites/props/seaweed_2.png" id="14_y5y3l"]
+[ext_resource type="Script" uid="uid://w2y2yfasmrtn" path="res://scripts/DebugMenu.gd" id="15_dbgmn"]
+[ext_resource type="PackedScene" uid="uid://d3kw1ccu05mqn" path="res://prefab/enemies/TutorialFish.tscn" id="18_attvq"]
+[ext_resource type="FontFile" uid="uid://dsugm7hp2ms" path="res://pixelmix.ttf" id="24_1gdd5"]
+[ext_resource type="Texture2D" uid="uid://c0jlqb60b5s4" path="res://sprites/kenney_input_sprites/tile_0120.png" id="24_754j2"]
+[ext_resource type="Texture2D" uid="uid://cqpuaccf3rp2h" path="res://sprites/kenney_input_sprites/tile_0123.png" id="28_426vi"]
+[ext_resource type="Texture2D" uid="uid://mlvp73opht8l" path="res://sprites/kenney_input_sprites/tile_0166.png" id="32_cxum0"]
+[ext_resource type="Texture2D" uid="uid://bkaksjf4ytlj8" path="res://sprites/kenney_input_sprites/tile_0167.png" id="33_1fiys"]
+[ext_resource type="Texture2D" uid="uid://b5xctvnyt2bbk" path="res://sprites/kenney_input_sprites/tile_0168.png" id="34_m2g6u"]
+[ext_resource type="Texture2D" uid="uid://c2mo0u5mdb7fb" path="res://sprites/kenney_input_sprites/tile_0169.png" id="35_27c7x"]
+[ext_resource type="Texture2D" uid="uid://b61b3twh6gpnr" path="res://sprites/kenney_input_sprites/tile_0235.png" id="36_cxum0"]
+[ext_resource type="Texture2D" uid="uid://by4rdakckfvh7" path="res://sprites/kenney_input_sprites/tile_0236.png" id="37_1fiys"]
+[ext_resource type="Texture2D" uid="uid://d0qjeyl2hgcqr" path="res://sprites/kenney_input_sprites/tile_0237.png" id="38_m2g6u"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mod73"]
 atlas = ExtResource("7_attvq")
@@ -369,6 +380,18 @@ script = ExtResource("14_vjgi4")
 [node name="Enemies" type="Node2D" parent="Entities" unique_id=1390980745]
 y_sort_enabled = true
 
+[node name="Enemy" parent="Entities" unique_id=1089066712 node_paths=PackedStringArray("player_ref") instance=ExtResource("18_attvq")]
+position = Vector2(-358, 188)
+player_ref = NodePath("../Player")
+
+[node name="Enemy2" parent="Entities" unique_id=784652024 node_paths=PackedStringArray("player_ref") instance=ExtResource("18_attvq")]
+position = Vector2(-8, 333)
+player_ref = NodePath("../Player")
+
+[node name="Enemy3" parent="Entities" unique_id=2001925915 node_paths=PackedStringArray("player_ref") instance=ExtResource("18_attvq")]
+position = Vector2(317, 194)
+player_ref = NodePath("../Player")
+
 [node name="BG" type="Node2D" parent="." unique_id=1544554596]
 z_index = -100
 
@@ -424,3 +447,81 @@ texture = ExtResource("4_400sg")
 
 [node name="DebugMenu" type="CanvasLayer" parent="." unique_id=1900000001]
 script = ExtResource("15_dbgmn")
+
+[node name="Tutorial" type="Node2D" parent="." unique_id=556405397]
+unique_name_in_owner = true
+position = Vector2(0, -111)
+scale = Vector2(2, 2)
+
+[node name="A" type="Sprite2D" parent="Tutorial" unique_id=796701201]
+position = Vector2(107.5, -2)
+texture = ExtResource("24_754j2")
+
+[node name="Dash" type="Label" parent="Tutorial" unique_id=443375758]
+offset_left = 77.5
+offset_top = 4.5
+offset_right = 137.5
+offset_bottom = 27.5
+theme_override_fonts/font = ExtResource("24_1gdd5")
+text = "dash"
+horizontal_alignment = 1
+
+[node name="F" type="Sprite2D" parent="Tutorial" unique_id=1777613]
+position = Vector2(36.5, -1)
+texture = ExtResource("28_426vi")
+
+[node name="Punch" type="Label" parent="Tutorial" unique_id=586993852]
+offset_left = 6.5
+offset_top = 5.5
+offset_right = 66.5
+offset_bottom = 28.5
+theme_override_fonts/font = ExtResource("24_1gdd5")
+text = "punch"
+horizontal_alignment = 1
+
+[node name="Up" type="Sprite2D" parent="Tutorial" unique_id=1073548138]
+position = Vector2(-107.5, -16)
+texture = ExtResource("32_cxum0")
+
+[node name="Right" type="Sprite2D" parent="Tutorial" unique_id=298627733]
+position = Vector2(-91.5, 0)
+texture = ExtResource("33_1fiys")
+
+[node name="Down" type="Sprite2D" parent="Tutorial" unique_id=145995640]
+position = Vector2(-107.5, 0)
+texture = ExtResource("34_m2g6u")
+
+[node name="Left" type="Sprite2D" parent="Tutorial" unique_id=58946497]
+position = Vector2(-123.5, 0)
+texture = ExtResource("35_27c7x")
+
+[node name="Move" type="Label" parent="Tutorial" unique_id=800653937]
+offset_left = -131.5
+offset_top = 8.0
+offset_right = -83.5
+offset_bottom = 31.0
+theme_override_fonts/font = ExtResource("24_1gdd5")
+text = "move"
+
+[node name="Spacebar" type="Node2D" parent="Tutorial" unique_id=1645556297]
+position = Vector2(-35.5, -1)
+
+[node name="Tile0235" type="Sprite2D" parent="Tutorial/Spacebar" unique_id=439754843]
+position = Vector2(-16, 0)
+texture = ExtResource("36_cxum0")
+
+[node name="Tile0236" type="Sprite2D" parent="Tutorial/Spacebar" unique_id=1420102188]
+texture = ExtResource("37_1fiys")
+
+[node name="Tile0237" type="Sprite2D" parent="Tutorial/Spacebar" unique_id=164798823]
+position = Vector2(16, 0)
+texture = ExtResource("38_m2g6u")
+
+[node name="Jump" type="Label" parent="Tutorial" unique_id=1232426928]
+offset_left = -64.5
+offset_top = 7.0
+offset_right = -6.5
+offset_bottom = 30.0
+theme_override_fonts/font = ExtResource("24_1gdd5")
+text = "jump"
+horizontal_alignment = 1
