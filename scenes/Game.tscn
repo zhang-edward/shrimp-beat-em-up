@@ -40,6 +40,10 @@
 atlas = ExtResource("7_attvq")
 region = Rect2(0, 0, 48, 48)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_m1oc7"]
+atlas = ExtResource("7_attvq")
+region = Rect2(19.033989, 9.633779, 13.427521, 11.300641)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_r7sob"]
 atlas = ExtResource("12_7ua8r")
 region = Rect2(0, 0, 28, 32)
@@ -279,15 +283,40 @@ size_flags_horizontal = 3
 size_flags_vertical = 1
 theme_override_styles/background = ExtResource("2_kiw3p")
 theme_override_styles/fill = ExtResource("3_400sg")
+max_value = 120.0
 step = 1.0
-value = 100.0
+value = 120.0
 show_percentage = false
 
-[node name="LivesLabel" type="Label" parent="CanvasLayer/HUD" unique_id=1719625438]
+[node name="LivesContainer" type="HBoxContainer" parent="CanvasLayer/HUD" unique_id=1719625438]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/HUD/LivesContainer" unique_id=937945364]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("24_1gdd5")
-theme_override_font_sizes/font_size = 20
-text = "Lives: 3"
+text = "Lives: "
+
+[node name="Life1" type="TextureRect" parent="CanvasLayer/HUD/LivesContainer" unique_id=1719625001]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = SubResource("AtlasTexture_m1oc7")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Life2" type="TextureRect" parent="CanvasLayer/HUD/LivesContainer" unique_id=1732873690]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = SubResource("AtlasTexture_m1oc7")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Life3" type="TextureRect" parent="CanvasLayer/HUD/LivesContainer" unique_id=1675819073]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = SubResource("AtlasTexture_m1oc7")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="Entities" type="Node2D" parent="." unique_id=1719935909]
 y_sort_enabled = true
@@ -297,10 +326,10 @@ bg_sprite = NodePath("../../BG/ParallaxManLayer/BGMan")
 fg_sprite = NodePath("FGMan")
 player_ref = NodePath("../Player")
 
-[node name="Player" parent="Entities" unique_id=1699568361 node_paths=PackedStringArray("healthbar", "lives_counter") instance=ExtResource("2_qbsmt")]
+[node name="Player" parent="Entities" unique_id=1699568361 node_paths=PackedStringArray("healthbar", "lives_display") instance=ExtResource("2_qbsmt")]
 position = Vector2(-11, 192)
 healthbar = NodePath("../../CanvasLayer/HUD/PlayerPortraitContainer/HealthBarContainer/MarginContainer/Healthbar")
-lives_counter = NodePath("../../CanvasLayer/HUD/LivesLabel")
+lives_display = NodePath("../../CanvasLayer/HUD/LivesContainer")
 
 [node name="Camera2D" type="Camera2D" parent="Entities/Player" unique_id=983189321]
 position = Vector2(34, -172)
@@ -468,6 +497,16 @@ shape = SubResource("RectangleShape2D_sv1m6")
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="BG/Boundaries" unique_id=1527441549]
 position = Vector2(762.00006, 190.00005)
 rotation = 0.73503983
+shape = SubResource("RectangleShape2D_a8wo8")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="BG/Boundaries" unique_id=606637220]
+position = Vector2(582.99994, 120.999985)
+rotation = 0.3603714
+shape = SubResource("RectangleShape2D_a8wo8")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="BG/Boundaries" unique_id=1281936420]
+position = Vector2(-526, 91)
+rotation = -0.20335495
 shape = SubResource("RectangleShape2D_a8wo8")
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="BG/Boundaries" unique_id=1915575441]

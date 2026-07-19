@@ -16,3 +16,6 @@ func take_hit(hit: HitConfig, source: Node2D) -> void:
 		is_dead = true
 	else:
 		lobster_boss.handle_hit()
+
+func has_super_armor():
+	return false

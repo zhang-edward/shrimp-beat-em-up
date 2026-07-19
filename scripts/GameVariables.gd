@@ -41,11 +41,13 @@ func _ready():
 	for res in level_resources:
 		var level_config = load("res://resources/levels/" + res + ".tres")
 		level_configs.append(level_config)
+
 	# Background music
 	game_bgm = load("res://audio/music/main_level.ogg")
 	piranha_bgm = load("res://audio/music/piranha_boss.ogg")
 	lobster_bgm = load("res://audio/music/lobster_boss.ogg")
 	final_boss_bgm = load("res://audio/music/final_boss.ogg")
+
 	# Sound effects
 	hurt_1 = load("res://audio/sfx/hurt1.wav")
 	hurt_2 = load("res://audio/sfx/hurt2.wav")

@@ -115,3 +115,6 @@ value = 120.0
 [node name="AnimatedSprite2D" parent="." index="2" unique_id=847188949]
 sprite_frames = SubResource("SpriteFrames_0ltij")
 animation = &"hurt"
+
+[node name="EnemyAttackState" parent="StateMachine" parent_id_path=PackedInt32Array(2094818322) index="1" unique_id=1390354486]
+windup_time_seconds = 0.2

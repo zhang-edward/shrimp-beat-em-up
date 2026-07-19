@@ -99,10 +99,10 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ub87s")
 }, {
-"duration": 5.0,
+"duration": 7.5,
 "texture": SubResource("AtlasTexture_ughef")
 }, {
-"duration": 1.0,
+"duration": 0.75,
 "texture": SubResource("AtlasTexture_cb02v")
 }, {
 "duration": 1.0,
@@ -182,10 +182,10 @@ texture = ExtResource("2_eulky")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1129622105]
 scale = Vector2(3.5, 3.5)
 sprite_frames = SubResource("SpriteFrames_xgwx1")
-animation = &"chomp"
+animation = &"bite"
 autoplay = "idle"
-frame = 1
-frame_progress = 0.52446854
+frame = 6
+frame_progress = 1.0
 offset = Vector2(-7.795, -50)
 
 [node name="HurtBox" type="Area2D" parent="AnimatedSprite2D" unique_id=525148697 node_paths=PackedStringArray("parent")]
@@ -257,7 +257,10 @@ state_machine = NodePath("../StateMachine")
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1562404546]
 
 [node name="BossHealth" parent="CanvasLayer" unique_id=1458634735 instance=ExtResource("2_6hbhs")]
-offset_top = -49.0
+offset_left = 24.0
+offset_top = -65.0
+offset_right = -24.0
+offset_bottom = -16.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1909615611]
 volume_db = -5.0

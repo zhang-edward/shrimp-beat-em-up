@@ -1,13 +1,16 @@
 class_name Enemy
 extends CharacterBody2D
 
-const MAX_AGGRO_ENEMIES := 2
+const MAX_AGGRO_ENEMIES := 4
 
 # Hits with no launch of their own still pop the target up by this much when it
 # has to be knocked down anyway (a killing blow, or a re-hit while ragdolling)
 const DEATH_LAUNCH := -260.0
 const JUGGLE_LAUNCH := -300.0
 const DEATH_KNOCKBACK_MIN := 260.0
+
+const HURT_SFX_MIN_INTERVAL_MS := 60.0
+static var _last_hurt_sfx_ms := -HURT_SFX_MIN_INTERVAL_MS
 
 @export var move_speed := 100.0
 @export var player_ref: Player
@@ -111,6 +114,10 @@ func can_take_aggro_slot() -> bool:
 	return others_aggroing < MAX_AGGRO_ENEMIES
 
 func play_hurt_sfx():
+	var now := Time.get_ticks_msec()
+	if now - _last_hurt_sfx_ms < HURT_SFX_MIN_INTERVAL_MS:
+		return
+	_last_hurt_sfx_ms = now
 	var hurt_sfx = [GameVariables.hurt_1, GameVariables.hurt_2]
 	var random_sfx = hurt_sfx.pick_random()
 	audio_stream_player.stream = random_sfx
