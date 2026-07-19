@@ -14,13 +14,13 @@ const BACK_WALL_HIDDEN_Y = 800.0
 const BG_WALL_HIDDEN_Y = 500.0
 const SIDE_SLIDE_OFFSET = 400.0
 const WALK_DIP = 40.0
+const LEFT_SPRITE_RESTING_POS := -825
+const RIGHT_SPRITE_RESTING_POS := 825
 
 @onready var fg_rest_scale: Vector2 = fg_sprite.scale
 @onready var fg_rest_modulate: Color = fg_sprite.modulate
 @onready var fg_sprite_l: AnimatedSprite2D = $ManSpriteL
 @onready var fg_sprite_r: AnimatedSprite2D = $ManSpriteR
-@onready var left_sprite_resting_pos := fg_sprite_l.position.x
-@onready var right_sprite_resting_pos := fg_sprite_r.position.x
 @onready var state_machine: StateMachine = $StateMachine
 
 @export var bg_sprite: AnimatedSprite2D
@@ -119,9 +119,9 @@ func _enter(target: FacePos, from: FacePos, emote: String) -> void:
 			await _face_to_back_wall(from, emote)
 			await _shift_back_wall(FacePos.BACK_WALL_RISEN)
 		FacePos.SIDE_LEFT:
-			await _slide_side_in(fg_sprite_l, left_sprite_resting_pos, -SIDE_SLIDE_OFFSET)
+			await _slide_side_in(fg_sprite_l, LEFT_SPRITE_RESTING_POS, -SIDE_SLIDE_OFFSET)
 		FacePos.SIDE_RIGHT:
-			await _slide_side_in(fg_sprite_r, right_sprite_resting_pos, SIDE_SLIDE_OFFSET)
+			await _slide_side_in(fg_sprite_r, RIGHT_SPRITE_RESTING_POS, SIDE_SLIDE_OFFSET)
 
 func _exit(current: FacePos) -> void:
 	match current:
@@ -130,9 +130,9 @@ func _exit(current: FacePos) -> void:
 		FacePos.BACK_WALL, FacePos.BACK_WALL_RISEN:
 			await _drop_below_rim()
 		FacePos.SIDE_LEFT:
-			await _slide_side_out(fg_sprite_l, left_sprite_resting_pos - SIDE_SLIDE_OFFSET)
+			await _slide_side_out(fg_sprite_l, LEFT_SPRITE_RESTING_POS - SIDE_SLIDE_OFFSET)
 		FacePos.SIDE_RIGHT:
-			await _slide_side_out(fg_sprite_r, right_sprite_resting_pos + SIDE_SLIDE_OFFSET)
+			await _slide_side_out(fg_sprite_r, RIGHT_SPRITE_RESTING_POS + SIDE_SLIDE_OFFSET)
 		FacePos.ABSENT:
 			pass
 

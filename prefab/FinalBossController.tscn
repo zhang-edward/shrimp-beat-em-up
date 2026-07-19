@@ -205,9 +205,8 @@ visible = false
 offset_top = -49.0
 
 [node name="ManSpriteR" type="AnimatedSprite2D" parent="." unique_id=1606828923]
-visible = false
 z_index = -101
-position = Vector2(747, 520)
+position = Vector2(1225, 520)
 rotation = 0.0046243123
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_ggxpt")
@@ -228,9 +227,8 @@ shape = SubResource("RectangleShape2D_a85ww")
 debug_color = Color(0.7967164, 0.42138872, 0.12490418, 0.41960785)
 
 [node name="ManSpriteL" type="AnimatedSprite2D" parent="." unique_id=949003926]
-visible = false
 z_index = -101
-position = Vector2(-825, 520)
+position = Vector2(-1225, 520)
 rotation = 0.0046243123
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_ggxpt")

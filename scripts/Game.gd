@@ -19,7 +19,6 @@ func _ready() -> void:
 	BOSS_SPAWN_LOCATION = Vector2(screen_size.x / 2 - 512, -screen_size.y / 2 - 100)
 	final_boss_controller.defeated.connect(handle_final_boss_defeated)
 	load_next_wave()
-	# load_level_boss()
 
 func update_wave_stats():
 	var curr_wave_config = GameVariables.get_curr_wave_config() as WaveSpawnConfig
@@ -113,8 +112,6 @@ func handle_boss_defeated():
 	boss.queue_free()
 	boss = null
 	if GameVariables.curr_level == GameVariables.level_configs.size() - 1:
-		# Beating the last level's boss doesn't win the game — it summons the human
-		# to fight you directly. Victory comes from FinalBossController.defeated.
 		start_final_boss_fight()
 	else:
 		GameVariables.curr_level += 1
