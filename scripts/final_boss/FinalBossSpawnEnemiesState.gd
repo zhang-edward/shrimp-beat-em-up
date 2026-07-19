@@ -70,7 +70,6 @@ func _open_hands() -> void:
 	_hand2.position.y = -800
 
 	await controller.play_emote("determined_1")
-	await controller.move_face_to(FinalBossController.FacePos.BG, "determined_1")
 	state_machine.transition_to(next_state)
 
 func _spawn_enemies() -> void:

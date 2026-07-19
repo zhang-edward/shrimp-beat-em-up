@@ -9,12 +9,14 @@
 [ext_resource type="Script" uid="uid://bq7x2mv8ndkr3" path="res://scripts/final_boss/FinalBossGrabState.gd" id="7_h3ded"]
 [ext_resource type="Script" uid="uid://do8t1vj4ygsrh" path="res://scripts/fsm/DebugStateMachineLabel.gd" id="8_144q2"]
 [ext_resource type="Script" uid="uid://ndmsx1dd3ovq" path="res://scripts/final_boss/FinalBossSideWallState.gd" id="8_pe7lp"]
-[ext_resource type="PackedScene" uid="uid://s4vk1a005tvq" path="res://prefab/Enemy.tscn" id="9_enemy"]
 [ext_resource type="Script" uid="uid://dfxfw3qtltj7h" path="res://scripts/final_boss/FinalBossSpawnEnemiesState.gd" id="9_spawn"]
 [ext_resource type="Texture2D" uid="uid://c6qoolct8od51" path="res://sprites/guy.png" id="10_b0c5c"]
+[ext_resource type="PackedScene" uid="uid://3i3idrorsh4f" path="res://prefab/enemies/Fish.tscn" id="10_jdej8"]
 [ext_resource type="SpriteFrames" uid="uid://b453dpnwlsx6" path="res://animations/man.tres" id="10_pe7lp"]
+[ext_resource type="PackedScene" uid="uid://bx2dwaci10oaa" path="res://prefab/enemies/Crab.tscn" id="11_b3dsh"]
 [ext_resource type="Script" uid="uid://bco6n4n8iq83q" path="res://scripts/final_boss/FinalBossInactiveState.gd" id="11_rn34i"]
 [ext_resource type="PackedScene" uid="uid://efld58y74mpo" path="res://prefab/BossHealth.tscn" id="12_51jxd"]
+[ext_resource type="PackedScene" uid="uid://br7ss8l7gw7a0" path="res://prefab/enemies/Snail.tscn" id="12_chod4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ggxpt"]
 atlas = ExtResource("3_144q2")
@@ -181,7 +183,7 @@ potential_next_states = [NodePath("../FinalBossPunchState"), NodePath("../FinalB
 [node name="FinalBossSpawnEnemiesState" type="Node" parent="StateMachine" unique_id=333912681 node_paths=PackedStringArray("next_state")]
 script = ExtResource("9_spawn")
 next_state = NodePath("../FinalBossSideWallState")
-enemy_scenes = Array[PackedScene]([ExtResource("9_enemy"), ExtResource("9_enemy"), ExtResource("9_enemy")])
+enemy_scenes = Array[PackedScene]([ExtResource("10_jdej8"), ExtResource("10_jdej8"), ExtResource("11_b3dsh"), ExtResource("12_chod4"), ExtResource("12_chod4")])
 
 [node name="FinalBossInactiveState" type="Node" parent="StateMachine" unique_id=1715358003]
 script = ExtResource("11_rn34i")

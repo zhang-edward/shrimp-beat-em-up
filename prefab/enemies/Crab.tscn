@@ -108,6 +108,10 @@ animations = [{
 
 [node name="Enemy" unique_id=65027616 instance=ExtResource("1_wf0ib")]
 
+[node name="Healthbar" parent="." index="1" unique_id=347754481]
+max_value = 120.0
+value = 120.0
+
 [node name="AnimatedSprite2D" parent="." index="2" unique_id=847188949]
 sprite_frames = SubResource("SpriteFrames_0ltij")
 animation = &"hurt"
