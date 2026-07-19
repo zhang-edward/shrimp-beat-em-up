@@ -9,7 +9,7 @@ var level_configs = []
 var curr_wave := 0
 var curr_level := 0
 var enemies_defeated_for_curr_wave := 0
-var game_over_state: GameOverState
+var game_over_state: GameOverState = GameOverState.VICTORY
 
 var game_bgm: AudioStream
 var piranha_bgm: AudioStream

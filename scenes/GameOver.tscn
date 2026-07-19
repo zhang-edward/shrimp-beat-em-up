@@ -1,23 +1,356 @@
 [gd_scene format=3 uid="uid://bsmpj13anhsyd"]
 
 [ext_resource type="Script" uid="uid://bjvahu884mx8v" path="res://scripts/GameOver.gd" id="1_6bcno"]
+[ext_resource type="Texture2D" uid="uid://8kdlujo1djqy" path="res://sprites/bg_sm_living_room.png" id="2_88ekj"]
+[ext_resource type="Texture2D" uid="uid://b6a6t3gkcmgxs" path="res://sprites/bg_sm.png" id="3_0winm"]
+[ext_resource type="Shader" uid="uid://tedsc5jd7q3j" path="res://prefab/styles/font-gradient.gdshader" id="4_j3qfp"]
+[ext_resource type="FontFile" uid="uid://jjwv8duy7abc" path="res://ThaleahFat.ttf" id="5_skdqa"]
+[ext_resource type="Texture2D" uid="uid://kf5gep21emok" path="res://prefab/styles/victory_gradient.tres" id="5_xlh57"]
+[ext_resource type="FontFile" uid="uid://dsugm7hp2ms" path="res://pixelmix.ttf" id="6_8dkuh"]
+[ext_resource type="Texture2D" uid="uid://800mviy7djks" path="res://sprites/props/seaweed_1.png" id="7_5dsns"]
+[ext_resource type="Script" uid="uid://ghmm1evp356x" path="res://scripts/PropWithRandomizedAnimation.gd" id="8_xlh57"]
+[ext_resource type="Texture2D" uid="uid://dk704xgij5d80" path="res://sprites/props/seaweed_3.png" id="9_kjj73"]
+[ext_resource type="Texture2D" uid="uid://bugjdi2mb3dmu" path="res://sprites/props/seaweed_2.png" id="10_otmnh"]
+[ext_resource type="Texture2D" uid="uid://br5cp6d53s4vv" path="res://sprites/props/rock1.png" id="11_k2h4m"]
+[ext_resource type="Texture2D" uid="uid://bhwt635b0jwv1" path="res://sprites/props/log1.png" id="12_n47bu"]
+[ext_resource type="Texture2D" uid="uid://duf8us6pj3mfr" path="res://sprites/props/rock3.png" id="13_spr6i"]
+[ext_resource type="Texture2D" uid="uid://blp8ap5yk36w3" path="res://sprites/props/rock2.png" id="14_6yffd"]
 
-[node name="GameOver" type="Node2D" unique_id=712809338 node_paths=PackedStringArray("game_over_label")]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5fq7v"]
+shader = ExtResource("4_j3qfp")
+shader_parameter/gradient_texture = ExtResource("5_xlh57")
+shader_parameter/use_label_gradient = true
+shader_parameter/text_size = Vector2(100, 100)
+shader_parameter/font_color = Color(1, 1, 1, 1)
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader_parameter/color_threshold = 0.1
+
+[sub_resource type="Gradient" id="Gradient_xlh57"]
+offsets = PackedFloat32Array(0, 0.4726776, 1)
+colors = PackedColorArray(0.26863354, 9.024516e-08, 7.219613e-08, 1, 0.73755026, 0.11719107, 3.85046e-07, 1, 1, 0.35320756, 0.20988283, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_xlh57"]
+gradient = SubResource("Gradient_xlh57")
+height = 100
+fill_from = Vector2(1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5dsns"]
+shader = ExtResource("4_j3qfp")
+shader_parameter/gradient_texture = SubResource("GradientTexture2D_xlh57")
+shader_parameter/use_label_gradient = true
+shader_parameter/text_size = Vector2(100, 100)
+shader_parameter/font_color = Color(1, 1, 1, 1)
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader_parameter/color_threshold = 0.1
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r7sob"]
+atlas = ExtResource("7_5dsns")
+region = Rect2(0, 0, 28, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y5y3l"]
+atlas = ExtResource("7_5dsns")
+region = Rect2(28, 0, 28, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vjgi4"]
+atlas = ExtResource("7_5dsns")
+region = Rect2(56, 0, 28, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jsyru"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r7sob")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y5y3l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vjgi4")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kyk2p"]
+atlas = ExtResource("9_kjj73")
+region = Rect2(0, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_45i86"]
+atlas = ExtResource("9_kjj73")
+region = Rect2(48, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sv1m6"]
+atlas = ExtResource("9_kjj73")
+region = Rect2(96, 0, 48, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4h8ls"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kyk2p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_45i86")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sv1m6")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a8wo8"]
+atlas = ExtResource("10_otmnh")
+region = Rect2(0, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_attvq"]
+atlas = ExtResource("10_otmnh")
+region = Rect2(32, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bneo8"]
+atlas = ExtResource("10_otmnh")
+region = Rect2(64, 0, 32, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m0y6l"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a8wo8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_attvq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bneo8")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="GameOver" type="Node2D" unique_id=712809338 node_paths=PackedStringArray("victory_label", "defeat_label", "play_again_label", "thanks_for_playing_label", "try_again_label")]
 script = ExtResource("1_6bcno")
-game_over_label = NodePath("CanvasLayer/Label")
+victory_label = NodePath("CanvasLayer2/VictoryLabel")
+defeat_label = NodePath("CanvasLayer2/DefeatLabel")
+play_again_label = NodePath("CanvasLayer2/PlayAgain")
+thanks_for_playing_label = NodePath("CanvasLayer2/ThanksForPlaying")
+try_again_label = NodePath("CanvasLayer2/TryAgain")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1282215310]
+[node name="BG" type="Sprite2D" parent="." unique_id=1189631494]
+scale = Vector2(3.600624, 3.3390105)
+texture = ExtResource("2_88ekj")
 
-[node name="Label" type="Label" parent="CanvasLayer" unique_id=1140075151]
+[node name="FG" type="Sprite2D" parent="." unique_id=1926546556]
+scale = Vector2(3.600624, 3.4190106)
+texture = ExtResource("3_0winm")
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=742972946]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer2" unique_id=1100134215]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.39607844)
+
+[node name="VictoryLabel" type="Label" parent="CanvasLayer2" unique_id=1181284508]
+material = SubResource("ShaderMaterial_5fq7v")
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
+offset_left = -52.0
 offset_top = -11.5
-offset_right = 20.0
+offset_right = 52.0
 offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
-text = "You win!"
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_skdqa")
+theme_override_font_sizes/font_size = 150
+text = "Victory"
+
+[node name="DefeatLabel" type="Label" parent="CanvasLayer2" unique_id=1148270799]
+visible = false
+material = SubResource("ShaderMaterial_5dsns")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -52.0
+offset_top = -11.5
+offset_right = 52.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_skdqa")
+theme_override_font_sizes/font_size = 150
+text = "Defeat"
+
+[node name="ThanksForPlaying" type="Label" parent="CanvasLayer2" unique_id=80265622]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -130.5
+offset_top = 62.5
+offset_right = 130.5
+offset_bottom = 85.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.76240367, 0.7624037, 0.7624035, 1)
+theme_override_fonts/font = ExtResource("5_skdqa")
+theme_override_font_sizes/font_size = 30
+text = "THANKS FOR PLAYING!"
+horizontal_alignment = 1
+
+[node name="PlayAgain" type="Label" parent="CanvasLayer2" unique_id=1352267384]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -129.5
+offset_top = -41.0
+offset_right = 129.5
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("6_8dkuh")
+theme_override_font_sizes/font_size = 20
+text = "ENTER TO PLAY AGAIN"
+horizontal_alignment = 1
+
+[node name="TryAgain" type="Label" parent="CanvasLayer2" unique_id=10161616]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -72.0
+offset_top = -41.0
+offset_right = 72.0
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("6_8dkuh")
+theme_override_font_sizes/font_size = 20
+text = "ENTER TO TRY AGAIN"
+horizontal_alignment = 1
+
+[node name="Props" type="Node2D" parent="." unique_id=1250265375]
+y_sort_enabled = true
+position = Vector2(-283, 0)
+
+[node name="Seaweed1" type="AnimatedSprite2D" parent="Props" unique_id=119249996]
+y_sort_enabled = true
+position = Vector2(101, 97)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_jsyru")
+offset = Vector2(0, -15.08)
+script = ExtResource("8_xlh57")
+
+[node name="Seaweed4" type="AnimatedSprite2D" parent="Props" unique_id=289746002]
+y_sort_enabled = true
+position = Vector2(127, 108)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_4h8ls")
+offset = Vector2(0, -24)
+script = ExtResource("8_xlh57")
+
+[node name="Seaweed5" type="AnimatedSprite2D" parent="Props" unique_id=463600876]
+y_sort_enabled = true
+position = Vector2(-91, 294)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_jsyru")
+offset = Vector2(0, -15.08)
+flip_h = true
+script = ExtResource("8_xlh57")
+
+[node name="Seaweed7" type="AnimatedSprite2D" parent="Props" unique_id=130806721]
+y_sort_enabled = true
+position = Vector2(-119, 312)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_m0y6l")
+offset = Vector2(0, -16)
+flip_h = true
+script = ExtResource("8_xlh57")
+
+[node name="Rock1" type="Sprite2D" parent="Props" unique_id=1441217638]
+y_sort_enabled = true
+position = Vector2(-181, 302)
+scale = Vector2(4, 4)
+texture = ExtResource("11_k2h4m")
+offset = Vector2(0, -16)
+
+[node name="Log1" type="Sprite2D" parent="Props" unique_id=435450045]
+y_sort_enabled = true
+position = Vector2(-40, 145)
+scale = Vector2(4, 4)
+texture = ExtResource("12_n47bu")
+offset = Vector2(0, -24.19)
+flip_h = true
+flip_v = true
+
+[node name="Rock3" type="Sprite2D" parent="Props" unique_id=948337213]
+y_sort_enabled = true
+position = Vector2(-96, 136)
+scale = Vector2(4, 4)
+texture = ExtResource("13_spr6i")
+offset = Vector2(0, -8)
+
+[node name="Rock2" type="Sprite2D" parent="Props" unique_id=1612140774]
+y_sort_enabled = true
+position = Vector2(626, 172)
+scale = Vector2(4, 4)
+texture = ExtResource("14_6yffd")
+offset = Vector2(0, -16)
+
+[node name="Rock4" type="Sprite2D" parent="Props" unique_id=626700772]
+y_sort_enabled = true
+position = Vector2(725, 197)
+scale = Vector2(4, 4)
+texture = ExtResource("13_spr6i")
+offset = Vector2(0, -9)
+
+[node name="Seaweed6" type="AnimatedSprite2D" parent="Props" unique_id=774625367]
+y_sort_enabled = true
+position = Vector2(534, 144)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_jsyru")
+offset = Vector2(0, -15.08)
+flip_h = true
+script = ExtResource("8_xlh57")
+
+[node name="Seaweed2" type="AnimatedSprite2D" parent="Props" unique_id=1346271957]
+y_sort_enabled = true
+position = Vector2(591, 174)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_m0y6l")
+offset = Vector2(0, -16)
+script = ExtResource("8_xlh57")
+
+[node name="Seaweed3" type="AnimatedSprite2D" parent="Props" unique_id=1033244897]
+y_sort_enabled = true
+position = Vector2(689, 206)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_4h8ls")
+offset = Vector2(0, -24)
+script = ExtResource("8_xlh57")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=708131332]
+scale = Vector2(0.09233543, -0.7423794)

@@ -20,14 +20,14 @@
 offsets = PackedFloat32Array(0, 0.27546296, 0.6805556, 1)
 colors = PackedColorArray(0.28068516, 0.5246902, 9.62615e-08, 1, 1.1551381e-06, 0.64539975, 0.56865823, 1, 0.97029734, 0.51869184, 0.026312135, 1, 1, 0.5224363, 0.021728916, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_rgcrq"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vwikb"]
 gradient = SubResource("Gradient_ugrxo")
 fill_from = Vector2(1, 0.9188034)
 fill_to = Vector2(1, 0.25213677)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6skjg"]
 shader = ExtResource("12_ugrxo")
-shader_parameter/gradient_texture = SubResource("GradientTexture2D_rgcrq")
+shader_parameter/gradient_texture = SubResource("GradientTexture2D_vwikb")
 shader_parameter/use_label_gradient = true
 shader_parameter/text_size = Vector2(100, 100)
 shader_parameter/font_color = Color(1, 1, 1, 1)
