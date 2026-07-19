@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://bge0hmqmafyrt" path="res://scripts/fsm/StateMachine.gd" id="2_e3gy8"]
 [ext_resource type="Texture2D" uid="uid://dn5gt0a1iuba6" path="res://sprites/shadow.png" id="2_n3fxy"]
 [ext_resource type="Script" uid="uid://csf7xaemitdcb" path="res://scripts/Hurtbox.gd" id="5_2y5xi"]
-[ext_resource type="SpriteFrames" uid="uid://p2743rvcgwd" path="res://animations/snail.tres" id="5_rh63n"]
+[ext_resource type="SpriteFrames" uid="uid://p2743rvcgwd" path="res://audio/sfx/boss/lobster/shrimp-beat-em-up/audio/sfx/boss/lobster/shrimp-beat-em-up/audio/sfx/boss/lobster/shrimp-beat-em-up/audio/sfx/boss/lobster/shrimp-beat-em-up/audio/sfx/boss/lobster/shrimp-beat-em-up/audio/sfx/boss/lobster/shrimp-beat-em-up/audio/sfx/boss/lobster/shrimp-beat-em-up/audio/sfx/boss/lobster/shrimp-beat-em-up/audio/sfx/boss/lobster/shrimp-beat-em-up/audio/sfx/boss/lobster/shrimp-beat-em-up/audio/sfx/boss/lobster/shrimp-beat-em-up/audio/sfx/boss/lobster/shrimp-beat-em-up/audio/sfx/boss/lobster/shrimp-beat-em-up/audio/sfx/boss/lobster/shrimp-beat-em-up/audio/sfx/boss/lobster/shrimp-beat-em-up/audio/sfx/boss/lobster/shrimp-beat-em-up/audio/sfx/boss/lobster/shrimp-beat-em-up/audio/sfx/boss/lobster/shrimp-beat-em-up/audio/sfx/boss/lobster/shrimp-beat-em-up/audio/sfx/boss/lobster/shrimp-beat-em-up/audio/sfx/boss/lobster/shrimp-beat-em-up/audio/sfx/boss/lobster/shrimp-beat-em-up/audio/sfx/boss/lobster/shrimp-beat-em-up/animations/snail.tres" id="5_rh63n"]
 [ext_resource type="Script" uid="uid://do8t1vj4ygsrh" path="res://scripts/fsm/DebugStateMachineLabel.gd" id="5_y7302"]
 [ext_resource type="StyleBox" uid="uid://tu5xpycc3rfh" path="res://prefab/styles/healthbar_bg.tres" id="7_jca2b"]
 [ext_resource type="Script" uid="uid://bukmh6a1bpgy" path="res://scripts/enemy_states/EnemyAttackState.gd" id="7_n3fxy"]
@@ -22,7 +22,6 @@ size = Vector2(25.75, 21)
 radius = 14.035668
 
 [node name="Enemy" type="CharacterBody2D" unique_id=1600955621 node_paths=PackedStringArray("audio_stream_player")]
-position = Vector2(109, 1)
 collision_mask = 3
 script = ExtResource("1_f08wl")
 audio_stream_player = NodePath("AudioStreamPlayer")

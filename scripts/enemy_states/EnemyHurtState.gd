@@ -20,7 +20,7 @@ func update(delta: float) -> void:
 
 	hitstun_timer -= delta
 	if hitstun_timer <= 0:
-		if enemy.can_take_aggro_slot():
+		if enemy.can_take_aggro_slot() and approach_state != null:
 			state_machine.transition_to(approach_state)
 		else:
 			state_machine.transition_to(wander_state)

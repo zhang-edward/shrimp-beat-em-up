@@ -222,28 +222,32 @@ func _ease_tween() -> Tween:
 
 ### Scripted sequences
 
-func spawn_new_wave_animation(_msg := {}) -> void:
+# Stage 1: mild concern. put replace fish in tank
+# Stage 2: angry. put spiky snails in tank
+# Stage 3: angry and evil pose. put crabs in tank
+func spawn_new_wave_animation(stage: int) -> void:
 	await move_face_to(FacePos.BG, "default")
 	await play_emote("worried")
 	await get_tree().create_timer(1.0).timeout
-	await play_emote("angry")
-	await get_tree().create_timer(1.0).timeout
-	await move_face_to(FacePos.BACK_WALL, "angry")
-	await play_emote("determined_1")
-	await move_face_to(FacePos.BACK_WALL_RISEN, "determined_1")
-	await play_emote("determined_2")
+	if stage == 2:
+		await play_emote("angry")
+		await get_tree().create_timer(1.0).timeout
+	await move_face_to(FacePos.BACK_WALL, "worried" if stage == 1 else "angry")
+	if stage == 3:
+		await play_emote("determined_1")
+	await move_face_to(FacePos.BACK_WALL_RISEN, "determined_1" if stage == 3 else "angry")
 	await play_emote("determined_3")
 	animation_sequence_finished.emit()
 
 func done_spawning_wave_animation(_msg := {}) -> void:
-	await play_emote("determined_1")
+	await play_emote("default")
 	await get_tree().create_timer(1.0).timeout
 	await move_face_to(FacePos.ABSENT, "")
 	animation_sequence_finished.emit()
 
 #### Final Boss
 
-func final_boss_start_sequence(_msg := {}) -> void:
+func final_boss_start_sequence() -> void:
 	await move_face_to(FacePos.BG, "default")
 	await play_emote("worried")
 	await get_tree().create_timer(1.0).timeout
@@ -274,6 +278,7 @@ func _play_death_sequence() -> void:
 	settle.set_ease(Tween.EASE_OUT)
 	settle.tween_property(fg_sprite, "position:x", 0.0, 0.3)
 	await settle.finished
+	await get_tree().create_timer(3.0).timeout
 	await play_emote("death")
 	await get_tree().create_timer(0.6).timeout
 	await _keel_over()

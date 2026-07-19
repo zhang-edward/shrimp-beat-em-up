@@ -1,23 +1,23 @@
-[gd_resource type="Resource" script_class="WaveSpawnConfig" format=3 uid="uid://c4blmucc8r0yi"]
+[gd_resource type="Resource" script_class="WaveSpawnConfig" format=3 uid="uid://bow2nh180i6ru"]
 
-[ext_resource type="PackedScene" uid="uid://br7ss8l7gw7a0" path="res://prefab/enemies/Snail.tscn" id="1_kj5yh"]
-[ext_resource type="PackedScene" uid="uid://bx2dwaci10oaa" path="res://prefab/enemies/Crab.tscn" id="2_x3fe6"]
-[ext_resource type="Script" uid="uid://d3l5nsti7vk1p" path="res://scripts/levels/WaveSpawnConfig.gd" id="3_cmr66"]
-[ext_resource type="Script" uid="uid://bqx8n2vw3ktle" path="res://scripts/levels/WaveEnemyGroup.gd" id="4_weg"]
+[ext_resource type="Script" uid="uid://d3l5nsti7vk1p" path="res://scripts/levels/WaveSpawnConfig.gd" id="1_wsc"]
+[ext_resource type="PackedScene" uid="uid://3i3idrorsh4f" path="res://prefab/enemies/Fish.tscn" id="2_fish"]
+[ext_resource type="PackedScene" uid="uid://br7ss8l7gw7a0" path="res://prefab/enemies/Snail.tscn" id="2_qtp8g"]
+[ext_resource type="Script" uid="uid://bqx8n2vw3ktle" path="res://scripts/levels/WaveEnemyGroup.gd" id="3_weg"]
 
-[sub_resource type="Resource" id="Group_snail"]
-script = ExtResource("4_weg")
-enemy_scene = ExtResource("1_kj5yh")
-count = 5
+[sub_resource type="Resource" id="Group_fish"]
+script = ExtResource("3_weg")
+enemy_scene = ExtResource("2_fish")
+count = 4
 metadata/_custom_type_script = "uid://bqx8n2vw3ktle"
 
-[sub_resource type="Resource" id="Group_crab"]
-script = ExtResource("4_weg")
-enemy_scene = ExtResource("2_x3fe6")
-count = 5
+[sub_resource type="Resource" id="Group_snail"]
+script = ExtResource("3_weg")
+enemy_scene = ExtResource("2_qtp8g")
+count = 4
 metadata/_custom_type_script = "uid://bqx8n2vw3ktle"
 
 [resource]
-script = ExtResource("3_cmr66")
-enemy_groups = Array[ExtResource("4_weg")]([SubResource("Group_snail"), SubResource("Group_crab")])
+script = ExtResource("1_wsc")
+enemy_groups = Array[ExtResource("3_weg")]([SubResource("Group_fish"), SubResource("Group_snail")])
 metadata/_custom_type_script = "uid://d3l5nsti7vk1p"

@@ -35,7 +35,8 @@ func update(_delta: float) -> void:
 		abs(player.global_position.y - enemy.global_position.y) <= ATTACK_RANGE_Y:
 		enemy.absolute_velocity = Vector2.ZERO
 		state_machine.transition_to(attack_state)
-		
+		return
+
 	animate()
 
 	state_timer -= _delta

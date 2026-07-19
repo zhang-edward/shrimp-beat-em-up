@@ -1,0 +1,106 @@
+[gd_scene format=3 uid="uid://d3kw1ccu05mqn"]
+
+[ext_resource type="Script" uid="uid://pyemjxradddg" path="res://scripts/Enemy.gd" id="1_uf7ap"]
+[ext_resource type="Texture2D" uid="uid://dn5gt0a1iuba6" path="res://sprites/shadow.png" id="2_gw0pu"]
+[ext_resource type="SpriteFrames" uid="uid://d4bijqkyhwkgn" path="res://animations/fish.tres" id="2_mks7g"]
+[ext_resource type="StyleBox" uid="uid://tu5xpycc3rfh" path="res://prefab/styles/healthbar_bg.tres" id="3_k6oeo"]
+[ext_resource type="StyleBox" uid="uid://bpb3vlcuriyr1" path="res://prefab/styles/healthbar_fill.tres" id="4_5lnvs"]
+[ext_resource type="Script" uid="uid://csf7xaemitdcb" path="res://scripts/Hurtbox.gd" id="6_0t5t0"]
+[ext_resource type="Script" uid="uid://bge0hmqmafyrt" path="res://scripts/fsm/StateMachine.gd" id="7_odn46"]
+[ext_resource type="Script" uid="uid://cv7crwf5qo2jy" path="res://scripts/enemy_states/EnemyHurtState.gd" id="9_4jv2h"]
+[ext_resource type="Script" uid="uid://dbujchdjs5x8u" path="res://scripts/enemy_states/EnemyWanderState.gd" id="10_0w30c"]
+[ext_resource type="Script" uid="uid://b0bfdsn84j8q8" path="res://scripts/enemy_states/EnemyRagdollState.gd" id="12_fjddv"]
+[ext_resource type="Script" uid="uid://do8t1vj4ygsrh" path="res://scripts/fsm/DebugStateMachineLabel.gd" id="13_dd7la"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jca2b"]
+size = Vector2(25.75, 21)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jca2b"]
+radius = 14.035668
+
+[node name="Enemy" type="CharacterBody2D" unique_id=1089066712]
+collision_mask = 3
+script = ExtResource("1_uf7ap")
+
+[node name="Shadow" type="Sprite2D" parent="." unique_id=1327308791]
+modulate = Color(1, 1, 1, 0.39215687)
+z_index = -1
+z_as_relative = false
+position = Vector2(0, 5)
+scale = Vector2(4, 4)
+texture = ExtResource("2_gw0pu")
+
+[node name="Healthbar" type="ProgressBar" parent="." unique_id=347754481]
+z_index = 100
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -47.0
+offset_top = -119.0
+offset_right = 48.0
+offset_bottom = -110.0
+grow_horizontal = 2
+theme_override_styles/background = ExtResource("3_k6oeo")
+theme_override_styles/fill = ExtResource("4_5lnvs")
+max_value = 60.0
+step = 1.0
+value = 60.0
+show_percentage = false
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=847188949]
+position = Vector2(0, 0.11)
+scale = Vector2(4, 4)
+sprite_frames = ExtResource("2_mks7g")
+offset = Vector2(0, -9.935)
+
+[node name="HurtBox" type="Area2D" parent="AnimatedSprite2D" unique_id=1798380912 node_paths=PackedStringArray("parent")]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("6_0t5t0")
+parent = NodePath("../..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/HurtBox" unique_id=908512090]
+position = Vector2(-0.875, -7.7775)
+shape = SubResource("RectangleShape2D_jca2b")
+debug_color = Color(0.7967164, 0.42138872, 0.12490418, 0.41960785)
+
+[node name="StateMachine" type="Node" parent="." unique_id=2094818322]
+unique_name_in_owner = true
+script = ExtResource("7_odn46")
+initial_state = NodePath("EnemyWanderState")
+
+[node name="EnemyHurtState" type="Node" parent="StateMachine" unique_id=1114880896 node_paths=PackedStringArray("approach_state", "wander_state")]
+unique_name_in_owner = true
+script = ExtResource("9_4jv2h")
+approach_state = NodePath("")
+wander_state = NodePath("../EnemyWanderState")
+
+[node name="EnemyWanderState" type="Node" parent="StateMachine" unique_id=1147463591 node_paths=PackedStringArray("approach_state")]
+script = ExtResource("10_0w30c")
+approach_state = NodePath("")
+
+[node name="EnemyRagdollState" type="Node" parent="StateMachine" unique_id=694318765 node_paths=PackedStringArray("approach_state", "wander_state")]
+unique_name_in_owner = true
+script = ExtResource("12_fjddv")
+approach_state = NodePath("")
+wander_state = NodePath("../EnemyWanderState")
+
+[node name="DebugStateMachineLabel" type="Label" parent="." unique_id=155363593 node_paths=PackedStringArray("state_machine")]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -46.0
+offset_top = -112.0
+offset_right = 46.0
+offset_bottom = -89.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+text = "debug state"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("13_dd7la")
+state_machine = NodePath("../StateMachine")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=600665596]
+position = Vector2(0, -1)
+shape = SubResource("CircleShape2D_jca2b")

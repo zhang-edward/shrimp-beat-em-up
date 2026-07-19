@@ -28,7 +28,7 @@ var respawn_sfx: AudioStream
 var death_sfx: AudioStream
 
 func _ready():
-	var level_resources = ["level2"]
+	var level_resources = ["level1", "level2", "level3"]
 	for res in level_resources:
 		var level_config = load("res://resources/levels/" + res + ".tres")
 		level_configs.append(level_config)
