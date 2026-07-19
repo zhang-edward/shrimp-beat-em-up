@@ -38,7 +38,6 @@ func physics_update(delta: float) -> void:
 
 func update(_delta: float) -> void:
 	if Input.is_action_just_pressed("attack"):
-		if player.z_velocity > -100:
-			state_machine.transition_to(jump_slam_state)
-		elif not player.uppercut_used:
-			state_machine.transition_to(uppercut_state)
+		state_machine.transition_to(jump_slam_state)
+	if Input.is_action_just_pressed("uppercut") and not player.uppercut_used:
+		state_machine.transition_to(uppercut_state)

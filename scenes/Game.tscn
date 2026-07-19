@@ -31,6 +31,7 @@
 [ext_resource type="Texture2D" uid="uid://bkaksjf4ytlj8" path="res://sprites/kenney_input_sprites/tile_0167.png" id="33_1fiys"]
 [ext_resource type="Texture2D" uid="uid://b5xctvnyt2bbk" path="res://sprites/kenney_input_sprites/tile_0168.png" id="34_m2g6u"]
 [ext_resource type="Texture2D" uid="uid://c2mo0u5mdb7fb" path="res://sprites/kenney_input_sprites/tile_0169.png" id="35_27c7x"]
+[ext_resource type="Texture2D" uid="uid://xfmknob8fnhb" path="res://sprites/kenney_input_sprites/tile_0122.png" id="35_m1oc7"]
 [ext_resource type="Texture2D" uid="uid://b61b3twh6gpnr" path="res://sprites/kenney_input_sprites/tile_0235.png" id="36_cxum0"]
 [ext_resource type="Texture2D" uid="uid://by4rdakckfvh7" path="res://sprites/kenney_input_sprites/tile_0236.png" id="37_1fiys"]
 [ext_resource type="Texture2D" uid="uid://d0qjeyl2hgcqr" path="res://sprites/kenney_input_sprites/tile_0237.png" id="38_m2g6u"]
@@ -496,7 +497,7 @@ script = ExtResource("23_bneo8")
 
 [node name="Tutorial" type="Node2D" parent="." unique_id=556405397]
 unique_name_in_owner = true
-position = Vector2(0, -111)
+position = Vector2(-117, -111)
 scale = Vector2(2, 2)
 
 [node name="A" type="Sprite2D" parent="Tutorial" unique_id=796701201]
@@ -570,4 +571,17 @@ offset_right = -6.5
 offset_bottom = 30.0
 theme_override_fonts/font = ExtResource("24_1gdd5")
 text = "jump"
+horizontal_alignment = 1
+
+[node name="D" type="Sprite2D" parent="Tutorial" unique_id=64508546]
+position = Vector2(202, -2.5)
+texture = ExtResource("35_m1oc7")
+
+[node name="Uppercut" type="Label" parent="Tutorial" unique_id=1365284787]
+offset_left = 155.0
+offset_top = 5.5
+offset_right = 251.0
+offset_bottom = 28.5
+theme_override_fonts/font = ExtResource("24_1gdd5")
+text = "uppercut"
 horizontal_alignment = 1

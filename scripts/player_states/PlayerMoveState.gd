@@ -7,6 +7,7 @@ const SPRINT_MULTIPLIER = 1.75
 @export var jump_state: PlayerJumpState
 @export var punch_state: PlayerPunchState
 @export var dash_state: PlayerDashState
+@export var uppercut_state: PlayerUppercutState
 
 var _sprinting: bool
 
@@ -25,6 +26,8 @@ func physics_update(_delta: float) -> void:
 
 	if Input.is_action_just_pressed("dash"):
 		state_machine.transition_to(dash_state, {"prev_state": self})
+	if Input.is_action_just_pressed("uppercut"):
+		state_machine.transition_to(uppercut_state)
 
 func update(_delta: float) -> void:
 	if Input.is_action_just_pressed("attack"):
