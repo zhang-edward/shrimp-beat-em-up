@@ -8,13 +8,13 @@
 [sub_resource type="Resource" id="Group_fish"]
 script = ExtResource("3_weg")
 enemy_scene = ExtResource("2_fish")
-count = 4
+count = 2
 metadata/_custom_type_script = "uid://bqx8n2vw3ktle"
 
 [sub_resource type="Resource" id="Group_snail"]
 script = ExtResource("3_weg")
 enemy_scene = ExtResource("2_qtp8g")
-count = 4
+count = 3
 metadata/_custom_type_script = "uid://bqx8n2vw3ktle"
 
 [resource]

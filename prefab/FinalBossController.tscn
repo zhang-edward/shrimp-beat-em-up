@@ -183,7 +183,7 @@ potential_next_states = [NodePath("../FinalBossPunchState"), NodePath("../FinalB
 [node name="FinalBossSpawnEnemiesState" type="Node" parent="StateMachine" unique_id=333912681 node_paths=PackedStringArray("next_state")]
 script = ExtResource("9_spawn")
 next_state = NodePath("../FinalBossSideWallState")
-enemy_scenes = Array[PackedScene]([ExtResource("10_jdej8"), ExtResource("10_jdej8"), ExtResource("11_b3dsh"), ExtResource("12_chod4"), ExtResource("12_chod4")])
+enemy_scenes = Array[PackedScene]([ExtResource("10_jdej8"), ExtResource("11_b3dsh"), ExtResource("12_chod4")])
 
 [node name="FinalBossInactiveState" type="Node" parent="StateMachine" unique_id=1715358003]
 script = ExtResource("11_rn34i")
