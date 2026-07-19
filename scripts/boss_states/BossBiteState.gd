@@ -7,6 +7,7 @@ var hit: HitConfig = HitConfig.create(25, HitEffectRegistry.HIT_EFFECT_1)
 var hitbox: Hitbox
 
 func enter(msg := {}):
+	boss.velocity = Vector2.ZERO
 	boss.sprite.play("bite")
 	boss.sprite.animation_finished.connect(on_anim_completed, CONNECT_ONE_SHOT)
 	

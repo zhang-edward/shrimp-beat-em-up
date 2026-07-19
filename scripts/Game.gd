@@ -25,6 +25,10 @@ func update_wave_stats():
 	wave_stats_label.text = "Wave " + str(GameVariables.curr_wave + 1) + ": " + str(GameVariables.enemies_defeated_for_curr_wave) + " / " + str(curr_wave_config.total_enemy_count())
 
 func incr_enemy_defeated_count():
+	# Fighting final boss -> don't load any more levels / waves
+	if final_boss_controller.state_machine.state is not FinalBossInactiveState:
+		return
+
 	GameVariables.enemies_defeated_for_curr_wave += 1
 	if GameVariables.is_wave_completed():
 		if GameVariables.is_level_completed():
@@ -38,9 +42,9 @@ func load_level_boss():
 	var level_config = GameVariables.get_curr_level_config()
 	if level_config.boss_scene != null:
 		boss = level_config.boss_scene.instantiate() as Boss
+		boss.global_position = BOSS_SPAWN_LOCATION
 		enemies_folder.add_child(boss)
 		boss.setup()
-		boss.global_position = BOSS_SPAWN_LOCATION
 	else:
 		if GameVariables.curr_level == GameVariables.level_configs.size() - 1:
 			get_tree().change_scene_to_file("res://scenes/GameOver.tscn")

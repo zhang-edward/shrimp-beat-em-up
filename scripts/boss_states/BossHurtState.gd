@@ -7,7 +7,7 @@ extends BossState
 var hitstun_timer = 0
 var should_go_to_attack: bool = false
 
-const BASE_KNOCKBACK := 100
+const BASE_KNOCKBACK := 50
 const HITSTUN_SECONDS := 0.5
 
 func enter(msg := {}):
