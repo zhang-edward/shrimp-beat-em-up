@@ -1,7 +1,7 @@
 class_name FinalBossPunchState
 extends FinalBossState
 
-const PUNCH_WINDUP_SECONDS = 1.0
+const PUNCH_WINDUP_SECONDS = 0.5
 const PUNCH_ACTIVE_SECONDS = 0.05
 const PUNCH_RECOVERY_SECONDS = 0.5
 const PUNCH_STARTING_Y = -800
@@ -80,6 +80,6 @@ func _spawn_punch_hitbox(hand_controller: Node2D):
 	controller.play_punch_sfx()
 	var hitbox = hitbox_scene.instantiate() as Hitbox
 	hand_controller.add_child(hitbox)
-	var hit_config = HitConfig.create(100, HitEffectRegistry.HIT_EFFECT_1)
+	var hit_config = HitConfig.create(40, HitEffectRegistry.HIT_EFFECT_1)
 	hitbox.init(Vector2.ZERO, Vector2(192, 48), PUNCH_ACTIVE_SECONDS, Hitbox.CollideableTypes.Player, hand_controller, hit_config)
 	ScreenShake.shake_vertical(20, 0.5, 10)

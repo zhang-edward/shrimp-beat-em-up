@@ -8,7 +8,7 @@ const AUTO_FACE_PLAYER_RANGE = 200
 func enter(_msg := {}) -> void:
 	enemy.shadow.hide()
 	enemy.ground_collider.disabled = true
-	fall_speed = randf_range(enemy.move_speed, enemy.move_speed * 5)
+	fall_speed = randf_range(enemy.move_speed * 3, enemy.move_speed * 9)
 	
 func exit() -> void:
 	enemy.shadow.show()

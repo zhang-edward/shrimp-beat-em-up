@@ -48,10 +48,11 @@ func _handle_area_entered(body: Area2D):
 		elif (hurtbox.parent is Enemy or is_hitting_boss) and _collide_with == CollideableTypes.Enemy:
 			var enemy = hurtbox.parent
 			enemy.take_hit(_hit, _source)
-			spawn_effect(lerp(global_position, body.global_position, 0.5), body.global_position - _source.global_position)
-			Hitstop.freeze([_source, enemy], _hit.hitstop)
-			if _hit.knockdown:
-				ScreenShake.shake_horizontal(12, 0.1, 12)
+			if !(hurtbox.parent is Boss and hurtbox.parent.has_super_armor()):
+				spawn_effect(lerp(global_position, body.global_position, 0.5), body.global_position - _source.global_position)
+				Hitstop.freeze([_source, enemy], _hit.hitstop)
+				if _hit.knockdown:
+					ScreenShake.shake_horizontal(12, 0.1, 12)
 
 func spawn_effect(pos: Vector2, dir: Vector2):
 	var config = EffectConfig.new()

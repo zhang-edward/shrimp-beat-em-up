@@ -279,8 +279,9 @@ size_flags_horizontal = 3
 size_flags_vertical = 1
 theme_override_styles/background = ExtResource("2_kiw3p")
 theme_override_styles/fill = ExtResource("3_400sg")
+max_value = 120.0
 step = 1.0
-value = 100.0
+value = 120.0
 show_percentage = false
 
 [node name="LivesLabel" type="Label" parent="CanvasLayer/HUD" unique_id=1719625438]
@@ -468,6 +469,16 @@ shape = SubResource("RectangleShape2D_sv1m6")
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="BG/Boundaries" unique_id=1527441549]
 position = Vector2(762.00006, 190.00005)
 rotation = 0.73503983
+shape = SubResource("RectangleShape2D_a8wo8")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="BG/Boundaries" unique_id=606637220]
+position = Vector2(582.99994, 120.999985)
+rotation = 0.3603714
+shape = SubResource("RectangleShape2D_a8wo8")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="BG/Boundaries" unique_id=1281936420]
+position = Vector2(-526, 91)
+rotation = -0.20335495
 shape = SubResource("RectangleShape2D_a8wo8")
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="BG/Boundaries" unique_id=1915575441]
