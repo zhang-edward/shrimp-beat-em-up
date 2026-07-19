@@ -1,0 +1,256 @@
+[gd_scene format=3 uid="uid://cp58vyi3mqs47"]
+
+[ext_resource type="Texture2D" uid="uid://8kdlujo1djqy" path="res://sprites/bg_sm_living_room.png" id="1_8t08e"]
+[ext_resource type="Script" uid="uid://cywnrumsb1qul" path="res://scripts/Start.gd" id="1_ea00n"]
+[ext_resource type="Texture2D" uid="uid://b6a6t3gkcmgxs" path="res://sprites/bg_sm.png" id="2_fx3ca"]
+[ext_resource type="Texture2D" uid="uid://800mviy7djks" path="res://sprites/props/seaweed_1.png" id="3_nqh5h"]
+[ext_resource type="Script" uid="uid://ghmm1evp356x" path="res://scripts/PropWithRandomizedAnimation.gd" id="4_ea00n"]
+[ext_resource type="Texture2D" uid="uid://dk704xgij5d80" path="res://sprites/props/seaweed_3.png" id="5_e66ye"]
+[ext_resource type="Texture2D" uid="uid://bugjdi2mb3dmu" path="res://sprites/props/seaweed_2.png" id="6_yud8w"]
+[ext_resource type="Texture2D" uid="uid://br5cp6d53s4vv" path="res://sprites/props/rock1.png" id="7_ugrxo"]
+[ext_resource type="Texture2D" uid="uid://bhwt635b0jwv1" path="res://sprites/props/log1.png" id="8_vwikb"]
+[ext_resource type="Texture2D" uid="uid://duf8us6pj3mfr" path="res://sprites/props/rock3.png" id="9_nje4j"]
+[ext_resource type="Texture2D" uid="uid://blp8ap5yk36w3" path="res://sprites/props/rock2.png" id="10_rgcrq"]
+[ext_resource type="AudioStream" uid="uid://bdo5q5a5vn0a0" path="res://audio/music/start.ogg" id="12_e66ye"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r7sob"]
+atlas = ExtResource("3_nqh5h")
+region = Rect2(0, 0, 28, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y5y3l"]
+atlas = ExtResource("3_nqh5h")
+region = Rect2(28, 0, 28, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vjgi4"]
+atlas = ExtResource("3_nqh5h")
+region = Rect2(56, 0, 28, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7422c"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r7sob")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y5y3l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vjgi4")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kyk2p"]
+atlas = ExtResource("5_e66ye")
+region = Rect2(0, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_45i86"]
+atlas = ExtResource("5_e66ye")
+region = Rect2(48, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sv1m6"]
+atlas = ExtResource("5_e66ye")
+region = Rect2(96, 0, 48, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pse3a"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kyk2p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_45i86")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sv1m6")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a8wo8"]
+atlas = ExtResource("6_yud8w")
+region = Rect2(0, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_attvq"]
+atlas = ExtResource("6_yud8w")
+region = Rect2(32, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bneo8"]
+atlas = ExtResource("6_yud8w")
+region = Rect2(64, 0, 32, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_waqk2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a8wo8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_attvq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bneo8")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="StartMenu" type="Node2D" unique_id=258259108 node_paths=PackedStringArray("start_prompt")]
+script = ExtResource("1_ea00n")
+start_prompt = NodePath("CanvasLayer/StartPrompt")
+
+[node name="BG" type="Sprite2D" parent="." unique_id=680017788]
+scale = Vector2(3.600624, 3.3390105)
+texture = ExtResource("1_8t08e")
+
+[node name="FG" type="Sprite2D" parent="." unique_id=331448883]
+scale = Vector2(3.600624, 3.4190106)
+texture = ExtResource("2_fx3ca")
+
+[node name="Props" type="Node2D" parent="." unique_id=1796265463]
+y_sort_enabled = true
+position = Vector2(-283, 0)
+
+[node name="Seaweed1" type="AnimatedSprite2D" parent="Props" unique_id=1116187147]
+y_sort_enabled = true
+position = Vector2(101, 97)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_7422c")
+offset = Vector2(0, -15.08)
+script = ExtResource("4_ea00n")
+
+[node name="Seaweed4" type="AnimatedSprite2D" parent="Props" unique_id=968879842]
+y_sort_enabled = true
+position = Vector2(127, 108)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_pse3a")
+offset = Vector2(0, -24)
+script = ExtResource("4_ea00n")
+
+[node name="Seaweed5" type="AnimatedSprite2D" parent="Props" unique_id=996933618]
+y_sort_enabled = true
+position = Vector2(-91, 294)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_7422c")
+offset = Vector2(0, -15.08)
+flip_h = true
+script = ExtResource("4_ea00n")
+
+[node name="Seaweed7" type="AnimatedSprite2D" parent="Props" unique_id=202758499]
+y_sort_enabled = true
+position = Vector2(-119, 312)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_waqk2")
+offset = Vector2(0, -16)
+flip_h = true
+script = ExtResource("4_ea00n")
+
+[node name="Rock1" type="Sprite2D" parent="Props" unique_id=1236254018]
+y_sort_enabled = true
+position = Vector2(-181, 302)
+scale = Vector2(4, 4)
+texture = ExtResource("7_ugrxo")
+offset = Vector2(0, -16)
+
+[node name="Log1" type="Sprite2D" parent="Props" unique_id=1727581422]
+y_sort_enabled = true
+position = Vector2(-40, 145)
+scale = Vector2(4, 4)
+texture = ExtResource("8_vwikb")
+offset = Vector2(0, -24.19)
+flip_h = true
+flip_v = true
+
+[node name="Rock3" type="Sprite2D" parent="Props" unique_id=1115685383]
+y_sort_enabled = true
+position = Vector2(-96, 136)
+scale = Vector2(4, 4)
+texture = ExtResource("9_nje4j")
+offset = Vector2(0, -8)
+
+[node name="Rock2" type="Sprite2D" parent="Props" unique_id=795223779]
+y_sort_enabled = true
+position = Vector2(626, 172)
+scale = Vector2(4, 4)
+texture = ExtResource("10_rgcrq")
+offset = Vector2(0, -16)
+
+[node name="Rock4" type="Sprite2D" parent="Props" unique_id=1067151680]
+y_sort_enabled = true
+position = Vector2(725, 197)
+scale = Vector2(4, 4)
+texture = ExtResource("9_nje4j")
+offset = Vector2(0, -9)
+
+[node name="Seaweed6" type="AnimatedSprite2D" parent="Props" unique_id=275972174]
+y_sort_enabled = true
+position = Vector2(534, 144)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_7422c")
+offset = Vector2(0, -15.08)
+flip_h = true
+script = ExtResource("4_ea00n")
+
+[node name="Seaweed2" type="AnimatedSprite2D" parent="Props" unique_id=1860222699]
+y_sort_enabled = true
+position = Vector2(591, 174)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_waqk2")
+offset = Vector2(0, -16)
+script = ExtResource("4_ea00n")
+
+[node name="Seaweed3" type="AnimatedSprite2D" parent="Props" unique_id=193426245]
+y_sort_enabled = true
+position = Vector2(689, 206)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_pse3a")
+offset = Vector2(0, -24)
+script = ExtResource("4_ea00n")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1647493844]
+scale = Vector2(0.09233543, -0.7423794)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=34642665]
+
+[node name="TitleLogo" type="Label" parent="CanvasLayer" unique_id=2034987496]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -52.0
+offset_top = -11.5
+offset_right = 52.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 72
+text = "Mantis Melee"
+
+[node name="StartPrompt" type="Label" parent="CanvasLayer" unique_id=1739271539]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -72.0
+offset_top = -41.0
+offset_right = 72.0
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 20
+text = "Press Enter"
+horizontal_alignment = 1
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer" parent="." unique_id=79699815]
+stream = ExtResource("12_e66ye")
+volume_db = -10.0
+autoplay = true
