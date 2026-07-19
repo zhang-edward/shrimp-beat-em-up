@@ -19,13 +19,16 @@ func _ready() -> void:
 	BOSS_SPAWN_LOCATION = Vector2(screen_size.x / 2 - 512, -screen_size.y / 2 - 100)
 	final_boss_controller.defeated.connect(handle_final_boss_defeated)
 	load_next_wave()
-	# load_level_boss()
 
 func update_wave_stats():
 	var curr_wave_config = GameVariables.get_curr_wave_config() as WaveSpawnConfig
 	wave_stats_label.text = "Wave " + str(GameVariables.curr_wave + 1) + ": " + str(GameVariables.enemies_defeated_for_curr_wave) + " / " + str(curr_wave_config.total_enemy_count())
 
 func incr_enemy_defeated_count():
+	# Fighting final boss -> don't load any more levels / waves
+	if final_boss_controller.state_machine.state is not FinalBossInactiveState:
+		return
+
 	GameVariables.enemies_defeated_for_curr_wave += 1
 	if GameVariables.is_wave_completed():
 		if GameVariables.is_level_completed():
@@ -39,9 +42,9 @@ func load_level_boss():
 	var level_config = GameVariables.get_curr_level_config()
 	if level_config.boss_scene != null:
 		boss = level_config.boss_scene.instantiate() as Boss
+		boss.global_position = BOSS_SPAWN_LOCATION
 		enemies_folder.add_child(boss)
 		boss.setup()
-		boss.global_position = BOSS_SPAWN_LOCATION
 	else:
 		if GameVariables.curr_level == GameVariables.level_configs.size() - 1:
 			get_tree().change_scene_to_file("res://scenes/GameOver.tscn")
@@ -113,8 +116,6 @@ func handle_boss_defeated():
 	boss.queue_free()
 	boss = null
 	if GameVariables.curr_level == GameVariables.level_configs.size() - 1:
-		# Beating the last level's boss doesn't win the game — it summons the human
-		# to fight you directly. Victory comes from FinalBossController.defeated.
 		start_final_boss_fight()
 	else:
 		GameVariables.curr_level += 1

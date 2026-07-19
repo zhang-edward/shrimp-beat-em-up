@@ -20,5 +20,5 @@ func spawn_effect_with_rand_delay(initial_delay):
 func spawn_effect(pos: Vector2):
 	var config = EffectConfig.new()
 	config.pos = pos
-	config.anim = HitEffectRegistry.HIT_EFFECT_1
+	config.anim = HitEffectRegistry.EXPLOSION
 	EffectManager.spawn_effect(config)

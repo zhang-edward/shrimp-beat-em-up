@@ -208,6 +208,8 @@ initial_state = NodePath("BossEnterArenaState")
 script = ExtResource("4_n2l5s")
 next_state = NodePath("../BossIdleState")
 y_stop_pos = 300
+x_pos = 400
+fall_speed = 400.0
 
 [node name="BossHurtState" type="Node" parent="StateMachine" unique_id=413514736 node_paths=PackedStringArray("idle_state", "attack_states")]
 script = ExtResource("7_8yf57")

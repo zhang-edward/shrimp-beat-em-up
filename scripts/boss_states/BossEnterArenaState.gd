@@ -3,10 +3,12 @@ extends BossState
 
 @export var next_state: BossState
 @export var y_stop_pos := 0
+@export var x_pos := 0
 @export var fall_speed: float = 200.0
 
 func enter(_msg := {}) -> void:
 	boss.shadow.hide()
+	boss.position.x = x_pos
 	
 func update(_delta: float) -> void:
 	boss.absolute_velocity.y = fall_speed
