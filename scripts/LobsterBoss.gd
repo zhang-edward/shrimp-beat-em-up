@@ -23,14 +23,15 @@ func take_hit(hit: HitConfig, source: Node2D) -> void:
 
 func setup():
 	game.player.top_level = true
-	left_claw_health.configure("Left claw", 500)
-	right_claw_health.configure("Right claw", 500)
+	left_claw_health.configure("Left claw", 200)
+	right_claw_health.configure("Right claw", 200)
 
 func handle_hit():
-	state_machine.transition_to(hurt_state)
+	if state_machine.state is LobsterBossIdleState:
+		state_machine.transition_to(hurt_state)
 
 func handle_claw_destroy(claw: LobsterBossClaw):
-	state_machine.transition_to(claw_destroy_state, { "claw_destroyed": claw })
+	state_machine.transition_to(claw_destroy_state, {"claw_destroyed": claw})
 
 func die():
 	super.die()

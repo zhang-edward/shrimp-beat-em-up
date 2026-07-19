@@ -124,3 +124,5 @@ layout_mode = 2
 
 [editable path="AnimatedSprite2D/LeftClaw"]
 [editable path="AnimatedSprite2D/RightClaw"]
+[editable path="CanvasLayer/HBoxContainer/LeftClawHealth"]
+[editable path="CanvasLayer/HBoxContainer/RightClawHealth"]

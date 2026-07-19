@@ -16,6 +16,11 @@ signal transitioned(state_name)
 # The current active state. At the start of the game, we get the `initial_state`.
 @onready var state: State = get_node(initial_state)
 
+# Once stopped the machine ignores all further transitions and stops delegating
+# engine callbacks. Used to permanently halt AI (e.g. when the boss dies) so no
+# lingering tween callback can restart it.
+var _stopped := false
+
 func _ready() -> void:
 	await owner.ready;
 	# The state machine assigns itself to the State objects' state_machine property.
@@ -37,6 +42,8 @@ func _physics_process(delta: float) -> void:
 # and calls its enter function.
 # It optionally takes a `msg` dictionary to pass to the next state's enter() function.
 func transition_to(target_state: State, msg: Dictionary = {}) -> void:
+	if _stopped:
+		return
 	# Safety check, you could use an assert() here to report an error if the state name is incorrect.
 	# We don't use an assert here to help with code reuse. If you reuse a state in different state machines
 	# but you don't want them all, they won't be able to transition to states that aren't in the scene tree.
@@ -44,3 +51,15 @@ func transition_to(target_state: State, msg: Dictionary = {}) -> void:
 	state = target_state
 	state.enter(msg)
 	transitioned.emit(state.name)
+
+# Permanently halt the machine: clean up the active state and stop responding to
+# input and transitions. There is no restart; this is for terminal cases (death).
+func stop() -> void:
+	if _stopped:
+		return
+	_stopped = true
+	set_process(false)
+	set_physics_process(false)
+	set_process_unhandled_input(false)
+	if state:
+		state.exit()

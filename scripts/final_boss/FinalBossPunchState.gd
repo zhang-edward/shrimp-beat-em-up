@@ -9,6 +9,7 @@ const PUNCH_STARTING_Y = -800
 @export var next_state: FinalBossState
 var punching: bool = false
 var hitbox_scene: PackedScene = preload("res://prefab/Hitbox.tscn")
+var _tweens: Array[Tween] = []
 
 func enter(_msg := {}) -> void:
 	punching = true
@@ -18,6 +19,12 @@ func enter(_msg := {}) -> void:
 	controller.hand1.get_node("Sprite").play("fist")
 	controller.hand2.get_node("Sprite").play("fist")
 	punching = false
+
+func exit() -> void:
+	for tween in _tweens:
+		if tween and tween.is_valid():
+			tween.kill()
+	_tweens.clear()
 
 
 func update(delta: float) -> void:
@@ -41,6 +48,7 @@ func _punch_hand(idx: int):
 	var sprite = hand_controller.get_node("Sprite")
 	sprite.position.y = PUNCH_STARTING_Y
 	var tween = controller.get_tree().create_tween()
+	_tweens.append(tween)
 
 	# Punch telegraph
 	tween.set_parallel(false)
