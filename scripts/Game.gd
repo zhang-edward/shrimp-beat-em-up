@@ -28,9 +28,15 @@ func _ready() -> void:
 	var tutorial = %Tutorial
 	if tutorial != null:
 		var tween = get_tree().create_tween()
-		tween.tween_callback(func(): tutorial.modulate = Color.GRAY)
+		var cb1 = func _cb1():
+			if tutorial != null:
+				tutorial.modulate = Color.GRAY
+		tween.tween_callback(cb1)
 		tween.tween_interval(0.5)
-		tween.tween_callback(func(): tutorial.modulate = Color.WHITE)
+		var cb2 = func _cb2():
+			if tutorial != null:
+				tutorial.modulate = Color.WHITE
+		tween.tween_callback(cb2)
 		tween.tween_interval(0.5)
 		tween.set_loops()
 
