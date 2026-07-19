@@ -14,7 +14,7 @@ metadata/_custom_type_script = "uid://bqx8n2vw3ktle"
 [sub_resource type="Resource" id="Group_crab"]
 script = ExtResource("4_weg")
 enemy_scene = ExtResource("2_x3fe6")
-count = 5
+count = 8
 metadata/_custom_type_script = "uid://bqx8n2vw3ktle"
 
 [resource]

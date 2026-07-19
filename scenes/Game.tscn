@@ -156,6 +156,7 @@ enemies_folder = NodePath("../Entities/Enemies")
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1452419952]
 
 [node name="WavePanel" type="NinePatchRect" parent="CanvasLayer" unique_id=1660627889]
+visible = false
 custom_minimum_size = Vector2(64, 32)
 anchors_preset = 1
 anchor_left = 1.0
@@ -283,6 +284,7 @@ show_percentage = false
 
 [node name="LivesLabel" type="Label" parent="CanvasLayer/HUD" unique_id=1719625438]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("24_1gdd5")
 theme_override_font_sizes/font_size = 20
 text = "Lives: 3"
 

@@ -262,7 +262,7 @@ func final_boss_start_sequence() -> void:
 	game.audio_stream_player.stream = GameVariables.final_boss_bgm
 	game.audio_stream_player.play()
 	await get_tree().create_timer(2.0).timeout
-	boss_health.configure("The Human", 100)
+	boss_health.configure("The Human", 500)
 	boss_health.show()
 	await move_face_to(FacePos.BACK_WALL_RISEN, "super_angry")
 	await play_emote("determined_3")

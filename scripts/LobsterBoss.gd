@@ -26,8 +26,8 @@ func take_hit(hit: HitConfig, source: Node2D) -> void:
 
 func setup():
 	game.player.top_level = true
-	left_claw_health.configure("Left claw", 200)
-	right_claw_health.configure("Right claw", 200)
+	left_claw_health.configure("Left claw", 250)
+	right_claw_health.configure("Right claw", 250)
 
 func handle_hit():
 	if state_machine.state is LobsterBossIdleState:

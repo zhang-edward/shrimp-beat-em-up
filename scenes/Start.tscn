@@ -6,12 +6,33 @@
 [ext_resource type="Texture2D" uid="uid://800mviy7djks" path="res://sprites/props/seaweed_1.png" id="3_nqh5h"]
 [ext_resource type="Script" uid="uid://ghmm1evp356x" path="res://scripts/PropWithRandomizedAnimation.gd" id="4_ea00n"]
 [ext_resource type="Texture2D" uid="uid://dk704xgij5d80" path="res://sprites/props/seaweed_3.png" id="5_e66ye"]
+[ext_resource type="FontFile" uid="uid://dsugm7hp2ms" path="res://pixelmix.ttf" id="6_vwikb"]
 [ext_resource type="Texture2D" uid="uid://bugjdi2mb3dmu" path="res://sprites/props/seaweed_2.png" id="6_yud8w"]
 [ext_resource type="Texture2D" uid="uid://br5cp6d53s4vv" path="res://sprites/props/rock1.png" id="7_ugrxo"]
 [ext_resource type="Texture2D" uid="uid://bhwt635b0jwv1" path="res://sprites/props/log1.png" id="8_vwikb"]
 [ext_resource type="Texture2D" uid="uid://duf8us6pj3mfr" path="res://sprites/props/rock3.png" id="9_nje4j"]
 [ext_resource type="Texture2D" uid="uid://blp8ap5yk36w3" path="res://sprites/props/rock2.png" id="10_rgcrq"]
 [ext_resource type="AudioStream" uid="uid://bdo5q5a5vn0a0" path="res://audio/music/start.ogg" id="12_e66ye"]
+[ext_resource type="Shader" uid="uid://tedsc5jd7q3j" path="res://prefab/styles/font-gradient.gdshader" id="12_ugrxo"]
+[ext_resource type="FontFile" uid="uid://jjwv8duy7abc" path="res://ThaleahFat.ttf" id="13_vwikb"]
+
+[sub_resource type="Gradient" id="Gradient_ugrxo"]
+offsets = PackedFloat32Array(0, 0.27546296, 0.6805556, 1)
+colors = PackedColorArray(0.28068516, 0.5246902, 9.62615e-08, 1, 1.1551381e-06, 0.64539975, 0.56865823, 1, 0.97029734, 0.51869184, 0.026312135, 1, 1, 0.5224363, 0.021728916, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_rgcrq"]
+gradient = SubResource("Gradient_ugrxo")
+fill_from = Vector2(1, 0.9188034)
+fill_to = Vector2(1, 0.25213677)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6skjg"]
+shader = ExtResource("12_ugrxo")
+shader_parameter/gradient_texture = SubResource("GradientTexture2D_rgcrq")
+shader_parameter/use_label_gradient = true
+shader_parameter/text_size = Vector2(100, 100)
+shader_parameter/font_color = Color(1, 1, 1, 1)
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader_parameter/color_threshold = 0.1
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r7sob"]
 atlas = ExtResource("3_nqh5h")
@@ -111,6 +132,53 @@ texture = ExtResource("1_8t08e")
 [node name="FG" type="Sprite2D" parent="." unique_id=331448883]
 scale = Vector2(3.600624, 3.4190106)
 texture = ExtResource("2_fx3ca")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=34642665]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=2002148939]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.39607844)
+
+[node name="TitleLogo" type="Label" parent="CanvasLayer" unique_id=2034987496]
+material = SubResource("ShaderMaterial_6skjg")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -52.0
+offset_top = -11.5
+offset_right = 52.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("13_vwikb")
+theme_override_font_sizes/font_size = 150
+text = "Mantis Melee"
+
+[node name="StartPrompt" type="Label" parent="CanvasLayer" unique_id=1739271539]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -72.0
+offset_top = -41.0
+offset_right = 72.0
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("6_vwikb")
+theme_override_font_sizes/font_size = 20
+text = "PRESS ENTER"
+horizontal_alignment = 1
 
 [node name="Props" type="Node2D" parent="." unique_id=1796265463]
 y_sort_enabled = true
@@ -214,41 +282,6 @@ script = ExtResource("4_ea00n")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1647493844]
 scale = Vector2(0.09233543, -0.7423794)
-
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=34642665]
-
-[node name="TitleLogo" type="Label" parent="CanvasLayer" unique_id=2034987496]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -52.0
-offset_top = -11.5
-offset_right = 52.0
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 72
-text = "Mantis Melee"
-
-[node name="StartPrompt" type="Label" parent="CanvasLayer" unique_id=1739271539]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -72.0
-offset_top = -41.0
-offset_right = 72.0
-offset_bottom = -18.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 5
-theme_override_font_sizes/font_size = 20
-text = "Press Enter"
-horizontal_alignment = 1
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer" parent="." unique_id=79699815]
 stream = ExtResource("12_e66ye")
