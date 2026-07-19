@@ -11,6 +11,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @export var fall_state: PlayerFallState
 
 func enter(_msg := {}) -> void:
+	player.play_jump_sfx()
 	player.num_jumps_remaining -= 1
 	player.z_velocity = - JUMP_VELOCITY
 	player.sprite.play("jump")

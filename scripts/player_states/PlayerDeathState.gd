@@ -4,6 +4,7 @@ extends PlayerState
 @export var spawn_state: PlayerSpawnState
 
 func enter(msg := {}) -> void:
+	player.play_death_sfx()
 	Engine.time_scale = 0.5
 	player.velocity = Vector2.ZERO
 	player.sprite.modulate = Color(0, 0, 0, 0.75)

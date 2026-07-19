@@ -20,6 +20,7 @@ var recovery_timer = 0
 var comboing: bool
 
 func enter(msg := {}) -> void:
+	player.play_attack_sfx()
 	combo_index = msg["combo_index"] if msg.has("combo_index") else 0
 	recovery_timer = RECOVERY_TIMES[combo_index]
 

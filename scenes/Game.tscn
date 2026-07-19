@@ -19,8 +19,10 @@
 [ext_resource type="Texture2D" uid="uid://duf8us6pj3mfr" path="res://sprites/props/rock3.png" id="11_2rd6h"]
 [ext_resource type="Texture2D" uid="uid://800mviy7djks" path="res://sprites/props/seaweed_1.png" id="12_7ua8r"]
 [ext_resource type="Script" uid="uid://ghmm1evp356x" path="res://scripts/PropWithRandomizedAnimation.gd" id="14_vjgi4"]
-[ext_resource type="Script" path="res://scripts/DebugMenu.gd" id="15_dbgmn"]
 [ext_resource type="Texture2D" uid="uid://bugjdi2mb3dmu" path="res://sprites/props/seaweed_2.png" id="14_y5y3l"]
+[ext_resource type="Script" uid="uid://w2y2yfasmrtn" path="res://scripts/DebugMenu.gd" id="15_dbgmn"]
+[ext_resource type="AudioStream" uid="uid://dtr1vpkl10ach" path="res://audio/sfx/hurt1.wav" id="22_attvq"]
+[ext_resource type="Script" uid="uid://qjiuldfv5lwj" path="res://scripts/AudioManager.gd" id="23_bneo8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mod73"]
 atlas = ExtResource("7_attvq")
@@ -125,9 +127,11 @@ size = Vector2(1806.0613, 57.5)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a8wo8"]
 size = Vector2(456.04907, 57.5)
 
-[node name="Game" type="Node2D" unique_id=67653856 node_paths=PackedStringArray("enemies_folder", "final_boss_controller")]
+[node name="Game" type="Node2D" unique_id=67653856 node_paths=PackedStringArray("enemies_folder", "audio_stream_player", "sfx_player", "final_boss_controller")]
 script = ExtResource("1_ibkli")
 enemies_folder = NodePath("Entities/Enemies")
+audio_stream_player = NodePath("BGMPlayer")
+sfx_player = NodePath("SFXPlayer")
 final_boss_controller = NodePath("Entities/FinalBossController")
 
 [node name="EffectManager" type="Node2D" parent="." unique_id=626913341]
@@ -424,3 +428,15 @@ texture = ExtResource("4_400sg")
 
 [node name="DebugMenu" type="CanvasLayer" parent="." unique_id=1900000001]
 script = ExtResource("15_dbgmn")
+
+[node name="BGMPlayer" type="AudioStreamPlayer" parent="." unique_id=1680612163]
+volume_db = 5.0
+autoplay = true
+
+[node name="SFXPlayer" type="AudioStreamPlayer" parent="." unique_id=956438903]
+stream = ExtResource("22_attvq")
+max_polyphony = 10
+
+[node name="AudioManager" type="Node" parent="." unique_id=1655712928]
+unique_name_in_owner = true
+script = ExtResource("23_bneo8")

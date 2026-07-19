@@ -11,6 +11,7 @@ const DEATH_KNOCKBACK_MIN := 260.0
 
 @export var move_speed := 100.0
 @export var player_ref: Player
+@export var audio_stream_player: AudioStreamPlayer
 
 @onready var ground_collider: CollisionShape2D = $CollisionShape2D
 @onready var shadow: Sprite2D = $Shadow
@@ -108,3 +109,13 @@ func can_take_aggro_slot() -> bool:
 		if other != self and is_instance_valid(other) and other is Enemy and other.is_aggroing():
 			others_aggroing += 1
 	return others_aggroing < MAX_AGGRO_ENEMIES
+
+func play_hit_sfx():
+	var hit_sounds = [GameVariables.hurt_1, GameVariables.hurt_2, GameVariables.hurt_3]
+	var random_sfx = hit_sounds.pick_random()
+	audio_stream_player.stream = random_sfx
+	audio_stream_player.play()
+	
+func play_attack_sfx():
+	audio_stream_player.stream = GameVariables.enemy_attack_sfx
+	audio_stream_player.play()

@@ -22,6 +22,7 @@ const RIGHT_SPRITE_RESTING_POS := 825
 @onready var fg_sprite_l: AnimatedSprite2D = $ManSpriteL
 @onready var fg_sprite_r: AnimatedSprite2D = $ManSpriteR
 @onready var state_machine: StateMachine = $StateMachine
+@onready var game = get_node("/root/Game") as Game
 
 @export var bg_sprite: AnimatedSprite2D
 @export var fg_sprite: AnimatedSprite2D
@@ -251,6 +252,9 @@ func final_boss_start_sequence(_msg := {}) -> void:
 	await play_emote("solemn")
 	await get_tree().create_timer(4.0).timeout
 	await play_emote("super_angry")
+	game.audio_stream_player.volume_db = 0.0
+	game.audio_stream_player.stream = GameVariables.final_boss_bgm
+	game.audio_stream_player.play()
 	await get_tree().create_timer(2.0).timeout
 	boss_health.configure("The Human", 100)
 	boss_health.show()

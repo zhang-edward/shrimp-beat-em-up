@@ -9,6 +9,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var started_ground_delay := false
 
 func enter(msg := {}) -> void:
+	player.play_respawn_sfx()
 	started_ground_delay = false
 	player.z = -400.0
 	start_invincible_flash()

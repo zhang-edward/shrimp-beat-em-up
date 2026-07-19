@@ -15,6 +15,7 @@ var hitbox_scene: PackedScene = preload("res://prefab/Hitbox.tscn")
 var hit: HitConfig = HitConfig.create(15, HitEffectRegistry.HIT_EFFECT_2, PI / 8, 200.0, 600.0, true, 0.12)
 
 func enter(_msg := {}) -> void:
+	player.play_attack_sfx()
 	recovery_timer = RECOVERY_TIME
 	player.sprite.play("jump_slam")
 

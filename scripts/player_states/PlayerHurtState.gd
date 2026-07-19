@@ -9,6 +9,7 @@ const HITSTUN_SECONDS := 0.2
 var t := 0.0
 
 func enter(_msg := {}) -> void:
+	player.play_hurt_sfx()
 	player.sprite.play("hurt")
 	t = HITSTUN_SECONDS
 	player.sprite.modulate = Color(1, 0, 0)

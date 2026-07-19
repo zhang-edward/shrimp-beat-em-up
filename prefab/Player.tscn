@@ -269,13 +269,14 @@ size = Vector2(14, 25)
 [sub_resource type="CircleShape2D" id="CircleShape2D_mod73"]
 radius = 6.0
 
-[node name="Player" type="CharacterBody2D" unique_id=2117824229 node_paths=PackedStringArray("grabbed_state", "hurt_state", "death_state")]
+[node name="Player" type="CharacterBody2D" unique_id=2117824229 node_paths=PackedStringArray("grabbed_state", "hurt_state", "death_state", "audio_stream_player")]
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_00yv1")
 grabbed_state = NodePath("StateMachine/PlayerGrabbedState")
 hurt_state = NodePath("StateMachine/PlayerHurtState")
 death_state = NodePath("StateMachine/PlayerDeathState")
+audio_stream_player = NodePath("AudioStreamPlayer")
 
 [node name="Shadow" type="Sprite2D" parent="." unique_id=1051102670]
 modulate = Color(1, 1, 1, 0.39215687)
@@ -395,3 +396,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("8_msqmi")
 state_machine = NodePath("../StateMachine")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1301660152]
+max_polyphony = 10

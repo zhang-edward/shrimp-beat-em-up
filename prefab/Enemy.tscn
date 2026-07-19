@@ -21,10 +21,11 @@ size = Vector2(25.75, 21)
 [sub_resource type="CircleShape2D" id="CircleShape2D_jca2b"]
 radius = 14.035668
 
-[node name="Enemy" type="CharacterBody2D" unique_id=1600955621]
+[node name="Enemy" type="CharacterBody2D" unique_id=1600955621 node_paths=PackedStringArray("audio_stream_player")]
 position = Vector2(109, 1)
 collision_mask = 3
 script = ExtResource("1_f08wl")
+audio_stream_player = NodePath("AudioStreamPlayer")
 
 [node name="Shadow" type="Sprite2D" parent="." unique_id=1327308791]
 modulate = Color(1, 1, 1, 0.39215687)
@@ -126,3 +127,5 @@ state_machine = NodePath("../StateMachine")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=600665596]
 position = Vector2(0, -1)
 shape = SubResource("CircleShape2D_jca2b")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1186916335]

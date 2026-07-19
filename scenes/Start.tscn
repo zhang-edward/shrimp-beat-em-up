@@ -252,5 +252,5 @@ horizontal_alignment = 1
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer" parent="." unique_id=79699815]
 stream = ExtResource("12_e66ye")
-volume_db = -10.0
+volume_db = 5.0
 autoplay = true

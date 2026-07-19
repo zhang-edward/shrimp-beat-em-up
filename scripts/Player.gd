@@ -3,6 +3,7 @@ extends CharacterBody2D
 
 signal grab_escaped
 
+@onready var game = get_node("/root/Game") as Game
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var state_machine: StateMachine = %StateMachine
 @onready var shadow: Sprite2D = $Shadow
@@ -11,6 +12,7 @@ signal grab_escaped
 @export var grabbed_state: PlayerGrabbedState
 @export var hurt_state: PlayerHurtState
 @export var death_state: PlayerDeathState
+@export var audio_stream_player: AudioStreamPlayer
 
 const MAX_JUMPS = 2
 const MAX_LIVES = 3
@@ -85,3 +87,27 @@ func release_from_grab() -> void:
 
 func get_sprite_size():
 	return sprite.sprite_frames.get_frame_texture("default", 0).get_size() * sprite.scale
+
+func play_attack_sfx():
+	audio_stream_player.stream = GameVariables.attack_sfx
+	audio_stream_player.play()
+	
+func play_jump_sfx():
+	audio_stream_player.stream = GameVariables.jump_sfx
+	audio_stream_player.play()
+	
+func play_dash_sfx():
+	audio_stream_player.stream = GameVariables.dash_sfx
+	audio_stream_player.play()
+
+func play_hurt_sfx():
+	audio_stream_player.stream = GameVariables.player_hurt_sfx
+	audio_stream_player.play()
+	
+func play_respawn_sfx():
+	audio_stream_player.stream = GameVariables.respawn_sfx
+	audio_stream_player.play()
+
+func play_death_sfx():
+	audio_stream_player.stream = GameVariables.death_sfx
+	audio_stream_player.play()

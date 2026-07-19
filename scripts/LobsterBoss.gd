@@ -9,6 +9,9 @@ extends Boss
 @onready var right_claw_health: BossHealth = $CanvasLayer/HBoxContainer/RightClawHealth as BossHealth
 
 func _ready():
+	game.audio_stream_player.stop()
+	game.audio_stream_player.stream = GameVariables.lobster_bgm
+	game.audio_stream_player.play()
 	boss_name = "Lobster"
 	left_claw.health = left_claw_health
 	left_claw.lobster_boss = self

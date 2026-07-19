@@ -7,6 +7,8 @@ extends Node2D
 @onready var player = $Entities/Player as Player
 
 @export var enemies_folder: Node
+@export var audio_stream_player: AudioStreamPlayer
+@export var sfx_player: AudioStreamPlayer
 @export var final_boss_controller: FinalBossController
 
 var BOSS_SPAWN_LOCATION: Vector2
@@ -14,6 +16,8 @@ var boss
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	audio_stream_player.stream = GameVariables.game_bgm
+	audio_stream_player.play()
 	update_wave_stats()
 	var screen_size = get_viewport().size
 	BOSS_SPAWN_LOCATION = Vector2(screen_size.x / 2 - 512, -screen_size.y / 2 - 100)
@@ -116,8 +120,13 @@ func handle_boss_defeated():
 	boss.queue_free()
 	boss = null
 	if GameVariables.curr_level == GameVariables.level_configs.size() - 1:
+		var tween = create_tween()
+		tween.tween_property(audio_stream_player, "volume_db", -50.0, 1.5)
 		start_final_boss_fight()
 	else:
+		audio_stream_player.stop()
+		audio_stream_player.stream = GameVariables.game_bgm
+		audio_stream_player.play()
 		GameVariables.curr_level += 1
 		load_next_level()
 		update_wave_stats()

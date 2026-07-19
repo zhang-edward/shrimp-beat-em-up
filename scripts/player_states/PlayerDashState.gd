@@ -8,6 +8,7 @@ var damping_factor = 4.0
 var prev_state: PlayerState
 
 func enter(msg := {}) -> void:
+	player.play_dash_sfx()
 	prev_state = msg["prev_state"] as PlayerState
 	player.sprite.play("move")
 	dash_timer = DASH_DURATION

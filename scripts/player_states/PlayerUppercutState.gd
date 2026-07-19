@@ -15,6 +15,7 @@ var hitbox_scene: PackedScene = preload("res://prefab/Hitbox.tscn")
 var hit: HitConfig = HitConfig.create(10, HitEffectRegistry.HIT_EFFECT_2, PI / 4, 120.0, -800.0, true, 0.12)
 
 func enter(_msg := {}) -> void:
+	player.play_attack_sfx()
 	player.uppercut_used = true;
 	recovery_timer = RECOVERY_TIME
 	player.sprite.play("jump_uppercut")

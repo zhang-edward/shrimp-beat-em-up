@@ -47,6 +47,7 @@ func enter_phase(_phase: Phase):
 			enemy.sprite.play("recovery")
 
 func spawn_hitbox():
+	enemy.play_attack_sfx()	
 	var hitbox = hitbox_scene.instantiate()
 	enemy.add_child(hitbox)
 	var sprite_size = enemy.get_sprite_size()
