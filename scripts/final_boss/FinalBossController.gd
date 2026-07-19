@@ -2,12 +2,16 @@ class_name FinalBossController
 extends Node2D
 
 signal animation_sequence_finished()
+# Emitted once the death sequence has finished playing out, so the game can move
+# on to the victory screen.
+signal defeated()
 
-enum FacePos {BG, BACK_WALL, BACK_WALL_RISEN, SIDE_LEFT, SIDE_RIGHT}
+enum FacePos {BG, BACK_WALL, BACK_WALL_RISEN, SIDE_LEFT, SIDE_RIGHT, ABSENT}
 
 const BACK_WALL_DOWN_Y = 0.0
 const BACK_WALL_RISEN_Y = -400.0
 const BACK_WALL_HIDDEN_Y = 800.0
+const BG_WALL_HIDDEN_Y = 500.0
 const SIDE_SLIDE_OFFSET = 400.0
 const WALK_DIP = 40.0
 
@@ -17,6 +21,7 @@ const WALK_DIP = 40.0
 @onready var fg_sprite_r: AnimatedSprite2D = $ManSpriteR
 @onready var left_sprite_resting_pos := fg_sprite_l.position.x
 @onready var right_sprite_resting_pos := fg_sprite_r.position.x
+@onready var state_machine: StateMachine = $StateMachine
 
 @export var bg_sprite: AnimatedSprite2D
 @export var fg_sprite: AnimatedSprite2D
@@ -24,17 +29,29 @@ const WALK_DIP = 40.0
 @export var hand2: Node2D
 @export var boss_health: BossHealth
 @export var player_ref: Player
+# The attack state the fight opens on. The state machine idles in
+# FinalBossInactiveState until start_final_boss_fight() hands control to this.
+@export var first_fight_state: FinalBossState
 
-var _face_pos: FacePos = FacePos.BG
+var _face_pos: FacePos = FacePos.ABSENT
 var _tween: Tween
 var health = 100
+var _defeated := false
 
 func start_final_boss_fight():
 	boss_health.configure("The Human", 100)
 	boss_health.show()
+	# Kick the AI out of its idle state; the attack's enter() raises his face in.
+	state_machine.transition_to(first_fight_state)
 
 func take_hit(hit: HitConfig, source: Node2D) -> void:
+	if _defeated:
+		return
 	boss_health.take_damage(hit.damage)
+	if boss_health.get_health() <= 0:
+		_defeated = true
+		_play_death_sequence()
+		return
 	var dir := Vector2(signf(position.x - source.position.x), 0.0)
 	if dir.x == 0.0:
 		dir.x = -1.0 if source.sprite.flip_h else 1.0
@@ -49,10 +66,13 @@ func move_face_to(target: FacePos, emote: String) -> void:
 		_tween.kill()
 
 	var from := _face_pos
-	if _is_back_wall(from) and _is_back_wall(target):
+	if target == FacePos.ABSENT:
+		await _exit(from)
+	elif _is_back_wall(from) and _is_back_wall(target):
 		await _shift_back_wall(target)
 	else:
-		await _exit(from)
+		if !(from == FacePos.BG and target == FacePos.BACK_WALL):
+			await _exit(from)
 		await _enter(target, from, emote)
 	_face_pos = target
 
@@ -92,7 +112,7 @@ func _is_back_wall(pos: FacePos) -> bool:
 func _enter(target: FacePos, from: FacePos, emote: String) -> void:
 	match target:
 		FacePos.BG:
-			bg_sprite.visible = true
+			await _rise_to_bg(emote)
 		FacePos.BACK_WALL:
 			await _face_to_back_wall(from, emote)
 		FacePos.BACK_WALL_RISEN:
@@ -106,13 +126,23 @@ func _enter(target: FacePos, from: FacePos, emote: String) -> void:
 func _exit(current: FacePos) -> void:
 	match current:
 		FacePos.BG:
-			bg_sprite.visible = false
+			await _drop_below_rim_bg()
 		FacePos.BACK_WALL, FacePos.BACK_WALL_RISEN:
 			await _drop_below_rim()
 		FacePos.SIDE_LEFT:
 			await _slide_side_out(fg_sprite_l, left_sprite_resting_pos - SIDE_SLIDE_OFFSET)
 		FacePos.SIDE_RIGHT:
 			await _slide_side_out(fg_sprite_r, right_sprite_resting_pos + SIDE_SLIDE_OFFSET)
+		FacePos.ABSENT:
+			pass
+
+func _rise_to_bg(emote: String) -> void:
+	bg_sprite.visible = true
+	bg_sprite.position = Vector2(0, BG_WALL_HIDDEN_Y)
+	bg_sprite.play(emote)
+	_tween = _ease_tween()
+	_tween.tween_property(bg_sprite, "position:y", 0, 1.5)
+	await _tween.finished
 
 func _face_to_back_wall(from: FacePos, emote: String) -> void:
 	if from == FacePos.BG:
@@ -133,6 +163,12 @@ func _shift_back_wall(target: FacePos) -> void:
 	_tween = _ease_tween()
 	_tween.tween_property(fg_sprite, "position:y", y, 0.8)
 	await _tween.finished
+
+func _drop_below_rim_bg() -> void:
+	_tween = _ease_tween()
+	_tween.tween_property(bg_sprite, "position:y", 500, 0.8)
+	await _tween.finished
+	bg_sprite.visible = false
 
 func _drop_below_rim() -> void:
 	_tween = _ease_tween()
@@ -204,5 +240,43 @@ func spawn_new_wave_animation(_msg := {}) -> void:
 func done_spawning_wave_animation(_msg := {}) -> void:
 	await play_emote("determined_1")
 	await get_tree().create_timer(1.0).timeout
-	await move_face_to(FacePos.BG, "determined_1")
+	await move_face_to(FacePos.ABSENT, "")
 	animation_sequence_finished.emit()
+
+### Death
+
+func _play_death_sequence() -> void:
+	# Halt the AI so nothing keeps punching/grabbing while he dies.
+	state_machine.stop()
+	_retract_hands()
+	# Come to rest at the back wall, centered, so the death reads clearly.
+	await move_face_to(FacePos.BACK_WALL, "angry")
+	var settle := get_tree().create_tween()
+	settle.set_ease(Tween.EASE_OUT)
+	settle.tween_property(fg_sprite, "position:x", 0.0, 0.3)
+	await settle.finished
+	await play_emote("death")
+	await get_tree().create_timer(0.6).timeout
+	await _keel_over()
+	defeated.emit()
+
+# Topple the face over: rotate it down toward the ground while it sinks below the
+# rim, as if the body has gone limp and fallen.
+func _keel_over() -> void:
+	var t := get_tree().create_tween()
+	t.set_ease(Tween.EASE_IN)
+	t.set_trans(Tween.TRANS_QUAD)
+	t.tween_property(fg_sprite, "rotation", deg_to_rad(90.0), 1.2)
+	t.parallel().tween_property(fg_sprite, "position:y", BACK_WALL_HIDDEN_Y, 1.4)
+	await t.finished
+
+# Pull both fists back up out of the tank so they don't hang mid-air after death.
+func _retract_hands() -> void:
+	for hand in [hand1, hand2]:
+		var sprite := hand.get_node("Sprite") as AnimatedSprite2D
+		sprite.show()
+		hand.get_node("Shadow").show()
+		var t := get_tree().create_tween()
+		t.set_ease(Tween.EASE_IN)
+		t.set_trans(Tween.TRANS_QUAD)
+		t.tween_property(sprite, "position:y", -800.0, 0.4)

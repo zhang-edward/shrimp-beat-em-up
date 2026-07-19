@@ -6,6 +6,10 @@
 atlas = ExtResource("1_ejunn")
 region = Rect2(384, 0, 192, 384)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_death"]
+atlas = ExtResource("1_ejunn")
+region = Rect2(576, 0, 192, 384)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_xnokc"]
 atlas = ExtResource("1_ejunn")
 region = Rect2(0, 0, 192, 384)
@@ -34,6 +38,14 @@ animations = [{
 }],
 "loop": 1,
 "name": &"angry",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_death")
+}],
+"loop": 0,
+"name": &"death",
 "speed": 5.0
 }, {
 "frames": [{

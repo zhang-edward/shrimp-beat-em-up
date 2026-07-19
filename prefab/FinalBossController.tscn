@@ -97,12 +97,13 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="FinalBossController" type="Node2D" unique_id=862737750 node_paths=PackedStringArray("hand1", "hand2", "boss_health")]
+[node name="FinalBossController" type="Node2D" unique_id=862737750 node_paths=PackedStringArray("hand1", "hand2", "boss_health", "first_fight_state")]
 y_sort_enabled = true
 script = ExtResource("1_5w4rv")
 hand1 = NodePath("Hand1")
 hand2 = NodePath("Hand2")
 boss_health = NodePath("CanvasLayer/BossHealth")
+first_fight_state = NodePath("StateMachine/FinalBossPunchState")
 
 [node name="Hand1" type="Node2D" parent="." unique_id=132289877]
 position = Vector2(-319, -800)
@@ -164,7 +165,7 @@ metadata/_custom_type_script = "uid://bge0hmqmafyrt"
 
 [node name="FinalBossPunchState" type="Node" parent="StateMachine" unique_id=643711401 node_paths=PackedStringArray("next_state")]
 script = ExtResource("6_pe7lp")
-next_state = NodePath("../FinalBossGrabState")
+next_state = NodePath("../FinalBossSpawnEnemiesState")
 metadata/_custom_type_script = "uid://21kurj1y2k1q"
 
 [node name="FinalBossGrabState" type="Node" parent="StateMachine" unique_id=2078556991 node_paths=PackedStringArray("potential_next_states")]
@@ -197,8 +198,10 @@ grow_horizontal = 2
 text = "hello"
 script = ExtResource("8_144q2")
 state_machine = NodePath("../../StateMachine")
+metadata/_edit_use_anchors_ = true
 
 [node name="BossHealth" parent="CanvasLayer" unique_id=1458634735 instance=ExtResource("12_51jxd")]
+visible = false
 offset_top = -49.0
 
 [node name="ManSpriteR" type="AnimatedSprite2D" parent="." unique_id=1606828923]

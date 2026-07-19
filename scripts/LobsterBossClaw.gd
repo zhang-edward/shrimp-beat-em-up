@@ -9,8 +9,8 @@ func _ready():
 	sprite.play("idle")
 
 func take_hit(hit: HitConfig, source: Node2D) -> void:
-	if lobster_boss.has_super_armor():
-		return
+	# if lobster_boss.has_super_armor():
+		# return
 	health.take_damage(hit.damage)
 	if health.get_health() == 0:
 		lobster_boss.handle_claw_destroy(self)

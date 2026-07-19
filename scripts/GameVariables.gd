@@ -26,7 +26,7 @@ func get_curr_wave_config():
 
 func is_wave_completed():
 	var curr_wave_config = get_curr_wave_config() as WaveSpawnConfig
-	return curr_wave_config.num_enemies_to_defeat <= enemies_defeated_for_curr_wave
+	return curr_wave_config.total_enemy_count() <= enemies_defeated_for_curr_wave
 
 func is_level_completed():
 	var level_config = get_curr_level_config() as LevelSpawnConfig

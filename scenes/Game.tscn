@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://duf8us6pj3mfr" path="res://sprites/props/rock3.png" id="11_2rd6h"]
 [ext_resource type="Texture2D" uid="uid://800mviy7djks" path="res://sprites/props/seaweed_1.png" id="12_7ua8r"]
 [ext_resource type="Script" uid="uid://ghmm1evp356x" path="res://scripts/PropWithRandomizedAnimation.gd" id="14_vjgi4"]
+[ext_resource type="Script" path="res://scripts/DebugMenu.gd" id="15_dbgmn"]
 [ext_resource type="Texture2D" uid="uid://bugjdi2mb3dmu" path="res://sprites/props/seaweed_2.png" id="14_y5y3l"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mod73"]
@@ -420,3 +421,6 @@ shape = SubResource("RectangleShape2D_a8wo8")
 position = Vector2(0, 22)
 scale = Vector2(5.5081506, 3.8)
 texture = ExtResource("4_400sg")
+
+[node name="DebugMenu" type="CanvasLayer" parent="." unique_id=1900000001]
+script = ExtResource("15_dbgmn")
