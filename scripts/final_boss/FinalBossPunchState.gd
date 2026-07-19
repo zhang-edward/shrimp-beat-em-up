@@ -82,3 +82,4 @@ func _spawn_punch_hitbox(hand_controller: Node2D):
 	hand_controller.add_child(hitbox)
 	var hit_config = HitConfig.create(100, HitEffectRegistry.HIT_EFFECT_1)
 	hitbox.init(Vector2.ZERO, Vector2(192, 48), PUNCH_ACTIVE_SECONDS, Hitbox.CollideableTypes.Player, hand_controller, hit_config)
+	ScreenShake.shake_vertical(20, 0.5, 10)

@@ -189,6 +189,7 @@ script = ExtResource("11_rn34i")
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=272432548]
 
 [node name="DebugStateMachineLabel" type="Label" parent="CanvasLayer" unique_id=85242084 node_paths=PackedStringArray("state_machine")]
+visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5

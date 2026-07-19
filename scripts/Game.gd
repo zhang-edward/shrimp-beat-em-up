@@ -2,7 +2,7 @@ class_name Game
 extends Node2D
 
 @onready var enemy_spawner = %EnemySpawner as EnemySpawner
-@onready var wave_stats_label = $CanvasLayer/WaveStats as Label
+@onready var wave_stats_label = %WaveStats as Label
 @onready var canvas_layer = $CanvasLayer as CanvasLayer
 @onready var player = $Entities/Player as Player
 
@@ -63,10 +63,13 @@ func incr_enemy_defeated_count():
 func load_level_boss():
 	var level_config = GameVariables.get_curr_level_config()
 	if level_config.boss_scene != null:
+		await animate_guy_placing_in_tank()
 		boss = level_config.boss_scene.instantiate() as Boss
 		boss.global_position = BOSS_SPAWN_LOCATION
 		enemies_folder.add_child(boss)
 		boss.setup()
+		await get_tree().create_timer(1.0).timeout
+		final_boss_controller.done_spawning_wave_animation()
 	else:
 		if GameVariables.curr_level == GameVariables.level_configs.size() - 1:
 			get_tree().change_scene_to_file("res://scenes/GameOver.tscn")
@@ -79,13 +82,7 @@ func start_final_boss_fight():
 	final_boss_controller.start_final_boss_fight()
 
 func load_next_wave():
-	var boss_animation_variation = 1
-	if GameVariables.curr_level == 1:
-		boss_animation_variation = 2
-	elif GameVariables.curr_level >= 2:
-		boss_animation_variation = 3
-	final_boss_controller.spawn_new_wave_animation(boss_animation_variation)
-	await final_boss_controller.animation_sequence_finished
+	await animate_guy_placing_in_tank()
 	var curr_wave_config = GameVariables.get_curr_wave_config()
 	enemy_spawner.clear_curr_enemies()
 	GameVariables.enemies_defeated_for_curr_wave = 0
@@ -94,6 +91,16 @@ func load_next_wave():
 	
 	await get_tree().create_timer(1.0).timeout
 	final_boss_controller.done_spawning_wave_animation()
+
+func animate_guy_placing_in_tank():
+	var boss_animation_variation = 1
+	if GameVariables.curr_level == 1:
+		boss_animation_variation = 2
+	elif GameVariables.curr_level >= 2:
+		boss_animation_variation = 3
+
+	final_boss_controller.spawn_new_wave_animation(boss_animation_variation)
+	await final_boss_controller.animation_sequence_finished
 
 func load_next_level():
 	GameVariables.curr_wave = 0
