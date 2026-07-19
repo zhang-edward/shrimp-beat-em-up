@@ -19,6 +19,7 @@ func enter(msg := {}) -> void:
 	var x_diff = -100 if is_left else 100
 	var orig_x = claw_to_attack_with.global_position.x
 	var windup_x = claw_to_attack_with.global_position.x + x_diff
+	lobster_boss.play_windup_sfx()
 	tween.tween_property(claw_to_attack_with, "global_position:x", windup_x, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	var callable = Callable(self, "play_attack_animation").bind(orig_x)
 	tween.finished.connect(callable)
@@ -29,6 +30,8 @@ func play_attack_animation(orig_x):
 	var x_diff = 150 if is_left else -150
 	var forward_x = orig_x + x_diff
 	tween.tween_property(claw_to_attack_with, "global_position:x", forward_x, 0.2)
+	var lobster_boss = boss as LobsterBoss
+	lobster_boss.play_snap_sfx()
 	boss.sprite.play("snap")
 	claw_to_attack_with.sprite.play("snap")
 	var callable = Callable(self, "on_animation_complete").bind(orig_x)

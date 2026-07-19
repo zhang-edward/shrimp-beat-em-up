@@ -15,6 +15,7 @@ func spawn_effect_with_rand_delay(initial_delay):
 	await get_tree().create_timer(rand_time).timeout
 	var rand_x_diff = randi_range(-200, 200)
 	var rand_y_diff = randi_range(-150, 150)
+	boss.play_explode_sfx()
 	spawn_effect(Vector2(boss.global_position.x + rand_x_diff, boss.global_position.y + rand_y_diff))
 	
 func spawn_effect(pos: Vector2):

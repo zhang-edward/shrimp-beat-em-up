@@ -111,7 +111,7 @@ func can_take_aggro_slot() -> bool:
 	return others_aggroing < MAX_AGGRO_ENEMIES
 
 func play_hurt_sfx():
-	var hurt_sfx = [GameVariables.hurt_1, GameVariables.hurt_2, GameVariables.hurt_3]
+	var hurt_sfx = [GameVariables.hurt_1, GameVariables.hurt_2]
 	var random_sfx = hurt_sfx.pick_random()
 	audio_stream_player.stream = random_sfx
 	audio_stream_player.play()

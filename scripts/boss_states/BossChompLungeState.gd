@@ -14,7 +14,9 @@ var hitbox: Hitbox = null
 var hit: HitConfig = HitConfig.create(20, HitEffectRegistry.HIT_EFFECT_1)
 
 func enter(msg := {}) -> void:
+	var pboss = boss as PiranhaBoss
 	boss.sprite.play("idle")
+	pboss.play_windup_sfx()
 	dash_timer = DASH_DURATION
 	flash_red(charge_forward)
 	
@@ -33,6 +35,8 @@ func charge_forward():
 	boss.sprite.play("chomp")
 	boss.absolute_velocity.x = -1000 if !boss.sprite.flip_h else 1000
 	if hitbox == null:
+		var piranha_boss = boss as PiranhaBoss
+		piranha_boss.play_dash_sfx()
 		hitbox = hitbox_scene.instantiate()
 		boss.add_child(hitbox)
 		var sprite_size = boss.get_sprite_size()

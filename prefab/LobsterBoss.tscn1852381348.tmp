@@ -36,18 +36,16 @@ animation = &"hurt"
 autoplay = "idle"
 offset = Vector2(0, -50)
 
-[node name="LeftClaw" parent="AnimatedSprite2D" unique_id=612295625 node_paths=PackedStringArray("audio_stream_player") instance=ExtResource("4_7e8c4")]
+[node name="LeftClaw" parent="AnimatedSprite2D" unique_id=612295625 instance=ExtResource("4_7e8c4")]
 position = Vector2(-70, -15)
-audio_stream_player = NodePath("../../AudioStreamPlayer")
 
 [node name="AnimatedSprite2D" parent="AnimatedSprite2D/LeftClaw" index="0" unique_id=394359658]
 position = Vector2(-15.25, -10.75)
 frame = 5
 frame_progress = 1.0
 
-[node name="RightClaw" parent="AnimatedSprite2D" unique_id=1668483975 node_paths=PackedStringArray("audio_stream_player") instance=ExtResource("4_7e8c4")]
+[node name="RightClaw" parent="AnimatedSprite2D" unique_id=1668483975 instance=ExtResource("4_7e8c4")]
 position = Vector2(110, -11.75)
-audio_stream_player = NodePath("../../AudioStreamPlayer")
 
 [node name="AnimatedSprite2D" parent="AnimatedSprite2D/RightClaw" index="0" unique_id=394359658]
 position = Vector2(-25.75, -13)
@@ -126,8 +124,6 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1449714692]
-volume_db = -5.0
-max_polyphony = 10
 
 [editable path="AnimatedSprite2D/LeftClaw"]
 [editable path="AnimatedSprite2D/RightClaw"]

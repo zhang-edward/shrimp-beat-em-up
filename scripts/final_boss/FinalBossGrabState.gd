@@ -70,6 +70,7 @@ func exit() -> void:
 	_show_hand1()
 
 func _clasp() -> void:
+	controller.play_grab_sfx()
 	_hide_hand1()
 	_sprite2.play("clasp")
 

@@ -26,6 +26,15 @@ var enemy_attack_sfx: AudioStream
 var player_hurt_sfx: AudioStream
 var respawn_sfx: AudioStream
 var death_sfx: AudioStream
+var lobster_snap_sfx: AudioStream
+var lobster_slam_sfx: AudioStream
+var boss_windup_sfx: AudioStream
+var piranha_bite_sfx: AudioStream
+var piranha_dash_sfx: AudioStream
+var final_boss_punch_sfx: AudioStream
+var final_boss_grab_sfx: AudioStream
+var hurt_no_dmg_sfx: AudioStream
+var boss_explode_sfx: AudioStream
 
 func _ready():
 	var level_resources = ["level1", "level2", "level3"]
@@ -41,6 +50,7 @@ func _ready():
 	hurt_1 = load("res://audio/sfx/hurt1.wav")
 	hurt_2 = load("res://audio/sfx/hurt2.wav")
 	hurt_3 = load("res://audio/sfx/hurt3.wav")
+	hurt_no_dmg_sfx = load("res://audio/sfx/hurt_no_dmg.wav")
 	jump_sfx = load("res://audio/sfx/jump.wav")
 	dash_sfx = load("res://audio/sfx/dash.wav")
 	attack_sfx = load("res://audio/sfx/whoosh.wav")
@@ -48,6 +58,14 @@ func _ready():
 	player_hurt_sfx = load("res://audio/sfx/player_hurt.wav")
 	respawn_sfx = load("res://audio/sfx/respawn.wav")
 	death_sfx = load("res://audio/sfx/death.wav")
+	lobster_snap_sfx = load("res://audio/sfx/boss/lobster/lobster_snap.wav")
+	lobster_slam_sfx = load("res://audio/sfx/boss/lobster/lobster-slam.wav")
+	boss_windup_sfx = load("res://audio/sfx/boss/windup.wav")
+	piranha_dash_sfx = load("res://audio/sfx/boss/piranha/piranha_dash.wav")
+	piranha_bite_sfx = load("res://audio/sfx/boss/piranha/piranha_bite.wav")
+	final_boss_punch_sfx = load("res://audio/sfx/boss/final_boss/final_boss_punch.wav")
+	final_boss_grab_sfx = load("res://audio/sfx/boss/final_boss/final_boss_grab.wav")
+	boss_explode_sfx = load("res://audio/sfx/boss/boss_explode.wav")
 	
 func get_curr_level_config():
 	return level_configs[curr_level]

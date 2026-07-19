@@ -3,6 +3,7 @@ extends CharacterBody2D
 
 @export var hurt_state: BossHurtState
 @export var death_state: BossDeathState
+@export var audio_stream_player: AudioStreamPlayer
 
 @onready var game = get_node("/root/Game") as Game
 @onready var shadow: Sprite2D = $Shadow
@@ -30,7 +31,9 @@ func setup():
 
 func take_hit(hit: HitConfig, source: Node2D) -> void:
 	if has_super_armor():
+		play_no_dmg_sfx()
 		return
+	play_hurt_sfx()
 	boss_health.take_damage(hit.damage)
 	if boss_health.get_health() == 0:
 		state_machine.transition_to(death_state)
@@ -45,3 +48,17 @@ func get_sprite_size():
 
 func die():
 	game.handle_boss_defeated()
+
+func play_hurt_sfx():
+	var hurt_sfx = [GameVariables.hurt_1, GameVariables.hurt_2]
+	var random_sfx = hurt_sfx.pick_random()
+	audio_stream_player.stream = random_sfx
+	audio_stream_player.play()
+	
+func play_no_dmg_sfx():
+	audio_stream_player.stream = GameVariables.hurt_no_dmg_sfx
+	audio_stream_player.play()
+	
+func play_explode_sfx():
+	audio_stream_player.stream = GameVariables.boss_explode_sfx
+	audio_stream_player.play()

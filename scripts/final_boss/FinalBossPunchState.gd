@@ -77,6 +77,7 @@ func _punch_hand(idx: int):
 
 
 func _spawn_punch_hitbox(hand_controller: Node2D):
+	controller.play_punch_sfx()
 	var hitbox = hitbox_scene.instantiate() as Hitbox
 	hand_controller.add_child(hitbox)
 	var hit_config = HitConfig.create(100, HitEffectRegistry.HIT_EFFECT_1)

@@ -43,3 +43,15 @@ func reset_anims():
 	sprite.play("idle")
 	left_claw.sprite.play("idle")
 	right_claw.sprite.play("idle")
+
+func play_snap_sfx():
+	audio_stream_player.stream = GameVariables.lobster_snap_sfx
+	audio_stream_player.play()
+	
+func play_windup_sfx():
+	audio_stream_player.stream = GameVariables.boss_windup_sfx
+	audio_stream_player.play()
+	
+func play_slam_sfx():
+	audio_stream_player.stream = GameVariables.lobster_slam_sfx
+	audio_stream_player.play()

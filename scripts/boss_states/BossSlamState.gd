@@ -18,6 +18,7 @@ func enter(msg := {}) -> void:
 	var tween = create_tween()
 	var orig_y = claw_to_attack_with.global_position.y
 	var windup_y = claw_to_attack_with.global_position.y - 150
+	lobster_boss.play_windup_sfx()
 	tween.tween_property(claw_to_attack_with, "global_position:y", windup_y, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	var callable = Callable(self, "play_attack_animation").bind(orig_y)
 	tween.finished.connect(callable)
@@ -35,6 +36,8 @@ func play_attack_animation(orig_y):
 	tween.finished.connect(callable)
 
 func on_animation_complete(orig_y):
+	var lobster_boss = boss as LobsterBoss	
+	lobster_boss.play_slam_sfx()
 	await get_tree().create_timer(0.5).timeout
 	var tween = create_tween()
 	tween.tween_property(claw_to_attack_with, "global_position:y", orig_y, 0.5)

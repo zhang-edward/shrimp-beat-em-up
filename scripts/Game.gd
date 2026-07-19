@@ -26,12 +26,13 @@ func _ready() -> void:
 	final_boss_controller.defeated.connect(handle_final_boss_defeated)
 
 	var tutorial = %Tutorial
-	var tween = get_tree().create_tween()
-	tween.tween_callback(func(): tutorial.modulate = Color.GRAY)
-	tween.tween_interval(0.5)
-	tween.tween_callback(func(): tutorial.modulate = Color.WHITE)
-	tween.tween_interval(0.5)
-	tween.set_loops()
+	if tutorial != null:
+		var tween = get_tree().create_tween()
+		tween.tween_callback(func(): tutorial.modulate = Color.GRAY)
+		tween.tween_interval(0.5)
+		tween.tween_callback(func(): tutorial.modulate = Color.WHITE)
+		tween.tween_interval(0.5)
+		tween.set_loops()
 
 func update_wave_stats():
 	var curr_wave_config = GameVariables.get_curr_wave_config() as WaveSpawnConfig

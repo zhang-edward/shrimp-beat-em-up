@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://s4vk1a005tvq" path="res://prefab/Enemy.tscn" id="9_enemy"]
 [ext_resource type="Script" uid="uid://dfxfw3qtltj7h" path="res://scripts/final_boss/FinalBossSpawnEnemiesState.gd" id="9_spawn"]
 [ext_resource type="Texture2D" uid="uid://c6qoolct8od51" path="res://sprites/guy.png" id="10_b0c5c"]
-[ext_resource type="SpriteFrames" uid="uid://b453dpnwlsx6" path="res://audio/sfx/boss/lobster/shrimp-beat-em-up/audio/sfx/boss/lobster/shrimp-beat-em-up/audio/sfx/boss/lobster/shrimp-beat-em-up/audio/sfx/boss/lobster/shrimp-beat-em-up/audio/sfx/boss/lobster/shrimp-beat-em-up/audio/sfx/boss/lobster/shrimp-beat-em-up/audio/sfx/boss/lobster/shrimp-beat-em-up/audio/sfx/boss/lobster/shrimp-beat-em-up/audio/sfx/boss/lobster/shrimp-beat-em-up/audio/sfx/boss/lobster/shrimp-beat-em-up/audio/sfx/boss/lobster/shrimp-beat-em-up/audio/sfx/boss/lobster/shrimp-beat-em-up/audio/sfx/boss/lobster/shrimp-beat-em-up/audio/sfx/boss/lobster/shrimp-beat-em-up/audio/sfx/boss/lobster/shrimp-beat-em-up/audio/sfx/boss/lobster/shrimp-beat-em-up/audio/sfx/boss/lobster/shrimp-beat-em-up/audio/sfx/boss/lobster/shrimp-beat-em-up/audio/sfx/boss/lobster/shrimp-beat-em-up/audio/sfx/boss/lobster/shrimp-beat-em-up/audio/sfx/boss/lobster/shrimp-beat-em-up/audio/sfx/boss/lobster/shrimp-beat-em-up/audio/sfx/boss/lobster/shrimp-beat-em-up/animations/man.tres" id="10_pe7lp"]
+[ext_resource type="SpriteFrames" uid="uid://b453dpnwlsx6" path="res://animations/man.tres" id="10_pe7lp"]
 [ext_resource type="Script" uid="uid://bco6n4n8iq83q" path="res://scripts/final_boss/FinalBossInactiveState.gd" id="11_rn34i"]
 [ext_resource type="PackedScene" uid="uid://efld58y74mpo" path="res://prefab/BossHealth.tscn" id="12_51jxd"]
 
@@ -97,9 +97,10 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="FinalBossController" type="Node2D" unique_id=862737750 node_paths=PackedStringArray("hand1", "hand2", "boss_health", "first_fight_state")]
+[node name="FinalBossController" type="Node2D" unique_id=862737750 node_paths=PackedStringArray("audio_stream_player", "hand1", "hand2", "boss_health", "first_fight_state")]
 y_sort_enabled = true
 script = ExtResource("1_5w4rv")
+audio_stream_player = NodePath("AudioStreamPlayer")
 hand1 = NodePath("Hand1")
 hand2 = NodePath("Hand2")
 boss_health = NodePath("CanvasLayer/BossHealth")
@@ -256,3 +257,6 @@ scale = Vector2(4, 4)
 sprite_frames = ExtResource("10_pe7lp")
 animation = &"solemn"
 offset = Vector2(0, 96)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1282507123]
+volume_db = -5.0

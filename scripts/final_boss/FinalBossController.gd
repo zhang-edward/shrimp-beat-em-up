@@ -24,6 +24,7 @@ const RIGHT_SPRITE_RESTING_POS := 825
 @onready var state_machine: StateMachine = $StateMachine
 @onready var game = get_node("/root/Game") as Game
 
+@export var audio_stream_player: AudioStreamPlayer
 @export var bg_sprite: AnimatedSprite2D
 @export var fg_sprite: AnimatedSprite2D
 @export var hand1: Node2D
@@ -43,6 +44,7 @@ func start_final_boss_fight():
 	await final_boss_start_sequence()
 
 func take_hit(hit: HitConfig, source: Node2D) -> void:
+	play_hurt_sfx()
 	if _defeated:
 		return
 	boss_health.take_damage(hit.damage)
@@ -256,7 +258,7 @@ func final_boss_start_sequence() -> void:
 	await play_emote("solemn")
 	await get_tree().create_timer(4.0).timeout
 	await play_emote("super_angry")
-	game.audio_stream_player.volume_db = 0.0
+	game.audio_stream_player.volume_db = 5.0
 	game.audio_stream_player.stream = GameVariables.final_boss_bgm
 	game.audio_stream_player.play()
 	await get_tree().create_timer(2.0).timeout
@@ -304,3 +306,17 @@ func _retract_hands() -> void:
 		t.set_ease(Tween.EASE_IN)
 		t.set_trans(Tween.TRANS_QUAD)
 		t.tween_property(sprite, "position:y", -800.0, 0.4)
+
+func play_punch_sfx():
+	audio_stream_player.stream = GameVariables.final_boss_punch_sfx
+	audio_stream_player.play()
+	
+func play_grab_sfx():
+	audio_stream_player.stream = GameVariables.final_boss_grab_sfx
+	audio_stream_player.play()
+
+func play_hurt_sfx():
+	var hurt_sfx = [GameVariables.hurt_1, GameVariables.hurt_2]
+	var random_sfx = hurt_sfx.pick_random()
+	audio_stream_player.stream = random_sfx
+	audio_stream_player.play()
