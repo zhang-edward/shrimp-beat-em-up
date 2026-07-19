@@ -9,7 +9,7 @@ const HITSTUN_SECONDS := 0.5
 var hitstun_timer = 0
 
 func enter(msg := {}):
-	enemy.play_hit_sfx()
+	enemy.play_hurt_sfx()
 	var dir: Vector2 = msg["dir"] if msg.has("dir") else Vector2.ZERO
 	enemy.absolute_velocity = dir.normalized() * BASE_KNOCKBACK
 	hitstun_timer = HITSTUN_SECONDS

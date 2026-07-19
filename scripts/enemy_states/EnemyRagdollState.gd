@@ -61,7 +61,7 @@ func relaunch(impulse: Vector2, launch: float) -> void:
 	enemy.z_velocity = launch
 	_chained.clear()
 	spin = SPIN_SPEED * (1.0 if impulse.x >= 0.0 else -1.0)
-	enemy.play_hit_sfx()
+	enemy.play_hurt_sfx()
 	enemy.sprite.play("hurt")
 	# Reset hurtbox if previously lying down
 	if not enemy.is_dead:
