@@ -15,6 +15,7 @@
 [ext_resource type="Script" uid="uid://ccd6itv5dy00" path="res://scripts/boss_states/BossSlamState.gd" id="11_n5f5x"]
 [ext_resource type="Script" uid="uid://dqc6yf45o4yos" path="res://scripts/boss_states/BossClawDestroyState.gd" id="12_pllld"]
 [ext_resource type="Script" uid="uid://uewb46idky86" path="res://scripts/boss_states/BossDeathState.gd" id="12_v1kf3"]
+[ext_resource type="FontFile" uid="uid://jjwv8duy7abc" path="res://ThaleahFat.ttf" id="16_wx8px"]
 
 [node name="LobsterBoss" type="CharacterBody2D" unique_id=1068858689 node_paths=PackedStringArray("claw_destroy_state", "hurt_state", "death_state", "audio_stream_player")]
 script = ExtResource("1_kw31t")
@@ -115,7 +116,10 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -49.0
+offset_left = 27.0
+offset_top = -66.0
+offset_right = -27.0
+offset_bottom = -17.0
 grow_horizontal = 2
 grow_vertical = 0
 size_flags_horizontal = 3
@@ -123,8 +127,14 @@ size_flags_horizontal = 3
 [node name="LeftClawHealth" parent="CanvasLayer/HBoxContainer" unique_id=1458634735 instance=ExtResource("2_7icou")]
 layout_mode = 2
 
+[node name="Label" parent="CanvasLayer/HBoxContainer/LeftClawHealth" index="0" unique_id=1321867342]
+theme_override_fonts/font = ExtResource("16_wx8px")
+
 [node name="RightClawHealth" parent="CanvasLayer/HBoxContainer" unique_id=2132998765 instance=ExtResource("2_7icou")]
 layout_mode = 2
+
+[node name="Label" parent="CanvasLayer/HBoxContainer/RightClawHealth" index="0" unique_id=1321867342]
+theme_override_fonts/font = ExtResource("16_wx8px")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1449714692]
 volume_db = -5.0

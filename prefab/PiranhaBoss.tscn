@@ -257,7 +257,10 @@ state_machine = NodePath("../StateMachine")
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1562404546]
 
 [node name="BossHealth" parent="CanvasLayer" unique_id=1458634735 instance=ExtResource("2_6hbhs")]
-offset_top = -49.0
+offset_left = 24.0
+offset_top = -65.0
+offset_right = -24.0
+offset_bottom = -16.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1909615611]
 volume_db = -5.0

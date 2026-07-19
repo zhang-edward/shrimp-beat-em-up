@@ -8,7 +8,7 @@ signal grab_escaped
 @onready var state_machine: StateMachine = %StateMachine
 @onready var shadow: Sprite2D = $Shadow
 @export var healthbar: ProgressBar
-@export var lives_counter: Label # TODO: Replace this with better UI
+@export var lives_display: Container # holds one icon per life; icons hide as lives are lost
 @export var grabbed_state: PlayerGrabbedState
 @export var hurt_state: PlayerHurtState
 @export var death_state: PlayerDeathState
@@ -59,7 +59,8 @@ func kill():
 
 func update_lives(amt: int):
 	num_lives += amt
-	lives_counter.text = "Lives: " + str(num_lives)
+	for i in lives_display.get_child_count():
+		lives_display.get_child(i).visible = i < num_lives + 1
 	if num_lives == 0:
 		GameVariables.game_over_state = GameVariables.GameOverState.DEFEAT
 		get_tree().change_scene_to_file("res://scenes/GameOver.tscn")

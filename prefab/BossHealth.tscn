@@ -3,13 +3,17 @@
 [ext_resource type="StyleBox" uid="uid://tu5xpycc3rfh" path="res://prefab/styles/healthbar_bg.tres" id="1_3dyqe"]
 [ext_resource type="Script" uid="uid://d151qbuj1jdw4" path="res://scripts/BossHealth.gd" id="1_5bdu6"]
 [ext_resource type="StyleBox" uid="uid://w3irfpd1t67f" path="res://prefab/styles/boss_healthbar_fill.tres" id="2_5bdu6"]
+[ext_resource type="FontFile" uid="uid://jjwv8duy7abc" path="res://ThaleahFat.ttf" id="2_ycavj"]
 
 [node name="BossHealth" type="HBoxContainer" unique_id=1458634735]
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -61.0
+offset_left = 30.0
+offset_top = -80.0
+offset_right = -30.0
+offset_bottom = -19.0
 grow_horizontal = 2
 grow_vertical = 0
 size_flags_horizontal = 3
@@ -19,6 +23,7 @@ script = ExtResource("1_5bdu6")
 [node name="Label" type="Label" parent="." unique_id=1321867342]
 layout_mode = 2
 theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("2_ycavj")
 theme_override_font_sizes/font_size = 35
 text = "Test: "
 
