@@ -254,5 +254,5 @@ visible = false
 z_index = -101
 scale = Vector2(4, 4)
 sprite_frames = ExtResource("10_pe7lp")
-animation = &"worried"
+animation = &"solemn"
 offset = Vector2(0, 96)

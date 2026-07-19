@@ -39,10 +39,7 @@ var health = 100
 var _defeated := false
 
 func start_final_boss_fight():
-	boss_health.configure("The Human", 100)
-	boss_health.show()
-	# Kick the AI out of its idle state; the attack's enter() raises his face in.
-	state_machine.transition_to(first_fight_state)
+	await final_boss_start_sequence()
 
 func take_hit(hit: HitConfig, source: Node2D) -> void:
 	if _defeated:
@@ -243,7 +240,25 @@ func done_spawning_wave_animation(_msg := {}) -> void:
 	await move_face_to(FacePos.ABSENT, "")
 	animation_sequence_finished.emit()
 
-### Death
+#### Final Boss
+
+func final_boss_start_sequence(_msg := {}) -> void:
+	await move_face_to(FacePos.BG, "default")
+	await play_emote("worried")
+	await get_tree().create_timer(1.0).timeout
+	await move_face_to(FacePos.BACK_WALL, "worried")
+	await get_tree().create_timer(2.0).timeout
+	await play_emote("solemn")
+	await get_tree().create_timer(4.0).timeout
+	await play_emote("super_angry")
+	await get_tree().create_timer(2.0).timeout
+	boss_health.configure("The Human", 100)
+	boss_health.show()
+	await move_face_to(FacePos.BACK_WALL_RISEN, "super_angry")
+	await play_emote("determined_3")
+	state_machine.transition_to(first_fight_state)
+
+#### Death
 
 func _play_death_sequence() -> void:
 	# Halt the AI so nothing keeps punching/grabbing while he dies.
